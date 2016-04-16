@@ -16,8 +16,11 @@ public class Lights implements ToGLMParser{
         properties = new Vector<Property>();
         properties.add(new Property("type", "HID", "")); //HID, SSL, CFL, FLUORESCENT, INCANDESCENT
         properties.add(new Property("placement", "OUTDOOR", "")); //OUTDOOR,INDOOR
-        properties.add(new Property("installed_power", "", ""));
+        properties.add(new Property("installed_power", "", "kW"));
         properties.add(new Property("circuit_split", "", ""));
+        properties.add(new Property("power_density", "", "W/sf"));
+        properties.add(new Property("curtailment", "", ""));
+        properties.add(new Property("actual_power", "", "kVA"));
         properties.add(new Property("demand", "", ""));
     }
     public void SetProperty(Vector<Property> wektor){

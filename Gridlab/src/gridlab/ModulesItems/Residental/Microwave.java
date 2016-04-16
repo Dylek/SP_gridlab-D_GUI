@@ -13,14 +13,14 @@ public class Microwave implements ToGLMParser {
 
     public Microwave(){
         properties = new Vector<Property>();
-        properties.add(new Property("installed_power","",""));
-        properties.add(new Property("standby_power","",""));
+        properties.add(new Property("installed_power","","W"));
+        properties.add(new Property("standby_power","","W"));
         properties.add(new Property("circuit_split","",""));
         properties.add(new Property("demand","",""));
         properties.add(new Property("heat_fraction","",""));
-        properties.add(new Property("state","ON",""));
-        properties.add(new Property("runtime","",""));
-        properties.add(new Property("state_time","",""));
+        properties.add(new Property("state","ON","")); //ON/OFF
+        properties.add(new Property("runtime","","s"));
+        properties.add(new Property("state_time","","s"));
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

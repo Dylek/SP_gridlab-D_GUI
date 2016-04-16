@@ -13,18 +13,18 @@ public class Waterheat implements ToGLMParser {
 
     public Waterheat(){
         properties = new Vector<Property>();
-        properties.add(new Property("tank_volume","",""));
-        properties.add(new Property("tank_UA","",""));
-        properties.add(new Property("tank_diameter","",""));
-        properties.add(new Property("water_demand","",""));
-        properties.add(new Property("heating_element_capacity","",""));
-        properties.add(new Property("inlet_water_temperature","",""));
+        properties.add(new Property("tank_volume","","gal"));
+        properties.add(new Property("tank_UA","","Btu"));
+        properties.add(new Property("tank_diameter","","ft"));
+        properties.add(new Property("water_demand","","gpm"));
+        properties.add(new Property("heating_element_capacity","","kW"));
+        properties.add(new Property("inlet_water_temperature","","degF"));
         properties.add(new Property("heat_mode","ELECTRIC","")); //ELECTRIC,GASHEAT
         properties.add(new Property("location","GARAGE","")); //GARAGE,INSIDE
-        properties.add(new Property("tank_setpoint","",""));
-        properties.add(new Property("thermostat_deadband","",""));
-        properties.add(new Property("temperature","",""));
-        properties.add(new Property("height","",""));
+        properties.add(new Property("tank_setpoint","","degF"));
+        properties.add(new Property("thermostat_deadband","","degF"));
+        properties.add(new Property("temperature","","degF"));
+        properties.add(new Property("height","","ft"));
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

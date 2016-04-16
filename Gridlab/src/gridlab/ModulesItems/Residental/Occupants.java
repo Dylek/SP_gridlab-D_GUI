@@ -15,8 +15,8 @@ public class Occupants implements ToGLMParser{
         properties = new Vector<Property>();
         properties.add(new Property("number_of_occupants","",""));
         properties.add(new Property("occupancy_fraction","",""));
-        properties.add(new Property("heatgain_per_person","",""));
-        properties.add(new Property("internal_gains","",""));
+        properties.add(new Property("heatgain_per_person","","Btu/h"));
+        properties.add(new Property("internal_gains","","kW"));
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

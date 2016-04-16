@@ -13,9 +13,15 @@ public class Freezer implements ToGLMParser{
 
     public Freezer(){
         properties = new Vector<Property>();
-        properties.add(new Property("size","",""));
-        properties.add(new Property("rated_capacity","",""));
+        properties.add(new Property("size","","cf"));
+        properties.add(new Property("rated_capacity","","Btu/h"));
         properties.add(new Property("power_factor","",""));
+        properties.add(new Property("temperature","","degF"));
+        properties.add(new Property("setpoint","","degF"));
+        properties.add(new Property("deadband","","degF"));
+        properties.add(new Property("UA","","Btu"));
+        properties.add(new Property("state","ON","")); //ON/OFF
+
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

@@ -14,8 +14,8 @@ public class Refrigerator implements ToGLMParser {
 
     public Refrigerator() {
         properties = new Vector<Property>();
-        properties.add(new Property("size", "", ""));
-        properties.add(new Property("rated_capacity", "", ""));
+        properties.add(new Property("size", "", "cf"));
+        properties.add(new Property("rated_capacity", "", "Btu/h"));
         properties.add(new Property("power_factor", "", ""));
     }
     public void SetProperty(Vector<Property> wektor){
