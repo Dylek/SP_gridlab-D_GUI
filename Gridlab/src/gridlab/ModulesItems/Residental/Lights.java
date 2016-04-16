@@ -20,6 +20,12 @@ public class Lights implements ToGLMParser{
         properties.add(new Property("circuit_split", "", ""));
         properties.add(new Property("demand", "", ""));
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object lights{ \n";

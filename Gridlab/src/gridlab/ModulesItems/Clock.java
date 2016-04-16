@@ -20,6 +20,13 @@ public class Clock implements ToGLMParser {
         properties = new Vector<Property>();
         properties=clock.properties;
     }
+
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="clock{ \n";

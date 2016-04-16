@@ -22,6 +22,12 @@ public class Microwave implements ToGLMParser {
         properties.add(new Property("runtime","",""));
         properties.add(new Property("state_time","",""));
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object microwave{ \n";

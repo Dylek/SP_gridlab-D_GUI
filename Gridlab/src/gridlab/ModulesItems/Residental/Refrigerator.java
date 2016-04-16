@@ -18,6 +18,12 @@ public class Refrigerator implements ToGLMParser {
         properties.add(new Property("rated_capacity", "", ""));
         properties.add(new Property("power_factor", "", ""));
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object refrigerator{ \n";

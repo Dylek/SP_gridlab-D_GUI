@@ -140,6 +140,12 @@ public class House implements ToGLMParser {
     public House(House house){
         properties=house.properties;
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object house{ \n";

@@ -18,6 +18,12 @@ public class Occupants implements ToGLMParser{
         properties.add(new Property("heatgain_per_person","",""));
         properties.add(new Property("internal_gains","",""));
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object occupantload{ \n";

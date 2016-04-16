@@ -26,7 +26,12 @@ public class Waterheat implements ToGLMParser {
         properties.add(new Property("temperature","",""));
         properties.add(new Property("height","",""));
     }
-
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object waterheater{ \n";

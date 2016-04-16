@@ -17,6 +17,12 @@ public class Plugs implements ToGLMParser {
         properties.add(new Property("demand","",""));
         properties.add(new Property("heat_fraction","",""));
     }
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object plugload{ \n";

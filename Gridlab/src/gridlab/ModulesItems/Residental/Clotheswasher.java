@@ -26,7 +26,12 @@ public class Clotheswasher implements ToGLMParser {
         properties.add(new Property("reset_delay","",""));
         properties.add(new Property("state","TRIPPED","")); //TRIPPED, STALLED, RUNNING, STOPPED
     }
-
+    public void SetProperty(Vector<Property> wektor){
+        properties=wektor;
+    }
+    public Vector<Property> GetProperties(){
+        return properties;
+    }
     public String ToGLM(){
         String s="";
         s="object clotheswasher{ \n";
