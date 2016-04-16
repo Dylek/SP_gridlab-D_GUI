@@ -1,24 +1,25 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class UnderGroundLineConductor {
+public class UnderGroundLineConductor implements ToGLMParser {
     private Vector<Property> properties;
 
     public UnderGroundLineConductor(){
         properties = new Vector<Property>();
         properties.add(new Property("name", "",""));
-        properties.add(new Property("outer_diameter", "", "inches"));
-        properties.add(new Property("conductor_gmr", "", "feet"));
-        properties.add(new Property("conductor_diameter", "", "inches"));
+        properties.add(new Property("outer_diameter", "", "in"));
+        properties.add(new Property("conductor_gmr", "", "ft"));
+        properties.add(new Property("conductor_diameter", "", "in"));
         properties.add(new Property("conductor_resistance", "", "Ohm/mile"));
-        properties.add(new Property("neutral_gmr", "", "feet"));
-        properties.add(new Property("neutral_diameter", "", " inches"));
+        properties.add(new Property("neutral_gmr", "", "ft"));
+        properties.add(new Property("neutral_diameter", "", " in"));
         properties.add(new Property("neutral_resistance", "", "Ohm/mile"));
         properties.add(new Property("neutral_strands", "", ""));
         properties.add(new Property("insultation_relative_permitivitty", "", ""));
