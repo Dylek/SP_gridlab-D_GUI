@@ -59,7 +59,7 @@ public class Solar implements ToGLMParser{
 
     public Solar(Solar solar)
     {
-        properties=solar.properties;
+        properties=solar.GetProperties();
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

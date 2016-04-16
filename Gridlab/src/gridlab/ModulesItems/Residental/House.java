@@ -138,7 +138,7 @@ public class House implements ToGLMParser {
     }
 
     public House(House house){
-        properties=house.properties;
+        properties=house.GetProperties();
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

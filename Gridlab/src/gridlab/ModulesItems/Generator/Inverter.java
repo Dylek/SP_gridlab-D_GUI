@@ -34,7 +34,7 @@ public class Inverter implements ToGLMParser{
 
     }
     public Inverter(Inverter inverter){
-        properties=inverter.properties;
+        properties=inverter.GetProperties();
     }
 
     public void SetProperty(Vector<Property> wektor){
