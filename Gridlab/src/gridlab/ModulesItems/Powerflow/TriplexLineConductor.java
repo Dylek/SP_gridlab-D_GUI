@@ -10,7 +10,7 @@ import java.util.Vector;
  */
 public class TriplexLineConductor implements ToGLMParser {
     private Vector<Property> properties;
-    public TriplexLineConductor(){
+    public TriplexLineConductorn(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
         properties.add(new Property("geometric_mean_radius", "", "ft"));
@@ -22,7 +22,7 @@ public class TriplexLineConductor implements ToGLMParser {
         properties.add(new Property("rating.winter.emergency", "", "A"));
 
     }
-    public TriplexLineConductor(TriplexLineConductor newOne)
+    public TriplexLineConductorn(TriplexLineConductor newOne)
     {
         properties=newOne.GetProperties();
     }
