@@ -1,0 +1,20 @@
+package gridlab.ModulesItems.Residental;
+
+import gridlab.ModulesItems.Property;
+import java.util.Vector;
+
+/**
+ * Created by Pavlo on 16.04.2016.
+ */
+public class Occupants {
+    private Vector<Property> properties;
+
+    public Occupants(){
+        properties = new Vector<Property>();
+        properties.add(new Property("number_of_occupants","",""));
+        properties.add(new Property("occupancy_fraction","",""));
+        properties.add(new Property("heatgain_per_person","",""));
+        properties.add(new Property("internal_gains","",""));
+    }
+}
+
