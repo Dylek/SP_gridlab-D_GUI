@@ -15,35 +15,35 @@ public class Solar implements ToGLMParser{
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
         properties.add(new Property("parent", "", ""));
-        properties.add(new Property("generator_mode", "SUPPLY_DRIVEN", ""));
-        properties.add(new Property("generator_status", "ONLINE", " "));
-        properties.add(new Property("panel_type", "SINGLE_CRYSTAL_SILICON", ""));
-        properties.add(new Property("power_type", "", ""));
-        properties.add(new Property("INSTALLATION_TYPE", "", ""));
+        properties.add(new Property("generator_mode", "SUPPLY_DRIVEN", ""));//UNKNOWN, CONSTANT_V,CONSTANT_PQ,CONSTANT_PF,SUPPLY_DRIVEN
+        properties.add(new Property("generator_status", "ONLINE", " "));//ONLINE,OFFLINE
+        properties.add(new Property("panel_type", "SINGLE_CRYSTAL_SILICON", ""));//SINGLE_CRYSTAL_SILICON (default), MULTI_CRYSTAL_SILICON, AMORPHOUS_SILICON,THIN_FILM_GA_AS (incomplete),CONCENTRATOR (incomplete)
+        properties.add(new Property("power_type", "", ""));//AC,DC
+        properties.add(new Property("INSTALLATION_TYPE", "", ""));//ROOF_MOUNTED,GROUND_MOUNTED
         properties.add(new Property("SOLAR_TILT_MODEL", "DEFAULT", ""));
         properties.add(new Property("SOLAR_POWER_MODEL", "DEFAULT", ""));
         properties.add(new Property("a_coeff", "-2.81", ""));
         properties.add(new Property("b_coeff", "-0.0455", ""));
-        properties.add(new Property("dT_coeff", "0.0", ""));
-        properties.add(new Property("T_coeff", "-0.5", "%/degC"));
-        properties.add(new Property("NOCT", "118.4", "F"));
-        properties.add(new Property("Tmodule", "", "DegF"));
-        properties.add(new Property("Tambient", "", "DegF"));
+        properties.add(new Property("dT_coeff", "0.0", "%/degC"));
+        properties.add(new Property("T_coeff", "-0.5", ""));
+        properties.add(new Property("NOCT", "118.4", "degF"));
+        properties.add(new Property("Tmodule", "", "degF"));
+        properties.add(new Property("Tambient", "77", "degF"));
         properties.add(new Property("wind_speed", "", "mph"));
-        properties.add(new Property("ambient_temperature", "", "DegF"));
-        properties.add(new Property("Insolation", "", "W/sqF"));
-        properties.add(new Property("Rinternal", "0.05", "OHM"));
-        properties.add(new Property("Rated_Insolation", "92.902", "W/sqF"));
+        properties.add(new Property("ambient_temperature", "", "degF"));
+        properties.add(new Property("Insolation", "0", "W/sf"));
+        properties.add(new Property("Rinternal", "0.05", "Ohm"));
+        properties.add(new Property("Rated_Insolation", "92.902", "W/sf"));
         properties.add(new Property("Pmax_temp_coeff", "", ""));
         properties.add(new Property("Voc_temp_coeff", "", ""));
         properties.add(new Property("V_Max", "79.34", "V"));
         properties.add(new Property("Voc_Max", "91.22", "V"));
         properties.add(new Property("Voc", "91.22", "V"));
-        properties.add(new Property("efficiency", "0.1", ""));
-        properties.add(new Property("area", "323", "sqf"));
-        properties.add(new Property("soiling", "", ""));
-        properties.add(new Property("derating", "", ""));
-        properties.add(new Property("Rated kVA", "", "KVA"));
+        properties.add(new Property("efficiency", "0.1", "unit"));
+        properties.add(new Property("area", "323", "sf"));
+        properties.add(new Property("soiling", "", "pu"));
+        properties.add(new Property("derating", "", "pu"));
+        properties.add(new Property("Rated kVA", "", "kVA"));
         properties.add(new Property("P_Out", "", "kW"));
         properties.add(new Property("V_Out", "", "V"));
         properties.add(new Property("I_Out", "", "A"));
@@ -71,7 +71,7 @@ public class Solar implements ToGLMParser{
         String s="";
         s="object solar{ \n";
         for (Property p: properties){
-            if(p.GetValue()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+            if(p.GetValue()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+";\n";
         }
         s+="} \n";
         return s;
