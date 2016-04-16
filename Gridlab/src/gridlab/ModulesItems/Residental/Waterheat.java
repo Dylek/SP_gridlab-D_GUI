@@ -1,12 +1,14 @@
 package gridlab.ModulesItems.Residental;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
+
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Waterheat {
+public class Waterheat implements ToGLMParser {
     private Vector<Property> properties;
 
     public Waterheat(){
@@ -23,5 +25,15 @@ public class Waterheat {
         properties.add(new Property("thermostat_deadband","",""));
         properties.add(new Property("temperature","",""));
         properties.add(new Property("height","",""));
+    }
+
+    public String ToGLM(){
+        String s="";
+        s="object waterheater{ \n";
+        for (Property p: properties){
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+        }
+        s+="} \n";
+        return s;
     }
 }

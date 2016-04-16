@@ -1,13 +1,15 @@
 package gridlab.ModulesItems.Residental;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
+
 import java.util.Vector;
 
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Lights {
+public class Lights implements ToGLMParser{
     private Vector<Property> properties;
 
     public Lights() {
@@ -17,5 +19,14 @@ public class Lights {
         properties.add(new Property("installed_power", "", ""));
         properties.add(new Property("circuit_split", "", ""));
         properties.add(new Property("demand", "", ""));
+    }
+    public String ToGLM(){
+        String s="";
+        s="object lights{ \n";
+        for (Property p: properties){
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+        }
+        s+="} \n";
+        return s;
     }
 }

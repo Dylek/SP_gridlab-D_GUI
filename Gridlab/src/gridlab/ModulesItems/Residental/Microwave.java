@@ -1,12 +1,14 @@
 package gridlab.ModulesItems.Residental;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
+
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Microwave {
+public class Microwave implements ToGLMParser {
     private Vector<Property> properties;
 
     public Microwave(){
@@ -19,5 +21,14 @@ public class Microwave {
         properties.add(new Property("state","ON",""));
         properties.add(new Property("runtime","",""));
         properties.add(new Property("state_time","",""));
+    }
+    public String ToGLM(){
+        String s="";
+        s="object microwave{ \n";
+        for (Property p: properties){
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+        }
+        s+="} \n";
+        return s;
     }
 }

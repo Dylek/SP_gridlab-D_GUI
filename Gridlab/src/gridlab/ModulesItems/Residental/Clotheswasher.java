@@ -1,12 +1,14 @@
 package gridlab.ModulesItems.Residental;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
+
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Clotheswasher {
+public class Clotheswasher implements ToGLMParser {
     private Vector<Property> properties;
 
     public Clotheswasher(){
@@ -23,5 +25,15 @@ public class Clotheswasher {
         properties.add(new Property("trip_delay","",""));
         properties.add(new Property("reset_delay","",""));
         properties.add(new Property("state","TRIPPED","")); //TRIPPED, STALLED, RUNNING, STOPPED
+    }
+
+    public String ToGLM(){
+        String s="";
+        s="object clotheswasher{ \n";
+        for (Property p: properties){
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+        }
+        s+="} \n";
+        return s;
     }
 }

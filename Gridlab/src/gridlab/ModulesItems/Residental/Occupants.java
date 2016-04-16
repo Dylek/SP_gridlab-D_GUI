@@ -1,12 +1,14 @@
 package gridlab.ModulesItems.Residental;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
+
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Occupants {
+public class Occupants implements ToGLMParser{
     private Vector<Property> properties;
 
     public Occupants(){
@@ -15,6 +17,15 @@ public class Occupants {
         properties.add(new Property("occupancy_fraction","",""));
         properties.add(new Property("heatgain_per_person","",""));
         properties.add(new Property("internal_gains","",""));
+    }
+    public String ToGLM(){
+        String s="";
+        s="object occupantload{ \n";
+        for (Property p: properties){
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+        }
+        s+="} \n";
+        return s;
     }
 }
 
