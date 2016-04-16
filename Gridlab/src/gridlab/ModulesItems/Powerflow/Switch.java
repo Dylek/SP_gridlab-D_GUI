@@ -1,40 +1,26 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Switch {
+public class Switch implements ToGLMParser {
     private Vector<Property>properties;
 
     public Switch(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("connect_type", "", ""));
-        properties.add(new Property("band_center", "", ""));
-        properties.add(new Property("band_width", "", "V"));
-        properties.add(new Property("time_delay", "", "V"));
-        properties.add(new Property("dwell_time", "", "KVA"));
-        properties.add(new Property("raise_taps", "", "KVA"));
-        properties.add(new Property("lower_taps", "", "KVA"));
-        properties.add(new Property("current_transducer_ratio", "", "KVA"));
-        properties.add(new Property("power_transducer_ratio", "", "OHM PU"));
-        properties.add(new Property("compensator_r_setting_A", "", "OHM PU"));
-        properties.add(new Property("compensator_r_setting_B", "", "OHM PU"));
-        properties.add(new Property("compensator_r_setting_C", "", "OHM PU"));
-        properties.add(new Property("compensator_x_setting_A", "", "OHM PU"));
-        properties.add(new Property("compensator_x_setting_B", "", "OHM PU"));
-        properties.add(new Property("compensator_x_setting_C", "", "OHM PU"));
-        properties.add(new Property("CT_phase", "", "pounds"));
-        properties.add(new Property("PT_phase", "", "pounds"));
-        properties.add(new Property("regulation", "", "gallons"));
-        properties.add(new Property("Control", "", "C"));
-        properties.add(new Property("Type", "", "C"));
-        properties.add(new Property("tap_pos_A", "", "H"));
-        properties.add(new Property("tap_pos_B", "", "H"));
-        properties.add(new Property("tap_pos_C", "", ""));
+        properties.add(new Property("phases", "", ""));
+        properties.add(new Property("from", "", ""));
+        properties.add(new Property("to", "", ""));
+        properties.add(new Property("status", "", ""));
+        properties.add(new Property("phase_A_state", "", ""));//OPEN,CLOSED
+        properties.add(new Property("phase_B_state", "", ""));//OPEN,CLOSED
+        properties.add(new Property("phase_C_state", "", ""));//OPEN,CLOSED
+        properties.add(new Property("operating_mode", "", ""));//OPEN,CLOSED
     }
     public Switch(Switch sch)
     {

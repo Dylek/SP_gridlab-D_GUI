@@ -1,13 +1,14 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexLine {
+public class TriplexLine implements ToGLMParser {
     private Vector<Property> properties;
     public TriplexLine(){
         properties=new Vector<Property>();

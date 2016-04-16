@@ -1,21 +1,23 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexLineConfiguration {
+public class TriplexLineConfiguration implements ToGLMParser {
     private Vector<Property> properties;
     public TriplexLineConfiguration(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
         properties.add(new Property("conductor_A", "", ""));
         properties.add(new Property("conductor_B", "", ""));
-        properties.add(new Property("conductor_C", "", ""));
+       // properties.add(new Property("conductor_C", "", ""));
         properties.add(new Property("conductor_N", "", ""));
+        properties.add(new Property("insulation_thickness", "", "in"));
         properties.add(new Property("spacing", "", ""));
 
         properties.add(new Property("z11", "", ""));
@@ -28,7 +30,7 @@ public class TriplexLineConfiguration {
         properties.add(new Property("z32", "", ""));
         properties.add(new Property("z33", "", ""));
     }
-    public TriplexLineConfiguration(TriplexLineConfigurationr newOne)
+    public TriplexLineConfiguration(TriplexLineConfiguration newOne)
     {
         properties=newOne.GetProperties();
     }
