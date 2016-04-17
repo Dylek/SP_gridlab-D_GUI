@@ -6,7 +6,7 @@ import gridlab.ModulesItems.Powerflow.*;
 import gridlab.ModulesItems.Residental.*;
 import gridlab.ModulesItems.Tape.Player;
 import gridlab.ModulesItems.Tape.Recorder;
-
+import gridlab.ModulesItems.Clock;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -30,11 +30,10 @@ public class MainWindow extends JFrame {
     private JPanel buttons;
 
 
-
-    private JList <String> modulesJList;
-    private JList <String> objectsJList;
-    private JList <String> addedObjectsJList;
-    private JList <String>  propertiesJList;
+    private JList<String> modulesJList;
+    private JList<String> objectsJList;
+    private JList<String> addedObjectsJList;
+    private JList<String> propertiesJList;
 
     DefaultListModel<String> modulesItems;
     DefaultListModel<String> powerflowItems;
@@ -46,17 +45,17 @@ public class MainWindow extends JFrame {
     DefaultListModel<String> addedObjectsItems;
     DefaultListModel<String> propertiesItems;
 
-    HashMap<String,Object> objectTable;
-    static int objectCount=0;
+    HashMap<String, Object> objectTable;
+    static int objectCount = 0;
 
     public MainWindow() {
-       objectTable=new HashMap<String,Object>();
+        objectTable = new HashMap<String, Object>();
 
         loadLists();
-        modulesJList=new JList <String>(modulesItems);
-        objectsJList=new JList <String>(objectsItems);
-        addedObjectsJList=new JList <String>(addedObjectsItems);
-        propertiesJList=new JList<String>(propertiesItems);
+        modulesJList = new JList<String>(modulesItems);
+        objectsJList = new JList<String>(objectsItems);
+        addedObjectsJList = new JList<String>(addedObjectsItems);
+        propertiesJList = new JList<String>(propertiesItems);
         objectsItems.addElement(" ");
         objectsJList.setSelectedIndex(0);
 
@@ -74,7 +73,7 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         buttons = new JPanel();
-        buttons.setLayout(new BoxLayout(buttons,BoxLayout.PAGE_AXIS));
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.PAGE_AXIS));
         buttons.add(exportToGlm);
         buttons.add(runSimulation);
         buttons.add(addClock);
@@ -92,8 +91,7 @@ public class MainWindow extends JFrame {
         loadListers();
 
 
-
-        mainFrame.setSize(new Dimension(1366,768));
+        mainFrame.setSize(new Dimension(1366, 768));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Gridlab-D GUI");
@@ -101,24 +99,23 @@ public class MainWindow extends JFrame {
         mainFrame.setVisible(true);
 
 
-
-
     }
-    private void loadLists(){
-        objectsItems=new DefaultListModel<String>();
-        addedObjectsItems=new DefaultListModel<String>();
-        propertiesItems=new DefaultListModel<String>();
 
-        modulesItems=new DefaultListModel<String>();
+    private void loadLists() {
+        objectsItems = new DefaultListModel<String>();
+        addedObjectsItems = new DefaultListModel<String>();
+        propertiesItems = new DefaultListModel<String>();
+
+        modulesItems = new DefaultListModel<String>();
         modulesItems.addElement("Generator");
         modulesItems.addElement("Powerflow");
         modulesItems.addElement("Residental");
         modulesItems.addElement("Tape");
-        tapeItems=new DefaultListModel<String>();
+        tapeItems = new DefaultListModel<String>();
         tapeItems.addElement("Player");
         tapeItems.addElement("Recorder");
 
-        residentalItems=new DefaultListModel<String>();
+        residentalItems = new DefaultListModel<String>();
         residentalItems.addElement("Freezer");
         residentalItems.addElement("House");
         residentalItems.addElement("Lights");
@@ -130,7 +127,7 @@ public class MainWindow extends JFrame {
         residentalItems.addElement("Clotheswasher");
         residentalItems.addElement("Dishwasher");
 
-        powerflowItems=new DefaultListModel<String>();
+        powerflowItems = new DefaultListModel<String>();
         powerflowItems.addElement("Capacitor");
         powerflowItems.addElement("Fuse");
         powerflowItems.addElement("LineConfiguration");
@@ -153,45 +150,47 @@ public class MainWindow extends JFrame {
         powerflowItems.addElement("UndergroundLine");
         powerflowItems.addElement("UnderGroundLineConductor");
 
-        generatorItems=new DefaultListModel<String>();
+        generatorItems = new DefaultListModel<String>();
         generatorItems.addElement("Inverter");
         generatorItems.addElement("Solar");
     }
-    private void loadListers(){
+
+    private void loadListers() {
 
         modulesJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
 
-                JList list = (JList)evt.getSource();
+                JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 1) {
 
                     objectsItems.clear();
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
-                    switch (index){
+                    switch (index) {
                         case 0:
-                            for(int i=0;i<generatorItems.getSize();i++) {
+                            for (int i = 0; i < generatorItems.getSize(); i++) {
                                 objectsItems.addElement(generatorItems.get(i));
                             }
                             objectsJList.setSelectedIndex(0);
                             break;
 
                         case 1:
-                            for(int i=0;i<powerflowItems.getSize();i++) {
+                            for (int i = 0; i < powerflowItems.getSize(); i++) {
                                 objectsItems.addElement(powerflowItems.get(i));
                             }
                             objectsJList.setSelectedIndex(0);
                             break;
 
-                        case 2:for(int i=0;i<residentalItems.getSize();i++) {
-                            objectsItems.addElement(residentalItems.get(i));
-                        }
+                        case 2:
+                            for (int i = 0; i < residentalItems.getSize(); i++) {
+                                objectsItems.addElement(residentalItems.get(i));
+                            }
                             objectsJList.setSelectedIndex(0);
-                           break;
+                            break;
 
                         case 3:
-                            for(int i=0;i<tapeItems.getSize();i++) {
+                            for (int i = 0; i < tapeItems.getSize(); i++) {
                                 objectsItems.addElement(tapeItems.get(i));
                             }
                             objectsJList.setSelectedIndex(0);
@@ -201,70 +200,144 @@ public class MainWindow extends JFrame {
                 }
             }
         });
-        addButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 objectCount++;
-                String object=new String();
-                object=objectsItems.get(objectsJList.getSelectedIndex());
-                addedObjectsItems.addElement(object+" "+objectCount);
+                String object = new String();
+                object = objectsItems.get(objectsJList.getSelectedIndex());
+                addedObjectsItems.addElement(object + " " + objectCount);
                 //String s=objectsItems.get(objectsJList.getSelectedIndex());
 
-                switch (object){
+                switch (object) {
 
-                    case "Player": objectTable.put((object+objectCount),new Player());System.out.print("utworozno klase");  break;
-                    case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());  break;
+                    case "Player":
+                        objectTable.put((object + objectCount), new Player());
+                        System.out.print("utworozno klase");
+                        break;
+                    case "Recorder":
+                        objectTable.put(object + " " + objectCount, new Recorder());
+                        break;
 
-                    case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
-                    case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
+                    case "Inverter":
+                        objectTable.put(object + " " + objectCount, new Inverter());
+                        break;
+                    case "Solar":
+                        objectTable.put(object + " " + objectCount, new Solar());
+                        break;
 
-                    case "House": objectTable.put(object+" "+objectCount,new House());break;
-                    case "Freezer": objectTable.put(object+" "+objectCount,new Freezer());break;
-                    case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
-                    case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
-                    case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
-                    case "Microwave": objectTable.put(object+" "+objectCount,new Microwave());break;
-                    case "Occupants": objectTable.put(object+" "+objectCount,new Occupants());break;
-                    case "Plugs": objectTable.put(object+" "+objectCount,new Plugs());break;
-                    case "Refrigerator": objectTable.put(object+" "+objectCount,new Refrigerator());break;
-                    case "Waterheat": objectTable.put(object+" "+objectCount,new Waterheat());break;
+                    case "House":
+                        objectTable.put(object + " " + objectCount, new House());
+                        break;
+                    case "Freezer":
+                        objectTable.put(object + " " + objectCount, new Freezer());
+                        break;
+                    case "Dishwasher":
+                        objectTable.put(object + " " + objectCount, new Dishwasher());
+                        break;
+                    case "Clotheswasher":
+                        objectTable.put(object + " " + objectCount, new Clotheswasher());
+                        break;
+                    case "Lights":
+                        objectTable.put(object + " " + objectCount, new Lights());
+                        break;
+                    case "Microwave":
+                        objectTable.put(object + " " + objectCount, new Microwave());
+                        break;
+                    case "Occupants":
+                        objectTable.put(object + " " + objectCount, new Occupants());
+                        break;
+                    case "Plugs":
+                        objectTable.put(object + " " + objectCount, new Plugs());
+                        break;
+                    case "Refrigerator":
+                        objectTable.put(object + " " + objectCount, new Refrigerator());
+                        break;
+                    case "Waterheat":
+                        objectTable.put(object + " " + objectCount, new Waterheat());
+                        break;
 
-                    case "Capacitor": objectTable.put(object+" "+objectCount,new Capacitor());break;
-                    case "Fuse": objectTable.put(object+" "+objectCount,new Fuse());break;
-                    case "LineConfiguration": objectTable.put(object+" "+objectCount,new LineConfiguration());break;
-                    case "LineSpacing": objectTable.put(object+" "+objectCount,new LineSpacing());break;
-                    case "Load": objectTable.put(object+" "+objectCount,new Load());break;
-                    case "Meter": objectTable.put(object+" "+objectCount,new Meter());break;
-                    case "Node": objectTable.put(object+" "+objectCount,new Node());break;
-                    case "OverheadLine": objectTable.put(object+" "+objectCount,new OverheadLine() );break;
-                    case "OverheadLineConductor": objectTable.put(object+" "+objectCount,new OverheadLineConductor());break;
-                    case "Regulator": objectTable.put(object+" "+objectCount,new Regulator());break;
-                    case "RegulatorConfiguration": objectTable.put(object+" "+objectCount,new RegulatorConfiguration());break;
-                    case "Switch": objectTable.put(object+" "+objectCount,new Switch());break;
-                    case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());break;
-                    case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());break;
-                    case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
-                    case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
-                    case "TiplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
-                    case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());break;
-                    case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());break;
-                    case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());break;
-                    case "UnderGroundLineConductor": objectTable.put(object+" "+objectCount,new UnderGroundLineConductor());break;
+                    case "Capacitor":
+                        objectTable.put(object + " " + objectCount, new Capacitor());
+                        break;
+                    case "Fuse":
+                        objectTable.put(object + " " + objectCount, new Fuse());
+                        break;
+                    case "LineConfiguration":
+                        objectTable.put(object + " " + objectCount, new LineConfiguration());
+                        break;
+                    case "LineSpacing":
+                        objectTable.put(object + " " + objectCount, new LineSpacing());
+                        break;
+                    case "Load":
+                        objectTable.put(object + " " + objectCount, new Load());
+                        break;
+                    case "Meter":
+                        objectTable.put(object + " " + objectCount, new Meter());
+                        break;
+                    case "Node":
+                        objectTable.put(object + " " + objectCount, new Node());
+                        break;
+                    case "OverheadLine":
+                        objectTable.put(object + " " + objectCount, new OverheadLine());
+                        break;
+                    case "OverheadLineConductor":
+                        objectTable.put(object + " " + objectCount, new OverheadLineConductor());
+                        break;
+                    case "Regulator":
+                        objectTable.put(object + " " + objectCount, new Regulator());
+                        break;
+                    case "RegulatorConfiguration":
+                        objectTable.put(object + " " + objectCount, new RegulatorConfiguration());
+                        break;
+                    case "Switch":
+                        objectTable.put(object + " " + objectCount, new Switch());
+                        break;
+                    case "Transformer":
+                        objectTable.put(object + " " + objectCount, new Transformer());
+                        break;
+                    case "TransformerConfiguration":
+                        objectTable.put(object + " " + objectCount, new TransformerConfiguration());
+                        break;
+                    case "TriplexLine":
+                        objectTable.put(object + " " + objectCount, new TriplexLineConductor());
+                        break;
+                    case "TriplexLineConductor":
+                        objectTable.put(object + " " + objectCount, new TriplexLineConductor());
+                        break;
+                    case "TiplexLineConfiguration":
+                        objectTable.put(object + " " + objectCount, new TriplexLineConfiguration());
+                        break;
+                    case "TriplexMeter":
+                        objectTable.put(object + " " + objectCount, new TriplexMeter());
+                        break;
+                    case "TriplexNode":
+                        objectTable.put(object + " " + objectCount, new TriplexNode());
+                        break;
+                    case "UndergroundLine":
+                        objectTable.put(object + " " + objectCount, new UndergroundLine());
+                        break;
+                    case "UnderGroundLineConductor":
+                        objectTable.put(object + " " + objectCount, new UnderGroundLineConductor());
+                        break;
 
                 }
-                System.out.print("Dodano"+objectTable.size());
+                System.out.print("Dodano" + objectTable.size());
             }
         });
-        removeButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
+        removeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String obj = addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
-                System.out.print("usunieto "+objectTable.size());
-        }
+                System.out.print("usunieto " + objectTable.size());
+            }
+        });
+        addClock.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                objectCount++;
+                addedObjectsItems.addElement("Clock " + objectCount);
+                objectTable.put("Clock" + " " + objectCount, new Clock());
+            }
         });
 /*
         addedObjectsJList.addMouseListener(new MouseAdapter() {
@@ -282,4 +355,5 @@ public class MainWindow extends JFrame {
             }
         });
 */
+    }
 }
