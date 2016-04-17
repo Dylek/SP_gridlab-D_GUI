@@ -150,7 +150,7 @@ public class House implements ToGLMParser {
         String s="";
         s="object house{ \n";
         for (Property p: properties){
-            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+";\n";
         }
         s+="} \n";
         return s;

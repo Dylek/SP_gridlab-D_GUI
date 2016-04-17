@@ -1,13 +1,14 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Regulator {
+public class Regulator implements ToGLMParser {
     private Vector<Property> properties;
     public Regulator(){
         properties=new Vector<Property>();

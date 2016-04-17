@@ -1,0 +1,15 @@
+object inverter{ 
+inverter_type    TWO_PULSE    ;
+generator_status    ONLINE    ;
+generator_mode    CONSTANT_PF    ;
+} 
+object inverter{ 
+inverter_type    TWO_PULSE    ;
+generator_status    ONLINE    ;
+generator_mode    CONSTANT_PF    ;
+} 
+object inverter{ 
+inverter_type    TWO_PULSE    ;
+generator_status    ONLINE    ;
+generator_mode    CONSTANT_PF    ;
+} 

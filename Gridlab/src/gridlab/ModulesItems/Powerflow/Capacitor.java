@@ -1,13 +1,14 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Capacitor {
+public class Capacitor implements ToGLMParser{
     private Vector<Property> properties;
     public Capacitor(){
         properties=new Vector<Property>();

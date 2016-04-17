@@ -1,13 +1,14 @@
 package gridlab.ModulesItems.Powerflow;
 
 import gridlab.ModulesItems.Property;
+import gridlab.ModulesItems.ToGLMParser;
 
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Fuse {
+public class Fuse implements ToGLMParser {
     private Vector<Property> properties;
     public Fuse(){
         properties=new Vector<Property>();

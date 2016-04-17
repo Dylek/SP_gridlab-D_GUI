@@ -6,11 +6,14 @@ import gridlab.ModulesItems.Powerflow.*;
 import gridlab.ModulesItems.Residental.*;
 import gridlab.ModulesItems.Tape.Player;
 import gridlab.ModulesItems.Tape.Recorder;
+import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * Created by Pavlo on 17.04.2016.
@@ -46,11 +49,11 @@ public class MainWindow extends JFrame {
     DefaultListModel<String> addedObjectsItems;
     DefaultListModel<String> propertiesItems;
 
-    HashMap<String,Object> objectTable;
+    HashMap<String,ToGLMParser> objectTable;
     static int objectCount=0;
 
     public MainWindow() {
-       objectTable=new HashMap<String,Object>();
+       objectTable=new HashMap<String,ToGLMParser>();
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -266,20 +269,69 @@ public class MainWindow extends JFrame {
                 System.out.print("usunieto "+objectTable.size());
         }
         });
-/*
-        addedObjectsJList.addMouseListener(new MouseAdapter() {
+
+      /*  addedObjectsJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
 
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    objectsItems.clear();
+                    propertiesItems.clear();
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
 
+                    for(int i=0;i<addedObjectsItems.size();i++){
+
+                    }
                 }
             }
         });
 */
-}
+        exportToGlm.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Vector <String> toglmString=new Vector<String>();
+                File file = new File("Hello1.glm");
+                // creates the file
+                try {
+                    file.createNewFile();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                FileWriter writer = null;
+                try {
+                    writer = new FileWriter(file);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                // creates a FileWriter Object
+                for(int i=0;i<addedObjectsItems.size();i++){
+                   ToGLMParser glm= (ToGLMParser) objectTable.get(addedObjectsItems.get(i));
+                   // System.out.println(glm.ToGLM());
+
+
+                    // Writes the content to the file
+                    try {
+                        writer.write(glm.ToGLM());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        writer.flush();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                try {
+                    writer.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+
+        });
+}}
