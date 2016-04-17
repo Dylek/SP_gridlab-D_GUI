@@ -1,9 +1,9 @@
 package gridlab.ModulesItems.Powerflow;
 
-import gridlab.ModulesItems.Property;
-import gridlab.ModulesItems.ToGLMParser;
+        import gridlab.ModulesItems.Property;
+        import gridlab.ModulesItems.ToGLMParser;
 
-import java.util.Vector;
+        import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
