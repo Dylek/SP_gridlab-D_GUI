@@ -11,9 +11,7 @@ import gridlab.ModulesItems.ToGLMParser;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.HashMap;
-import java.util.Vector;
 
 /**
  * Created by Pavlo on 17.04.2016.
@@ -33,11 +31,10 @@ public class MainWindow extends JFrame {
     private JPanel buttons;
 
 
-
-    private JList <String> modulesJList;
-    private JList <String> objectsJList;
-    private JList <String> addedObjectsJList;
-    private JList <String>  propertiesJList;
+    private JList<String> modulesJList;
+    private JList<String> objectsJList;
+    private JList<String> addedObjectsJList;
+    private JList<String> propertiesJList;
 
     DefaultListModel<String> modulesItems;
     DefaultListModel<String> powerflowItems;
@@ -53,7 +50,7 @@ public class MainWindow extends JFrame {
     static int objectCount=0;
 
     public MainWindow() {
-       objectTable=new HashMap<String,ToGLMParser>();
+       objectTable=new HashMap<String,Object>();
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -77,7 +74,7 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         buttons = new JPanel();
-        buttons.setLayout(new BoxLayout(buttons,BoxLayout.PAGE_AXIS));
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.PAGE_AXIS));
         buttons.add(exportToGlm);
         buttons.add(runSimulation);
         buttons.add(addClock);
@@ -269,14 +266,14 @@ public class MainWindow extends JFrame {
                 System.out.print("usunieto "+objectTable.size());
         }
         });
-
-      /*  addedObjectsJList.addMouseListener(new MouseAdapter() {
+/*
+        addedObjectsJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
 
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    propertiesItems.clear();
+                    objectsItems.clear();
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
