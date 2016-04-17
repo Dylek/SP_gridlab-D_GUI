@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
-        objectsJList=new JList <String>(objectsJList);
+        objectsJList=new JList <String>(objectsItems);
         addedObjectsJList=new JList <String>(addedObjectsItems);
         propertiesJList=new JList<String>(propertiesItems);
         loadListers();
@@ -151,18 +151,39 @@ public class MainWindow extends JFrame {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    modulesItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
-                    objectsItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
-                   /* // Double-click detected
+                    //modulesItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
+                    //objectsItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
+                    objectsItems.clear();
+
+
+                   // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
                     switch (index){
-                        case 0: objectPanel.remove(objectsJList);
-                                 objectPanel.add(new JList<String>(generatorItems)); break;
-                        case 1: objectsItems=powerflowItems;break;
-                        case 2: objectsItems=residentalItems;break;
-                        case 3: objectsItems=tapeItems;break;
+                        case 0:
+                            for(int i=0;i<generatorItems.getSize();i++) {
+                                objectsItems.addElement(generatorItems.get(i));
+                            }
 
-                    }*/
+                            break;
+
+                        case 1:
+                            for(int i=0;i<powerflowItems.getSize();i++) {
+                                objectsItems.addElement(powerflowItems.get(i));
+                            }
+                            break;
+
+                        case 2:for(int i=0;i<residentalItems.getSize();i++) {
+                            objectsItems.addElement(residentalItems.get(i));
+                        }
+                           break;
+
+                        case 3:
+                            for(int i=0;i<tapeItems.getSize();i++) {
+                                objectsItems.addElement(tapeItems.get(i));
+                            }
+                            break;
+
+                    }
                 }
             }
         });
