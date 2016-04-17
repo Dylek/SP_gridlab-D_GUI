@@ -10,17 +10,19 @@ import javax.swing.*;
  */
 public class ModulesPanel extends JPanel {
 
-   private JList mojaList;
+    private JList mojaList;
     //private DefaultListModel<String> modulesItems;
+    private JScrollPane listScrollPane = new JScrollPane();
 
     public ModulesPanel(JList lista) {
         mojaList=lista;
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(300, 200));
+        listScrollPane.setViewportView(mojaList);
 
 
-        add(mojaList,BorderLayout.CENTER);
+        add(listScrollPane,BorderLayout.CENTER);
     }
 
 

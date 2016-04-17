@@ -45,15 +45,14 @@ public class MainWindow extends JFrame {
         objectsJList=new JList <String>(objectsItems);
         addedObjectsJList=new JList <String>(addedObjectsItems);
         propertiesJList=new JList<String>(propertiesItems);
-        loadListers();
-
+        objectsItems.addElement(" ");
+        objectsJList.setSelectedIndex(0);
 
         mainFrame = new JFrame();
         modulesPanel = new ModulesPanel(modulesJList);
         objectPanel = new ModulesPanel(objectsJList);
         addedObjectsPanel = new ModulesPanel(addedObjectsJList);
         propertiesPanel = new ModulesPanel(propertiesJList);
-        modulesItems.addElement("lol");
 
         addButton = new JButton("+");
         removeButton = new JButton("-");
@@ -77,6 +76,8 @@ public class MainWindow extends JFrame {
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
         container.add(buttons);
+
+        loadListers();
 
 
 
@@ -148,15 +149,13 @@ public class MainWindow extends JFrame {
 
         modulesJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
+
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    //modulesItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
-                    //objectsItems.addElement("LOLOLSODKJASDHALSKDLASDLASHDlHASD");
                     objectsItems.clear();
 
-
-                   // Double-click detected
+                    // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
                     switch (index){
                         case 0:
@@ -190,8 +189,20 @@ public class MainWindow extends JFrame {
                 }
             }
         });
-
-
+        addButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                addedObjectsItems.addElement(objectsItems.get(objectsJList.getSelectedIndex()));
+            }
+        });
+        removeButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
+        }
+        });
     }
 
 }
