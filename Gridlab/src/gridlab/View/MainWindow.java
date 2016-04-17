@@ -1,5 +1,6 @@
 package gridlab.View;
 
+import gridlab.ModulesItems.Clock;
 import gridlab.ModulesItems.Generator.Inverter;
 import gridlab.ModulesItems.Generator.Solar;
 import gridlab.ModulesItems.Powerflow.*;
@@ -11,6 +12,9 @@ import gridlab.ModulesItems.ToGLMParser;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -50,7 +54,7 @@ public class MainWindow extends JFrame {
     static int objectCount=0;
 
     public MainWindow() {
-       objectTable=new HashMap<String,Object>();
+       objectTable=new HashMap<String,ToGLMParser>();
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -265,6 +269,13 @@ public class MainWindow extends JFrame {
                 objectTable.remove(obj);
                 System.out.print("usunieto "+objectTable.size());
         }
+        });
+        addClock.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                objectCount++;
+                addedObjectsItems.addElement("Clock " + objectCount);
+                objectTable.put("Clock" + " " + objectCount, new Clock());
+            }
         });
 /*
         addedObjectsJList.addMouseListener(new MouseAdapter() {
