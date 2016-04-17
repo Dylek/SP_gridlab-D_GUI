@@ -1,8 +1,16 @@
 package gridlab.View;
 
+import gridlab.ModulesItems.Generator.Inverter;
+import gridlab.ModulesItems.Generator.Solar;
+import gridlab.ModulesItems.Powerflow.*;
+import gridlab.ModulesItems.Residental.*;
+import gridlab.ModulesItems.Tape.Player;
+import gridlab.ModulesItems.Tape.Recorder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
 /**
  * Created by Pavlo on 17.04.2016.
@@ -38,7 +46,11 @@ public class MainWindow extends JFrame {
     DefaultListModel<String> addedObjectsItems;
     DefaultListModel<String> propertiesItems;
 
+    HashMap<String,Object> objectTable;
+    static int objectCount=0;
+
     public MainWindow() {
+       objectTable=new HashMap<String,Object>();
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -193,16 +205,81 @@ public class MainWindow extends JFrame {
         {
             public void actionPerformed(ActionEvent e)
             {
-                addedObjectsItems.addElement(objectsItems.get(objectsJList.getSelectedIndex()));
+                objectCount++;
+                String object=new String();
+                object=objectsItems.get(objectsJList.getSelectedIndex());
+                addedObjectsItems.addElement(object+" "+objectCount);
+                //String s=objectsItems.get(objectsJList.getSelectedIndex());
+
+                switch (object){
+
+                    case "Player": objectTable.put((object+objectCount),new Player());System.out.print("utworozno klase");  break;
+                    case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());  break;
+
+                    case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
+                    case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
+
+                    case "House": objectTable.put(object+" "+objectCount,new House());break;
+                    case "Freezer": objectTable.put(object+" "+objectCount,new Freezer());break;
+                    case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
+                    case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
+                    case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
+                    case "Microwave": objectTable.put(object+" "+objectCount,new Microwave());break;
+                    case "Occupants": objectTable.put(object+" "+objectCount,new Occupants());break;
+                    case "Plugs": objectTable.put(object+" "+objectCount,new Plugs());break;
+                    case "Refrigerator": objectTable.put(object+" "+objectCount,new Refrigerator());break;
+                    case "Waterheat": objectTable.put(object+" "+objectCount,new Waterheat());break;
+
+                    case "Capacitor": objectTable.put(object+" "+objectCount,new Capacitor());break;
+                    case "Fuse": objectTable.put(object+" "+objectCount,new Fuse());break;
+                    case "LineConfiguration": objectTable.put(object+" "+objectCount,new LineConfiguration());break;
+                    case "LineSpacing": objectTable.put(object+" "+objectCount,new LineSpacing());break;
+                    case "Load": objectTable.put(object+" "+objectCount,new Load());break;
+                    case "Meter": objectTable.put(object+" "+objectCount,new Meter());break;
+                    case "Node": objectTable.put(object+" "+objectCount,new Node());break;
+                    case "OverheadLine": objectTable.put(object+" "+objectCount,new OverheadLine() );break;
+                    case "OverheadLineConductor": objectTable.put(object+" "+objectCount,new OverheadLineConductor());break;
+                    case "Regulator": objectTable.put(object+" "+objectCount,new Regulator());break;
+                    case "RegulatorConfiguration": objectTable.put(object+" "+objectCount,new RegulatorConfiguration());break;
+                    case "Switch": objectTable.put(object+" "+objectCount,new Switch());break;
+                    case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());break;
+                    case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());break;
+                    case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
+                    case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
+                    case "TiplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
+                    case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());break;
+                    case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());break;
+                    case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());break;
+                    case "UnderGroundLineConductor": objectTable.put(object+" "+objectCount,new UnderGroundLineConductor());break;
+
+                }
+                System.out.print("Dodano"+objectTable.size());
             }
         });
         removeButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
+                String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
+                objectTable.remove(obj);
+                System.out.print("usunieto "+objectTable.size());
         }
         });
-    }
+/*
+        addedObjectsJList.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
 
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 1) {
+
+                    objectsItems.clear();
+
+                    // Double-click detected
+                    int index = list.locationToIndex(evt.getPoint());
+
+                }
+            }
+        });
+*/
 }
