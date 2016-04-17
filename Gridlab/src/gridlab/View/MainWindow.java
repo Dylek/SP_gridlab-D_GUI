@@ -163,30 +163,35 @@ public class MainWindow extends JFrame {
                             for(int i=0;i<generatorItems.getSize();i++) {
                                 objectsItems.addElement(generatorItems.get(i));
                             }
-
+                            objectsJList.setSelectedIndex(0);
                             break;
 
                         case 1:
                             for(int i=0;i<powerflowItems.getSize();i++) {
                                 objectsItems.addElement(powerflowItems.get(i));
                             }
+                            objectsJList.setSelectedIndex(0);
                             break;
 
                         case 2:for(int i=0;i<residentalItems.getSize();i++) {
                             objectsItems.addElement(residentalItems.get(i));
                         }
+                            objectsJList.setSelectedIndex(0);
                            break;
 
                         case 3:
                             for(int i=0;i<tapeItems.getSize();i++) {
                                 objectsItems.addElement(tapeItems.get(i));
                             }
+                            objectsJList.setSelectedIndex(0);
                             break;
 
                     }
                 }
             }
         });
+
+
     }
 
 }
