@@ -1,5 +1,0 @@
-Nie wiem gdzie to napisać, potem się podzielimy taskami ale na razie piszę tu żeby nie zapomnieć sobie
-
-Jak chcecie uruchomić to co zrobiłam, kliknijcie Run na ModuleChooserWindow, po kliknięciu OK ClockChooser sam się otworzy :)
-
-Oczywiście, zamiast wypisywać na konsoli, trzeba będzie przypisywać te wartości do jakichś zmiennych, a potem przekazać je do jakiejś funkcji która będzie tworzyła plik. Auto-generated metody są void i nie można tego zmienić, więc nie można zrobić returnów. W kolejnym oknie powinny być opcje dodawania schedulerów i obiektów, dla każdego wyskakuje nowe okno, z obiektami będzie najwięcej pracy bo to jest w sumie główna część tego programu.
