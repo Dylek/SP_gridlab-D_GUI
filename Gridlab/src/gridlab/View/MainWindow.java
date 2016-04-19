@@ -35,6 +35,8 @@ public class MainWindow extends JFrame {
     private JTextArea fileNameJTextArea;
 
 
+    private JButton saveChangers;
+
     private JPanel buttons;
     private String fileName="Hello1.glm";
 
@@ -56,6 +58,9 @@ public class MainWindow extends JFrame {
 
     HashMap<String,ToGLMParser> objectTable;
     static int objectCount=0;
+    //private JLabel[] labelsGlobal;
+    private JTextField[] textFieldsGlobal;
+    private int currentObject;
 
     public MainWindow() {
        objectTable=new HashMap<String,ToGLMParser>();
@@ -95,6 +100,8 @@ public class MainWindow extends JFrame {
         buttons.add(addClock);
 
 
+        saveChangers= new JButton("Save changes");
+        buttons.add(saveChangers);
 
 
 
@@ -228,6 +235,7 @@ public class MainWindow extends JFrame {
                 if (evt.getClickCount() == 1) {
 
                     int index = list.locationToIndex(evt.getPoint());
+                    currentObject=index;
                     String key = addedObjectsItems.get(index);
                     ToGLMParser value = objectTable.get(key);
                     int propAmount = value.GetProperties().size();
@@ -243,12 +251,15 @@ public class MainWindow extends JFrame {
                         params.add(labels[i]);
                         params.add(textfields[i]);
                     }
+                    //labelsGlobal=labels;
+                    textFieldsGlobal=textfields;
                   //  JScrollPane scrollPanel = new JScrollPane(params);
                     propertiesPanel.setViewportView(params);
                    // propertiesPanel.add(params);
                     propertiesPanel.revalidate();
                     propertiesPanel.repaint();
                 }
+
             }
         });
 
@@ -324,6 +335,23 @@ public class MainWindow extends JFrame {
                 objectTable.put("Clock" + " " + objectCount, new Clock());
             }
         });
+
+
+        saveChangers.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt) {
+                if (evt.getClickCount() == 1) {
+                    int index = currentObject;
+                    String key = addedObjectsItems.get(index);
+                    ToGLMParser value = objectTable.get(key);
+                    int propAmount = value.GetProperties().size();
+                    for(int i =0; i<propAmount;i++){
+                       value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
+                    }
+
+                }
+            }
+        });
+
         runSimulation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command;
