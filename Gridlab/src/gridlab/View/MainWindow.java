@@ -18,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+
 /**
  * Created by Pavlo on 17.04.2016.
  */
@@ -27,6 +29,7 @@ public class MainWindow extends JFrame {
     private JPanel objectPanel;
     private JPanel addedObjectsPanel;
     private JScrollPane propertiesPanel;
+    private JScrollPane consolePanel;
     private JButton addButton;
     private JButton removeButton;
     private JButton exportToGlm;
@@ -62,6 +65,9 @@ public class MainWindow extends JFrame {
     private JTextField[] textFieldsGlobal;
     private int currentObject;
 
+
+    private JTextArea consoleOutput=new JTextArea();
+
     public MainWindow() {
        objectTable=new HashMap<String,ToGLMParser>();
 
@@ -78,9 +84,10 @@ public class MainWindow extends JFrame {
         objectPanel = new ModulesPanel(objectsJList);
         addedObjectsPanel = new ModulesPanel(addedObjectsJList);
         propertiesPanel = new JScrollPane();
+        consolePanel = new JScrollPane(consoleOutput);
         //propertiesPanel.setLayout(null);
         propertiesPanel.setPreferredSize(new Dimension(450, 300));
-
+        consolePanel.setPreferredSize(new Dimension(500,300));
         addButton = new JButton("+");
         removeButton = new JButton("-");
         exportToGlm = new JButton("Export to GLM");
@@ -96,14 +103,11 @@ public class MainWindow extends JFrame {
         /*
          *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
          */
-        fileNameJTextArea=new JTextArea("HelloWorld");
+        fileNameJTextArea=new JTextArea("waterheater_example");
         buttons.add(fileNameJTextArea);
         buttons.add(runSimulation);
-
-
         saveChangers= new JButton("Save changes");
         buttons.add(saveChangers);
-
 
 
 
@@ -117,8 +121,11 @@ public class MainWindow extends JFrame {
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
         container.add(buttons);
+        container.add(consolePanel);
+
 
         loadListers();
+
 
 
 
@@ -359,10 +366,21 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String command;
                 command="gridlabd ";
+                fileName=fileNameJTextArea.getText();
+
                 if (fileName != null && fileName != "") {
+
                     ExecuteShellCommand execCom=new ExecuteShellCommand();
-                    System.out.println("Consol output:\n");
-                    System.out.println(execCom.executeCommand(command+fileName));
+
+                    JPanel conPan=new JPanel();
+                    conPan.setPreferredSize(new Dimension(400, 300));
+
+                    consoleOutput.setText(execCom.executeCommand(command+fileName+".glm"));
+
+
+                    System.out.println("Running in console");
+                    //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
+                    System.out.println("End of console response");
                 }
 
             }
@@ -375,8 +393,8 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Vector <String> toglmString=new Vector<String>();
-                fileName=fileNameJTextArea.getText()+".glm";
-                File file = new File(fileName);
+                fileName=fileNameJTextArea.getText();
+                File file = new File(fileName+".glm");
                 // creates the file
                 try {
                     file.createNewFile();
