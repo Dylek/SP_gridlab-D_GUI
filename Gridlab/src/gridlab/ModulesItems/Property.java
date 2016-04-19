@@ -6,11 +6,11 @@ package gridlab.ModulesItems;
 public class Property {
 
     private String name;
-    private Object value;
+    private String value;
     private String unit;
     public Property(){
     };
-    public Property(String name, Object value,String unit) {
+    public Property(String name, String value,String unit) {
         this.name=name;
         this.value=value;
         this.unit=unit;
@@ -19,7 +19,7 @@ public class Property {
     public void SetName(String name){
         this.name=name;
     }
-    public void SetValue(Object value){
+    public void SetValue(String value){
         this.value=value;
     }
     public void SetUnit(String unit){
@@ -28,7 +28,7 @@ public class Property {
     public String GetName(){
         return name;
     }
-    public Object GetValue(){
+    public String GetValue(){
         return value;
     }
     public String GetUnit(){

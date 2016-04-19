@@ -18,7 +18,7 @@ public class ModulesPanel extends JPanel {
         mojaList=lista;
 
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(300, 200));
+        setPreferredSize(new Dimension(250, 300));
         listScrollPane.setViewportView(mojaList);
 
 

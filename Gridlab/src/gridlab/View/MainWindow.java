@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
     private JPanel modulesPanel;
     private JPanel objectPanel;
     private JPanel addedObjectsPanel;
-    private JPanel propertiesPanel;
+    private JScrollPane propertiesPanel;
     private JButton addButton;
     private JButton removeButton;
     private JButton exportToGlm;
@@ -72,7 +72,9 @@ public class MainWindow extends JFrame {
         modulesPanel = new ModulesPanel(modulesJList);
         objectPanel = new ModulesPanel(objectsJList);
         addedObjectsPanel = new ModulesPanel(addedObjectsJList);
-        propertiesPanel = new ModulesPanel(propertiesJList);
+        propertiesPanel = new JScrollPane();
+        //propertiesPanel.setLayout(null);
+        propertiesPanel.setPreferredSize(new Dimension(400, 300));
 
         addButton = new JButton("+");
         removeButton = new JButton("-");
@@ -82,16 +84,17 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         buttons = new JPanel();
-        buttons.setLayout(new BoxLayout(buttons, BoxLayout.PAGE_AXIS));
+        buttons.setLayout(new GridLayout(2,2));
         buttons.add(exportToGlm);
-        buttons.add(runSimulation);
-        buttons.add(addClock);
-
         /*
          *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
          */
         fileNameJTextArea=new JTextArea("HelloWorld");
         buttons.add(fileNameJTextArea);
+        buttons.add(runSimulation);
+        buttons.add(addClock);
+
+
 
 
 
@@ -218,6 +221,37 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        addedObjectsJList.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 1) {
+
+                    int index = list.locationToIndex(evt.getPoint());
+                    String key = addedObjectsItems.get(index);
+                    ToGLMParser value = objectTable.get(key);
+                    int propAmount = value.GetProperties().size();
+                    JPanel params = new JPanel();
+                    params.setLayout(new GridLayout(propAmount,2));
+                    params.setPreferredSize(new Dimension(400, 300));
+                    JLabel labels[] = new JLabel[propAmount];
+                    JTextField textfields[] = new JTextField[propAmount];
+                    for(int i =0; i<propAmount;i++){
+                        labels[i] = new JLabel(value.GetProperties().get(i).GetName());
+                        textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
+
+                        params.add(labels[i]);
+                        params.add(textfields[i]);
+                    }
+                  //  JScrollPane scrollPanel = new JScrollPane(params);
+                    propertiesPanel.setViewportView(params);
+                   // propertiesPanel.add(params);
+                    propertiesPanel.revalidate();
+                    propertiesPanel.repaint();
+                }
+            }
+        });
+
         addButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -230,7 +264,7 @@ public class MainWindow extends JFrame {
 
                 switch (object){
 
-                    case "Player": objectTable.put((object+objectCount),new Player());System.out.print("utworozno klase");  break;
+                    case "Player": objectTable.put((object+" "+objectCount),new Player());System.out.print("utworozno klase");  break;
                     case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());  break;
 
                     case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
