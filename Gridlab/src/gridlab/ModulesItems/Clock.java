@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Clock extends ToGLMParser {
+public class Clock implements ToGLMParser {
 
     private Vector<Property> properties;
 
@@ -31,7 +31,12 @@ public class Clock extends ToGLMParser {
         String s="";
         s="clock{ \n";
         for (Property p: properties){
-            if(p.GetValue()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+            if(p.GetValue()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;

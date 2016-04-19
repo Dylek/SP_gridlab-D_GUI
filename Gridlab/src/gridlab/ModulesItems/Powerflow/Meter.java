@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Meter extends ToGLMParser {
+public class Meter implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
 
@@ -44,7 +44,12 @@ public class Meter extends ToGLMParser {
         String s="";
         s="object meter { \n";
         for (Property p: properties){
-            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+";\n";
+            if(p.GetValue()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;

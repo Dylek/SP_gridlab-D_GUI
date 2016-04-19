@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Player extends ToGLMParser{
+public class Player implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 3;
 
@@ -33,7 +33,12 @@ public class Player extends ToGLMParser{
         String s="";
         s="object player{ \n";
         for (Property p: properties){
-            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+            if(p.GetName()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;

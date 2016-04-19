@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexMeter  extends ToGLMParser {
+public class TriplexMeter  implements ToGLMParser {
 
     private Vector<Property> properties;
     private int module = 1;
@@ -70,7 +70,12 @@ public class TriplexMeter  extends ToGLMParser {
         String s="";
         s="object triplex_meter { \n";
         for (Property p: properties){
-            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+";\n";
+            if(p.GetValue()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;

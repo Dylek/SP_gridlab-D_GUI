@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Inverter extends ToGLMParser{
+public class Inverter implements ToGLMParser {
 
     private Vector<Property> properties;
     private int module =0;
@@ -48,7 +48,12 @@ public class Inverter extends ToGLMParser{
         String s="";
         s="object inverter{ \n";
         for (Property p: properties){
-            if(!p.GetValue().toString().isEmpty())s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+";\n";
+            if(p.GetValue()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;

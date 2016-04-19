@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Occupants extends ToGLMParser{
+public class Occupants implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
 
@@ -29,7 +29,12 @@ public class Occupants extends ToGLMParser{
         String s="";
         s="object occupantload{ \n";
         for (Property p: properties){
-            if(p.GetName()!=null)s+=p.GetName()+"    "+p.GetValue()+"    "+p.GetUnit()+"\n";
+            if(p.GetValue()!=null)
+            {
+                s+=p.GetName()+"    "+p.GetValue();
+                // if(false)s+=" "+p.GetUnit();
+                s+=";\n";
+            }
         }
         s+="} \n";
         return s;
