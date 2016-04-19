@@ -1,5 +1,6 @@
 package gridlab.View;
 
+import gridlab.ExecuteShellCommand;
 import gridlab.ModulesItems.Clock;
 import gridlab.ModulesItems.Generator.Inverter;
 import gridlab.ModulesItems.Generator.Solar;
@@ -33,7 +34,7 @@ public class MainWindow extends JFrame {
     private JButton addClock;
 
     private JPanel buttons;
-
+    private String fileName="Hello1.glm";
 
     private JList<String> modulesJList;
     private JList<String> objectsJList;
@@ -277,6 +278,19 @@ public class MainWindow extends JFrame {
                 objectTable.put("Clock" + " " + objectCount, new Clock());
             }
         });
+        runSimulation.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String command;
+
+                command="gridlabd ";
+                if (fileName != null && fileName != "") {
+                    ExecuteShellCommand execCom=new ExecuteShellCommand();
+                    System.out.println("Consol output:\n");
+                    System.out.println(execCom.executeCommand(command+fileName));
+                }
+
+            }
+        });
 /*
         addedObjectsJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -302,7 +316,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Vector <String> toglmString=new Vector<String>();
-                File file = new File("Hello1.glm");
+                File file = new File(fileName);
                 // creates the file
                 try {
                     file.createNewFile();
