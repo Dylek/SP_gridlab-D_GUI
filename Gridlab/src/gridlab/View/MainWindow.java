@@ -249,18 +249,23 @@ public class MainWindow extends JFrame {
                     ToGLMParser value = objectTable.get(key);
                     int propAmount = value.GetProperties().size();
                     JPanel params = new JPanel();
-                    params.setLayout(new GridLayout(propAmount,2));
-                    params.setPreferredSize(new Dimension(400, 300));
+                    params.setLayout(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    params.setPreferredSize(new Dimension(400, 500));
                     JLabel labels[] = new JLabel[propAmount];
                     JTextField textfields[] = new JTextField[propAmount];
-                    Dimension dim = new Dimension(100,20);
                     for(int i =0; i<propAmount;i++){
                         labels[i] = new JLabel(value.GetProperties().get(i).GetName());
                         textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
-                        textfields[i].setMinimumSize(dim);
-                        params.add(labels[i]);
-                        params.add(textfields[i]);
+                        gbc.ipadx=200;
+                        gbc.gridx = 0;
+                        gbc.gridy = i;
+                        params.add(labels[i],gbc);
+                        gbc.gridx = 1;
+                        gbc.gridy = i;
+                        params.add(textfields[i],gbc);
                     }
+                    params.setPreferredSize(params.getPreferredSize());
                     //labelsGlobal=labels;
                     textFieldsGlobal=textfields;
                   //  JScrollPane scrollPanel = new JScrollPane(params);
