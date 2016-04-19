@@ -48,7 +48,7 @@ public class Inverter implements ToGLMParser {
         String s="";
         s="object inverter{ \n";
         for (Property p: properties){
-            if(p.GetValue()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();
@@ -61,5 +61,14 @@ public class Inverter implements ToGLMParser {
 
     public int getModule(){
         return module;
+    }
+
+    public static void main(String[] args) {
+        Inverter inek=new Inverter();
+        if(inek.GetProperties().get(0).GetValue()!="")
+        System.out.println("tak"+inek.GetProperties().get(0).GetValue()+"tak");
+        else
+            System.out.println("nie");
+
     }
 }

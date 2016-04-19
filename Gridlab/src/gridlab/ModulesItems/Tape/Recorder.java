@@ -44,7 +44,7 @@ public class Recorder implements ToGLMParser {
         String s="";
         s="object recorder{ \n";
         for (Property p: properties){
-            if(p.GetName()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

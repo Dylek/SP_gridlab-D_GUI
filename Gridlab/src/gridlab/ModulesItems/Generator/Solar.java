@@ -70,9 +70,9 @@ public class Solar implements ToGLMParser {
     }
     public String ToGLM(){
         String s="";
-        s="solar {";
+        s="solar {\n";
         for (Property p: properties){
-            if(p.GetValue()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

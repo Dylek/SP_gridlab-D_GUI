@@ -34,7 +34,7 @@ public class OverheadLineConductor implements ToGLMParser {
         String s="";
         s="object overhead_line_conductor { \n";
         for (Property p: properties){
-            if(p.GetValue()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

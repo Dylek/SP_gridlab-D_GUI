@@ -29,7 +29,7 @@ public class Occupants implements ToGLMParser {
         String s="";
         s="object occupantload{ \n";
         for (Property p: properties){
-            if(p.GetValue()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

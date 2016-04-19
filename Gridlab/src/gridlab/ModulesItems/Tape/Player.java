@@ -33,7 +33,7 @@ public class Player implements ToGLMParser {
         String s="";
         s="object player{ \n";
         for (Property p: properties){
-            if(p.GetName()!=null)
+            if(p.GetValue()!="")
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();
