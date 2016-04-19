@@ -79,7 +79,7 @@ public class MainWindow extends JFrame {
         addedObjectsPanel = new ModulesPanel(addedObjectsJList);
         propertiesPanel = new JScrollPane();
         //propertiesPanel.setLayout(null);
-        propertiesPanel.setPreferredSize(new Dimension(400, 300));
+        propertiesPanel.setPreferredSize(new Dimension(450, 300));
 
         addButton = new JButton("+");
         removeButton = new JButton("-");
@@ -89,7 +89,9 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         buttons = new JPanel();
-        buttons.setLayout(new GridLayout(2,2));
+        buttons.setLayout(new GridLayout(2,2,0,30));
+        Dimension d = new Dimension(100,50);
+        exportToGlm.setPreferredSize(d);
         buttons.add(exportToGlm);
         /*
          *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
@@ -97,7 +99,6 @@ public class MainWindow extends JFrame {
         fileNameJTextArea=new JTextArea("HelloWorld");
         buttons.add(fileNameJTextArea);
         buttons.add(runSimulation);
-        buttons.add(addClock);
 
 
         saveChangers= new JButton("Save changes");
@@ -107,11 +108,12 @@ public class MainWindow extends JFrame {
 
 
         Container container = mainFrame.getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(new FlowLayout(FlowLayout.LEFT));
         container.add(modulesPanel);
         container.add(objectPanel);
         container.add(addButton);
         container.add(removeButton);
+        container.add(addClock);
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
         container.add(buttons);
@@ -244,10 +246,11 @@ public class MainWindow extends JFrame {
                     params.setPreferredSize(new Dimension(400, 300));
                     JLabel labels[] = new JLabel[propAmount];
                     JTextField textfields[] = new JTextField[propAmount];
+                    Dimension dim = new Dimension(100,20);
                     for(int i =0; i<propAmount;i++){
                         labels[i] = new JLabel(value.GetProperties().get(i).GetName());
                         textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
-
+                        textfields[i].setMinimumSize(dim);
                         params.add(labels[i]);
                         params.add(textfields[i]);
                     }
@@ -364,39 +367,8 @@ public class MainWindow extends JFrame {
 
             }
         });
-/*
-         fileNameJTextArea.addPropertyChangeListener() .addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String command;
-                command="gridlabd ";
-                if (fileName != null && fileName != "") {
-                    ExecuteShellCommand execCom=new ExecuteShellCommand();
-                    System.out.println("Consol output:\n");
-                    System.out.println(execCom.executeCommand(command+fileName));
-                }
 
-            }
-        });*/
 
-/*
-        addedObjectsJList.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-
-                JList list = (JList)evt.getSource();
-                if (evt.getClickCount() == 1) {
-
-                    objectsItems.clear();
-
-                    // Double-click detected
-                    int index = list.locationToIndex(evt.getPoint());
-
-                    for(int i=0;i<addedObjectsItems.size();i++){
-
-                    }
-                }
-            }
-        });
-*/
         exportToGlm.addActionListener(new ActionListener()
         {
 
