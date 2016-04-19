@@ -8,9 +8,10 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexNode implements ToGLMParser {
+public class TriplexNode extends ToGLMParser {
 
     private Vector<Property> properties;
+    private int module = 1;
     public TriplexNode(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -59,5 +60,9 @@ public class TriplexNode implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

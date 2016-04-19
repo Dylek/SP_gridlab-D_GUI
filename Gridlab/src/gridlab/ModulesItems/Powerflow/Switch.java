@@ -7,8 +7,9 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Switch implements ToGLMParser {
+public class Switch extends ToGLMParser {
     private Vector<Property>properties;
+    private int module = 1;
 
     public Switch(){
         properties=new Vector<Property>();
@@ -40,5 +41,8 @@ public class Switch implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+    public int getModule(){
+        return module;
     }
 }

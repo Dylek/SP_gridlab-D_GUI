@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Freezer implements ToGLMParser{
+public class Freezer extends ToGLMParser{
     private Vector<Property> properties;
+    private int module = 2;
 
     public Freezer(){
         properties = new Vector<Property>();
@@ -37,5 +38,9 @@ public class Freezer implements ToGLMParser{
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

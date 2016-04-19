@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Fuse implements ToGLMParser {
+public class Fuse extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+    
     public Fuse(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -38,5 +40,8 @@ public class Fuse implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+    public int getModule(){
+        return module;
     }
 }

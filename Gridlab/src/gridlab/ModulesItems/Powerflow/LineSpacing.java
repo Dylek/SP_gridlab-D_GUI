@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class LineSpacing implements ToGLMParser {
+public class LineSpacing extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public LineSpacing(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -39,5 +41,9 @@ public class LineSpacing implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

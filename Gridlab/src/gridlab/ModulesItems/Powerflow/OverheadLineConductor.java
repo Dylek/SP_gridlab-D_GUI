@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class OverheadLineConductor implements ToGLMParser {
+public class OverheadLineConductor extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public OverheadLineConductor(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -36,5 +38,9 @@ public class OverheadLineConductor implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

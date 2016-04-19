@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Clock implements ToGLMParser {
+public class Clock extends ToGLMParser {
 
     private Vector<Property> properties;
 
@@ -35,5 +35,9 @@ public class Clock implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return 999;
     }
 }

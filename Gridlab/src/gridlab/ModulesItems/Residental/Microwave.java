@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Microwave implements ToGLMParser {
+public class Microwave extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 2;
 
     public Microwave(){
         properties = new Vector<Property>();
@@ -36,5 +37,9 @@ public class Microwave implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

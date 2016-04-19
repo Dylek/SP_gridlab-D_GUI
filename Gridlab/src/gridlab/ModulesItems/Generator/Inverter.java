@@ -8,10 +8,10 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Inverter implements ToGLMParser{
+public class Inverter extends ToGLMParser{
 
     private Vector<Property> properties;
-
+    private int module =0;
     public Inverter() {
         properties = new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -52,5 +52,9 @@ public class Inverter implements ToGLMParser{
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

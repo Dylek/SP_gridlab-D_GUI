@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Meter implements ToGLMParser {
+public class Meter extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public Meter(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -46,5 +48,9 @@ public class Meter implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

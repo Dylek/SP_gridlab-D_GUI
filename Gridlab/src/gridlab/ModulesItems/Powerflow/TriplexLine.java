@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexLine implements ToGLMParser {
+public class TriplexLine extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public TriplexLine(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
@@ -37,5 +39,9 @@ public class TriplexLine implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

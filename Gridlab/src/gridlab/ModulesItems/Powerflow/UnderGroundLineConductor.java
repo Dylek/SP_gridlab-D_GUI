@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class UnderGroundLineConductor implements ToGLMParser {
+public class UnderGroundLineConductor extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
 
     public UnderGroundLineConductor(){
         properties = new Vector<Property>();
@@ -49,5 +50,9 @@ public class UnderGroundLineConductor implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Occupants implements ToGLMParser{
+public class Occupants extends ToGLMParser{
     private Vector<Property> properties;
+    private int module = 2;
 
     public Occupants(){
         properties = new Vector<Property>();
@@ -32,6 +33,10 @@ public class Occupants implements ToGLMParser{
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }
 

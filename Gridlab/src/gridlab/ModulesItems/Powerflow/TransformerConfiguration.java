@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TransformerConfiguration implements ToGLMParser {
+public class TransformerConfiguration extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public TransformerConfiguration(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -56,5 +58,9 @@ public class TransformerConfiguration implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

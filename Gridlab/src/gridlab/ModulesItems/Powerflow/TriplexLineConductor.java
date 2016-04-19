@@ -8,8 +8,10 @@ package gridlab.ModulesItems.Powerflow;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexLineConductor implements ToGLMParser {
+public class TriplexLineConductor extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public TriplexLineConductor(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
@@ -40,5 +42,9 @@ public class TriplexLineConductor implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

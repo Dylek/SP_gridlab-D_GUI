@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Regulator implements ToGLMParser {
+public class Regulator extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public Regulator(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -40,5 +42,9 @@ public class Regulator implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

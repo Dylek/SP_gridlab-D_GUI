@@ -8,10 +8,9 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class House implements ToGLMParser {
-
-
+public class House extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 2;
 
     public House(){
         properties = new Vector<Property>();
@@ -154,5 +153,9 @@ public class House implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

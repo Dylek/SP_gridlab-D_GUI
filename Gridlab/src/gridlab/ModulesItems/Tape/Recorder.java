@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Recorder implements ToGLMParser{
+public class Recorder extends ToGLMParser{
     private Vector<Property> properties;
+    private int module = 3;
 
     public Recorder(){
         properties = new Vector<Property>();
@@ -49,4 +50,7 @@ public class Recorder implements ToGLMParser{
         return s;
     }
 
+    public int getModule(){
+        return module;
+    }
 }

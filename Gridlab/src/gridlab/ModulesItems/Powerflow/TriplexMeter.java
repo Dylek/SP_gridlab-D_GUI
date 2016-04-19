@@ -8,9 +8,11 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexMeter  implements ToGLMParser {
+public class TriplexMeter  extends ToGLMParser {
 
     private Vector<Property> properties;
+    private int module = 1;
+
     public TriplexMeter(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -38,7 +40,7 @@ public class TriplexMeter  implements ToGLMParser {
         properties.add(new Property("measured_current_1", "", "A"));
         properties.add(new Property("measured_current_2", "", "A"));
         properties.add(new Property("measured_current_N", "", "A"));
-         properties.add(new Property("price", "", " $/kwh"));
+        properties.add(new Property("price", "", " $/kwh"));
         properties.add(new Property("monthly_fee", "", " $"));
         properties.add(new Property("monthly_bill", "", " $"));
         properties.add(new Property("previous_monthly_bill", "", "$"));
@@ -72,5 +74,9 @@ public class TriplexMeter  implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

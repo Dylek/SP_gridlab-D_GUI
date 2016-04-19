@@ -9,8 +9,9 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Refrigerator implements ToGLMParser {
+public class Refrigerator extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 2;
 
     public Refrigerator() {
         properties = new Vector<Property>();
@@ -32,5 +33,9 @@ public class Refrigerator implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }

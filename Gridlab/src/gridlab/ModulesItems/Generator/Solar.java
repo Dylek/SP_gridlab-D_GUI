@@ -8,8 +8,9 @@ import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Solar implements ToGLMParser{
+public class Solar extends ToGLMParser{
     private Vector<Property> properties;
+    private int module =0;
 
     public Solar(){
         properties=new Vector<Property>();
@@ -75,6 +76,9 @@ public class Solar implements ToGLMParser{
         }
         s+="} \n";
         return s;
+    }
+    public int getModule(){
+        return module;
     }
 
 }

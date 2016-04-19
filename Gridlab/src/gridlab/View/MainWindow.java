@@ -298,6 +298,7 @@ public class MainWindow extends JFrame {
 */
         exportToGlm.addActionListener(new ActionListener()
         {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Vector <String> toglmString=new Vector<String>();
@@ -314,6 +315,12 @@ public class MainWindow extends JFrame {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
+                try {
+                    writer.write(checkModules());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
                 // creates a FileWriter Object
                 for(int i=0;i<addedObjectsItems.size();i++){
                    ToGLMParser glm= (ToGLMParser) objectTable.get(addedObjectsItems.get(i));
@@ -342,4 +349,34 @@ public class MainWindow extends JFrame {
             }
 
         });
-}}
+
+}
+    public String checkModules(){
+        String modules = "";
+        int checkGuard1 = 0;
+        int checkGuard2 = 0;
+        int checkGuard3 = 0;
+        int checkGuard4 = 0;
+
+
+        for (ToGLMParser value : objectTable.values()) {
+            if(value.getModule()==0 && checkGuard1 ==0){
+                modules = modules + "module generators;\n";
+                checkGuard1++;
+            }
+            if(value.getModule()==1 && checkGuard2 ==0){
+                modules = modules + "module powerflow;\n";
+                checkGuard2++;
+            }
+            if(value.getModule()==2 && checkGuard3 ==0){
+                modules = modules + "module residential;\n";
+                checkGuard3++;
+            }
+            if(value.getModule()==3 && checkGuard4 ==0){
+                modules = modules + "module tape;\n";
+                checkGuard4++;
+            }
+        }
+        return modules;
+    }
+}

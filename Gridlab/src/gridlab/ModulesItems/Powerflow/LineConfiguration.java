@@ -8,8 +8,10 @@ import java.util.Vector;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class LineConfiguration implements ToGLMParser {
+public class LineConfiguration extends ToGLMParser {
     private Vector<Property> properties;
+    private int module = 1;
+
     public LineConfiguration(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -43,5 +45,9 @@ public class LineConfiguration implements ToGLMParser {
         }
         s+="} \n";
         return s;
+    }
+
+    public int getModule(){
+        return module;
     }
 }
