@@ -32,9 +32,12 @@ public class MainWindow extends JFrame {
     private JButton exportToGlm;
     private JButton runSimulation;
     private JButton addClock;
+    private JTextArea fileNameJTextArea;
+
 
     private JPanel buttons;
     private String fileName="Hello1.glm";
+
 
     private JList<String> modulesJList;
     private JList<String> objectsJList;
@@ -83,6 +86,15 @@ public class MainWindow extends JFrame {
         buttons.add(exportToGlm);
         buttons.add(runSimulation);
         buttons.add(addClock);
+
+        /*
+         *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
+         */
+        fileNameJTextArea=new JTextArea("HelloWorld");
+        buttons.add(fileNameJTextArea);
+
+
+
 
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout());
@@ -281,7 +293,6 @@ public class MainWindow extends JFrame {
         runSimulation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command;
-
                 command="gridlabd ";
                 if (fileName != null && fileName != "") {
                     ExecuteShellCommand execCom=new ExecuteShellCommand();
@@ -291,6 +302,20 @@ public class MainWindow extends JFrame {
 
             }
         });
+/*
+         fileNameJTextArea.addPropertyChangeListener() .addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String command;
+                command="gridlabd ";
+                if (fileName != null && fileName != "") {
+                    ExecuteShellCommand execCom=new ExecuteShellCommand();
+                    System.out.println("Consol output:\n");
+                    System.out.println(execCom.executeCommand(command+fileName));
+                }
+
+            }
+        });*/
+
 /*
         addedObjectsJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -316,6 +341,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Vector <String> toglmString=new Vector<String>();
+                fileName=fileNameJTextArea.getText()+".glm";
                 File file = new File(fileName);
                 // creates the file
                 try {
