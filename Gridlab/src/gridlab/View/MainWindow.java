@@ -129,7 +129,7 @@ public class MainWindow extends JFrame {
 
 
 
-        mainFrame.setSize(new Dimension(1366,768));
+        mainFrame.setSize(new Dimension(1300,600));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Gridlab-D GUI");
