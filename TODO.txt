@@ -1,0 +1,14 @@
+TO DO gridlabd:
+
+ocena 1 prezentacji : 80/100  
+
+panel boczny 
+elementy do wyboru
+laczymy elementy
+
+-----
+piersze do poprawki
+sprawdzenie kazdego objectu czy wywala errory w konsoli
+poprawienie jpanela z properties
+ogarniecie polaczen
+panel konsoli ma wyłapywać warningi itp
