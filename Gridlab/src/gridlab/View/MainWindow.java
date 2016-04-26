@@ -251,13 +251,14 @@ public class MainWindow extends JFrame {
                     JPanel params = new JPanel();
                     params.setLayout(new GridBagLayout());
                     GridBagConstraints gbc = new GridBagConstraints();
-                    params.setPreferredSize(new Dimension(400, 500));
+                    params.setMinimumSize(new Dimension(300,50));
+                    params.setMaximumSize(new Dimension(300, 2500));
                     JLabel labels[] = new JLabel[propAmount];
                     JTextField textfields[] = new JTextField[propAmount];
                     for(int i =0; i<propAmount;i++){
                         labels[i] = new JLabel(value.GetProperties().get(i).GetName());
                         textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
-                        gbc.ipadx=200;
+                        gbc.ipadx=100;
                         gbc.gridx = 0;
                         gbc.gridy = i;
                         params.add(labels[i],gbc);
