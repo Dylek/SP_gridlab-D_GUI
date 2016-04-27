@@ -15,7 +15,7 @@ public class UndergroundLine implements ToGLMParser {
     public UndergroundLine(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
-        properties.add(new Property("phases", "",""));
+        properties.add(new Property("phases", "ABC",""));
         properties.add(new Property("from", "",""));
         properties.add(new Property("to", "", ""));
         properties.add(new Property("length", "0", " ft"));
@@ -34,7 +34,7 @@ public class UndergroundLine implements ToGLMParser {
     }
     public String ToGLM(){
         String s="";
-        s="object triplex_node { \n";
+        s="object underground_line { \n";
         for (Property p: properties){
             if(p.GetValue()!="")
             {

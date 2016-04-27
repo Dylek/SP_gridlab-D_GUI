@@ -15,7 +15,7 @@ public class Transformer implements ToGLMParser {
     public Transformer(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
+        properties.add(new Property("phases", "ABC", ""));
         properties.add(new Property("from", "", ""));
         properties.add(new Property("to", "", ""));
         properties.add(new Property("aging_constant", "", "K"));

@@ -15,7 +15,7 @@ public class TriplexLine implements ToGLMParser {
     public TriplexLine(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
-        properties.add(new Property("phases", "",""));
+        properties.add(new Property("phases", "ABC",""));
         properties.add(new Property("from", "",""));
         properties.add(new Property("to", "", ""));
         properties.add(new Property("length", "0", " ft"));

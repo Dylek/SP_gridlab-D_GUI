@@ -15,7 +15,7 @@ public class Regulator implements ToGLMParser {
     public Regulator(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
+        properties.add(new Property("phases", "ABC", ""));
         properties.add(new Property("from", "", ""));
         properties.add(new Property("to", "", "V"));
         properties.add(new Property("configuration", "", ""));

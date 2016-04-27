@@ -155,7 +155,6 @@ public class MainWindow extends JFrame {
         tapeItems.addElement("Recorder");
 
         residentalItems=new DefaultListModel<String>();
-        residentalItems.addElement("Freezer");
         residentalItems.addElement("House");
         residentalItems.addElement("Lights");
         residentalItems.addElement("Microwave");
@@ -298,7 +297,6 @@ public class MainWindow extends JFrame {
                     case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
 
                     case "House": objectTable.put(object+" "+objectCount,new House());break;
-                    case "Freezer": objectTable.put(object+" "+objectCount,new Freezer());break;
                     case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
                     case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
                     case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
@@ -322,9 +320,9 @@ public class MainWindow extends JFrame {
                     case "Switch": objectTable.put(object+" "+objectCount,new Switch());break;
                     case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());break;
                     case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());break;
-                    case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
+                    case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLine());break;
                     case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
-                    case "TiplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
+                    case "TriplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
                     case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());break;
                     case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());break;
                     case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());break;

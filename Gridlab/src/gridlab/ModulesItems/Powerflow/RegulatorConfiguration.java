@@ -20,8 +20,8 @@ public class RegulatorConfiguration implements ToGLMParser {
         properties.add(new Property("band_width", "", "V"));
         properties.add(new Property("time_delay", "", "V"));
         properties.add(new Property("dwell_time", "", "kVA"));
-        properties.add(new Property("raise_taps", "", "kVA"));
-        properties.add(new Property("lower_taps", "", "kVA"));
+        properties.add(new Property("raise_taps", "16", ""));
+        properties.add(new Property("lower_taps", "16", ""));
         properties.add(new Property("current_transducer_ratio", "", "kVA"));
         properties.add(new Property("power_transducer_ratio", "", "OHM PU"));
         properties.add(new Property("compensator_r_setting_A", "", "OHM PU"));

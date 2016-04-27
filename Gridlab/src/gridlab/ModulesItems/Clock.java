@@ -13,8 +13,8 @@ public class Clock implements ToGLMParser {
         properties = new Vector<Property>();
         properties.add(new Property("timezone","PST+8PDT",""));
         properties.add(new Property("timestamp","",""));
-        properties.add(new Property("starttime","2016-04-01 00:00:00",""));
-        properties.add(new Property("stoptime","2016-04-02 00:00:00",""));
+        properties.add(new Property("starttime","'2016-04-01 00:00:00'",""));
+        properties.add(new Property("stoptime","'2016-04-02 00:00:00'",""));
     }
     public Clock(Clock clock){
         properties = new Vector<Property>();

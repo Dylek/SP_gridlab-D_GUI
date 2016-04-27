@@ -15,15 +15,9 @@ public class Dishwasher implements ToGLMParser {
     public Dishwasher(){
         properties = new Vector<Property>();
         properties.add(new Property("energy_baseline","0.9","kWh"));
-        properties.add(new Property("heateddry_option_check","TRUE",""));
         properties.add(new Property("control_power","10","W"));
         properties.add(new Property("motor_power","250","W"));
-        properties.add(new Property("coil_rating_wash and rinse cycles","950","W"));
-        properties.add(new Property("coil_rating_heated dry","695","W"));
         properties.add(new Property("daily_dishwasher_demand","1",""));
-        properties.add(new Property("power_factor_motor","0.95",""));
-        properties.add(new Property("power_factor_coil","1",""));
-        properties.add(new Property("power_coil_only","0",""));
         properties.add(new Property("queue","0.8",""));
 
 

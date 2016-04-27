@@ -15,16 +15,16 @@ public class TransformerConfiguration implements ToGLMParser {
     public TransformerConfiguration(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("connect_type", "", ""));//UNKNOWN,WYE_WYE,DELTA-DELTA,DELTA_GWYE,SINGLE_PHASE,SINGLE_PHASE_CENTER_TAPPED
+        properties.add(new Property("connect_type", "DELTA_DELTA", ""));//UNKNOWN,WYE_WYE,DELTA_DELTA,DELTA_GWYE,SINGLE_PHASE,SINGLE_PHASE_CENTER_TAPPED
         properties.add(new Property("install_type", "", ""));//UNKNOWN,POLETOP,PADMOUNT,VAULT
-        properties.add(new Property("primary_voltage", "", "V"));
-        properties.add(new Property("secondary_voltage", "", "V"));
-        properties.add(new Property("power_rating", "", "kVA"));
+        properties.add(new Property("primary_voltage", "4800", "V"));
+        properties.add(new Property("secondary_voltage", "480", "V"));
+        properties.add(new Property("power_rating", "500", "kVA"));
         properties.add(new Property("powerA_rating", "", "kVA"));
         properties.add(new Property("powerB_rating", "", "kVA"));
         properties.add(new Property("powerC_rating", "", "kVA"));
-        properties.add(new Property("resistance", "", "OHM PU"));
-        properties.add(new Property("reactance", "", "OHM PU"));
+        properties.add(new Property("resistance", "10", "OHM PU"));
+        properties.add(new Property("reactance", "10", "OHM PU"));
         properties.add(new Property("impedance", "", "OHM PU"));
         properties.add(new Property("shunt_impedance", "", "OHM PU"));
         properties.add(new Property("impedance1", "", "OHM PU"));

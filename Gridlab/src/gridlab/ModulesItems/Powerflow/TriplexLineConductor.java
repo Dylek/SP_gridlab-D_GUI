@@ -16,7 +16,7 @@ public class TriplexLineConductor implements ToGLMParser {
         properties=new Vector<Property>();
         properties.add(new Property("name", "",""));
         properties.add(new Property("geometric_mean_radius", "", "ft"));
-        properties.add(new Property("resistance", "", "Ohm/mile"));
+        properties.add(new Property("resistance", "0.97", "Ohm/mile"));
         properties.add(new Property("diameter", "", "in"));
         properties.add(new Property("rating.summer.continuous", "", " A"));
         properties.add(new Property("rating.summer.emergency", "", "A"));

@@ -25,7 +25,7 @@ public class Clotheswasher implements ToGLMParser {
         properties.add(new Property("stall_impedance","","Ohm"));
         properties.add(new Property("trip_delay","","s"));
         properties.add(new Property("reset_delay","","s"));
-        properties.add(new Property("state","TRIPPED","")); //TRIPPED, STALLED, RUNNING, STOPPED
+        properties.add(new Property("state","STOPPED","")); //TRIPPED, STALLED, RUNNING, STOPPED
     }
     public void SetProperty(Vector<Property> wektor){
         properties=wektor;

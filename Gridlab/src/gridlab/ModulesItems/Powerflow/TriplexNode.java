@@ -15,7 +15,7 @@ public class TriplexNode implements ToGLMParser {
     public TriplexNode(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
+        properties.add(new Property("phases", "AS", ""));
         properties.add(new Property("bustype", "", ""));
         properties.add(new Property("busflags", "", ""));
         properties.add(new Property("reference_bus", "", ""));
@@ -39,7 +39,7 @@ public class TriplexNode implements ToGLMParser {
         properties.add(new Property("impedace_1","","Ohms"));
         properties.add(new Property("impedace_2","","Ohms"));
         properties.add(new Property("impedace_12","","Ohms"));
-
+        properties.add(new Property("nominal_voltage","120",""));
 
     }
     public TriplexNode(TriplexNode newOne)

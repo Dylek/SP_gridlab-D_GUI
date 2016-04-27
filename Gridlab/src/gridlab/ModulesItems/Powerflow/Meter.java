@@ -15,8 +15,8 @@ public class Meter implements ToGLMParser {
     public Meter(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
-        properties.add(new Property("nominal_voltage", "", ""));
+        properties.add(new Property("phases", "ABC", ""));
+        properties.add(new Property("nominal_voltage", "4800", ""));
         properties.add(new Property("bill_day", "", ""));
         properties.add(new Property("price", "", "$/kWh"));
         properties.add(new Property("monthly_fee", "", "$"));

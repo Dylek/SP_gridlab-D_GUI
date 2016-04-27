@@ -16,8 +16,8 @@ public class TriplexMeter  implements ToGLMParser {
     public TriplexMeter(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
-        properties.add(new Property("nominal_voltage", "", " V"));
+        properties.add(new Property("phases", "AS", ""));
+        properties.add(new Property("nominal_voltage", "120", " V"));
         //properties.add(new Property("bustype", "", ""));
         //properties.add(new Property("maximum_voltage_error", "", " Volts"));
        /// properties.add(new Property("busflags", "", ""));

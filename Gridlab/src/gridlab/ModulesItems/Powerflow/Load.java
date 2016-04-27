@@ -15,8 +15,8 @@ public class Load implements ToGLMParser {
     public Load(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
-        properties.add(new Property("nominal_voltage", "", ""));
+        properties.add(new Property("phases", "ABC", ""));
+        properties.add(new Property("nominal_voltage", "4800", ""));
         properties.add(new Property("load_class", "", "")); //U,R,C,I,A
         properties.add(new Property("constant_power_A", "", "VA"));
         properties.add(new Property("constant_power_B", "", "VA"));

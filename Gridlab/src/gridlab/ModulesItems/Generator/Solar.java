@@ -70,7 +70,7 @@ public class Solar implements ToGLMParser {
     }
     public String ToGLM(){
         String s="";
-        s="solar {\n";
+        s="object solar {\n";
         for (Property p: properties){
             if(p.GetValue()!="")
             {

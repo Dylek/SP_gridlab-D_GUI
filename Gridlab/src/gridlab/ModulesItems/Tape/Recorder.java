@@ -18,7 +18,7 @@ public class Recorder implements ToGLMParser {
         properties.add(new Property("parent","",""));
         properties.add(new Property("property","",""));
         properties.add(new Property("file","",""));
-        properties.add(new Property("interval","TS_NEVER",""));
+        properties.add(new Property("interval","",""));
         properties.add(new Property("limit","0",""));
         properties.add(new Property("trigger","",""));
         properties.add(new Property("flags","DELTAMODE",""));

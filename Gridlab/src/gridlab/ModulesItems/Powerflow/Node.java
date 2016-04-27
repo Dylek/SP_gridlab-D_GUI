@@ -15,7 +15,7 @@ public class Node implements ToGLMParser {
     public Node(){
         properties=new Vector<Property>();
         properties.add(new Property("name", "", ""));
-        properties.add(new Property("phases", "", ""));
+        properties.add(new Property("phases", "ABC", ""));
         properties.add(new Property("nominal_voltage", "7200.0", "V"));
         properties.add(new Property("voltage_A", "7200.0+0d", "V"));
         properties.add(new Property("voltage_B", "7200.0-120.0d", "V"));
