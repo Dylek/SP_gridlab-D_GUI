@@ -19,10 +19,20 @@ public class ExecuteShellCommand {
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            String line = "";
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(p.getErrorStream()));
+
+            String lineErrors = "";
+            // read any errors from the attempted command
+            while ((lineErrors = stdError.readLine()) != null) {
+                output.append(lineErrors+"\n");
+            }
+            String line="";
+            // read the output from the command
             while ((line = reader.readLine())!= null) {
                 output.append(line + "\n");
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();

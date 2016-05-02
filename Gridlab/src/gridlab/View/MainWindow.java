@@ -103,7 +103,7 @@ public class MainWindow extends JFrame {
         /*
          *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
          */
-        fileNameJTextArea=new JTextArea("waterheater_example");
+        fileNameJTextArea=new JTextArea("HelloWorld");
         buttons.add(fileNameJTextArea);
         buttons.add(runSimulation);
         saveChangers= new JButton("Save changes");
@@ -378,12 +378,13 @@ public class MainWindow extends JFrame {
 
                     JPanel conPan=new JPanel();
                     conPan.setPreferredSize(new Dimension(400, 300));
-
-                    consoleOutput.setText(execCom.executeCommand(command+fileName+".glm"));
-
+                    String str=execCom.executeCommand(command+fileName+".glm");
+                    consoleOutput.setText(str);
+                    consoleOutput.updateUI();
 
                     System.out.println("Running in console");
                     //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
+
                     System.out.println("End of console response");
                 }
 
