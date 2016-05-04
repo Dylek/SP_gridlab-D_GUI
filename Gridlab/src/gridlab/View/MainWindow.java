@@ -37,6 +37,8 @@ public class MainWindow extends JFrame {
     private JButton addClock;
     private JTextArea fileNameJTextArea;
 
+    private JMenuBar menuBar;
+    private JToolBar   toolBar;
 
     private JButton saveChangers;
 
@@ -110,9 +112,10 @@ public class MainWindow extends JFrame {
         buttons.add(saveChangers);
 
 
-
+        loadToolBox();
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
+        container.add(toolBar);
         container.add(modulesPanel);
         container.add(objectPanel);
         container.add(addButton);
@@ -127,6 +130,9 @@ public class MainWindow extends JFrame {
         loadListers();
 
 
+        menuBar=new JMenuBar();
+        mainFrame.setJMenuBar(menuBar);
+        loadMenu();
 
 
         mainFrame.setSize(new Dimension(1300,600));
@@ -475,5 +481,120 @@ public class MainWindow extends JFrame {
             }
         }
         return modules;
+    }
+
+    public void loadMenu(){
+
+        JMenu glmMenu=new JMenu("GLM");
+        JMenu helpMenu=new JMenu("Help");
+        JMenu fileMenu=new JMenu("File");
+
+        menuBar.add(fileMenu);
+        menuBar.add(glmMenu);
+        menuBar.add(helpMenu);
+
+
+        //do zakłądi file
+        JMenuItem saveItem=new JMenuItem("Save");
+        JMenuItem newItem=new JMenuItem("New");
+        JMenuItem openItem=new JMenuItem("Open");
+        JMenuItem exitItem=new JMenuItem("Exit");
+        fileMenu.add(saveItem);
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(exitItem);
+        //do zakładki GLM
+        JMenuItem exportItem=new JMenuItem("Export to GLM");
+        JMenuItem runItem=new JMenuItem("Run Simulation");
+        glmMenu.add(exportItem);
+        glmMenu.add(runItem);
+        //do zakładki Help
+        JMenuItem authorsItem=new JMenuItem("About");
+        JMenuItem wikiItem=new JMenuItem("Gridlab-D wiki");
+        helpMenu.add(authorsItem);
+        helpMenu.add(wikiItem);
+
+        //menu listeners
+        runItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String command;
+                command="gridlabd ";
+                fileName=fileNameJTextArea.getText();
+
+                if (fileName != null && fileName != "") {
+
+                    ExecuteShellCommand execCom=new ExecuteShellCommand();
+
+                    JPanel conPan=new JPanel();
+                    conPan.setPreferredSize(new Dimension(400, 300));
+                    String str=execCom.executeCommand(command+fileName+".glm");
+                    consoleOutput.setText(str);
+                    consoleOutput.updateUI();
+
+                    System.out.println("Running in console");
+                    //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
+
+                    System.out.println("End of console response");
+                }
+
+            }
+        });
+
+    }
+
+    public void loadToolBox(){
+        toolBar=new JToolBar(JToolBar.VERTICAL);
+        //toolBar.
+        JButton residentalModule=new JButton(new ImageIcon("Gridlab\\Icons\\residental.png"));
+        JButton generatorModule=new JButton(new ImageIcon("Gridlab\\Icons\\generator.png"));
+        JButton powerflowModule=new JButton(new ImageIcon("Gridlab\\Icons\\powerflow.png"));
+        JButton tapeModule=new JButton(new ImageIcon("Gridlab\\Icons\\Tape2-512.png"));
+        JButton clockModule=new JButton(new ImageIcon("Gridlab\\Icons\\clock-128.png"));
+        toolBar.add(residentalModule);
+        toolBar.add(generatorModule);
+        toolBar.add(powerflowModule);
+        toolBar.add(tapeModule);
+        toolBar.add(clockModule);
+
+        //ToolBox listeners
+        residentalModule.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                objectsItems.clear();
+                for(int i=0;i<residentalItems.getSize();i++) {
+                    objectsItems.addElement(residentalItems.get(i));
+                }
+                }
+        });
+        powerflowModule.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                objectsItems.clear();
+                for(int i=0;i<powerflowItems.getSize();i++) {
+                    objectsItems.addElement(powerflowItems.get(i));
+                }
+            }
+        });
+        generatorModule.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                objectsItems.clear();
+                for(int i=0;i<generatorItems.getSize();i++) {
+                    objectsItems.addElement(generatorItems.get(i));
+                }
+            }
+        });
+        tapeModule.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                objectsItems.clear();
+                for(int i=0;i<tapeItems.getSize();i++) {
+                    objectsItems.addElement(tapeItems.get(i));
+                }
+            }
+        });
+        clockModule.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                objectCount++;
+                addedObjectsItems.addElement("Clock " + objectCount);
+                objectTable.put("Clock" + " " + objectCount, new Clock());
+            }
+        });
     }
 }
