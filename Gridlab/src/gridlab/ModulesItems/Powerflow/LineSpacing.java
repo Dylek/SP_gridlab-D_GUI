@@ -37,7 +37,7 @@ public class LineSpacing implements ToGLMParser {
         String s="";
         s="object line_spacing { \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

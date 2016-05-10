@@ -36,7 +36,7 @@ public class Waterheat implements ToGLMParser {
     public String ToGLM(){
         String s="object waterheater{\n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

@@ -70,7 +70,7 @@ public class TriplexMeter  implements ToGLMParser {
         String s="";
         s="object triplex_meter { \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

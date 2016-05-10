@@ -56,7 +56,7 @@ public class TriplexNode implements ToGLMParser {
         String s="";
         s="object triplex_node { \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

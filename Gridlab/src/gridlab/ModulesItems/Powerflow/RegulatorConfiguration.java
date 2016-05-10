@@ -54,7 +54,7 @@ public class RegulatorConfiguration implements ToGLMParser {
         String s="";
         s="object regulator_configuration { \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

@@ -29,7 +29,7 @@ public class Refrigerator implements ToGLMParser {
         String s="";
         s="object refrigerator{ \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();

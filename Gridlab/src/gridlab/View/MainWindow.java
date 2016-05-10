@@ -126,11 +126,11 @@ public class MainWindow extends JFrame {
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
         container.add(toolBar);
-        container.add(modulesPanel);
-        container.add(objectPanel);
-        container.add(addButton);
+        //container.add(modulesPanel);
+        //container.add(objectPanel);
+        //container.add(addButton);
         container.add(removeButton);
-        container.add(addClock);
+        //container.add(addClock);
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
         container.add(buttons);

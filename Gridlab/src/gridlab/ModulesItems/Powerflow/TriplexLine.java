@@ -35,7 +35,7 @@ public class TriplexLine implements ToGLMParser {
         String s="";
         s="object triplex_line { \n";
         for (Property p: properties){
-            if(p.GetValue()!="")
+            if(!p.GetValue().isEmpty())
             {
                 s+=p.GetName()+"    "+p.GetValue();
                 // if(false)s+=" "+p.GetUnit();
