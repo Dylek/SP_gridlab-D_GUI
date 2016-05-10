@@ -70,6 +70,16 @@ public class MainWindow extends JFrame {
 
     private JTextArea consoleOutput=new JTextArea();
 
+    private JPopupMenu popupTape;
+    private JPopupMenu popupResidental;
+    private JPopupMenu popupPowerflow;
+    private JPopupMenu popupGenerator;
+   //private JPopupMenu popup;
+
+
+
+
+
     public MainWindow() {
        objectTable=new HashMap<String,ToGLMParser>();
 
@@ -556,45 +566,131 @@ public class MainWindow extends JFrame {
         toolBar.add(tapeModule);
         toolBar.add(clockModule);
 
+
+        {
+            popupTape = new JPopupMenu();
+            for (int i=0;i< tapeItems.size();i++  ) {
+                String str=tapeItems.get(i);
+                popupTape.add(new JMenuItem(new AbstractAction(str) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        addObject(str);
+                    }
+                }));
+            }
+
+        }
+        {
+            popupResidental=new JPopupMenu();
+            for (int i=0;i< residentalItems.size();i++  ) {
+                String str=residentalItems.get(i);
+                popupResidental.add(new JMenuItem(new AbstractAction(str) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        addObject(str);
+                    }
+                }));
+            }
+        }
+        {
+            popupPowerflow=new JPopupMenu();
+            for (int i=0;i< powerflowItems.size();i++  ) {
+                String str=powerflowItems.get(i);
+                popupPowerflow.add(new JMenuItem(new AbstractAction(str) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        addObject(str);
+                    }
+                }));
+            }
+        }
+        {
+            popupGenerator=new JPopupMenu();
+            for (int i=0;i< generatorItems.size();i++  ) {
+                String str=generatorItems.get(i);
+                popupGenerator.add(new JMenuItem(new AbstractAction(str) {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        addObject(str);
+                    }
+                }));
+            }
+        }
+
+
         //ToolBox listeners
         residentalModule.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                objectsItems.clear();
-                for(int i=0;i<residentalItems.getSize();i++) {
-                    objectsItems.addElement(residentalItems.get(i));
-                }
+                popupResidental.show(residentalModule,residentalModule.getWidth()/2,residentalModule.getHeight()/2);
                 }
         });
         powerflowModule.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                objectsItems.clear();
-                for(int i=0;i<powerflowItems.getSize();i++) {
-                    objectsItems.addElement(powerflowItems.get(i));
-                }
+                popupPowerflow.show(powerflowModule,powerflowModule.getWidth()/2,powerflowModule.getHeight()/2);
             }
         });
         generatorModule.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                objectsItems.clear();
-                for(int i=0;i<generatorItems.getSize();i++) {
-                    objectsItems.addElement(generatorItems.get(i));
-                }
+                popupGenerator.show(generatorModule, generatorModule.getWidth()/2, generatorModule.getHeight()/2);
             }
         });
         tapeModule.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                objectsItems.clear();
-                for(int i=0;i<tapeItems.getSize();i++) {
-                    objectsItems.addElement(tapeItems.get(i));
-                }
+                popupTape.show(tapeModule, tapeModule.getWidth()/2, tapeModule.getHeight()/2);
             }
         });
         clockModule.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                objectCount++;
-                addedObjectsItems.addElement("Clock " + objectCount);
-                objectTable.put("Clock" + " " + objectCount, new Clock());
+                addObject("Clock");
             }
         });
+    }
+
+    private void addObject(String object){
+        objectCount++;
+        addedObjectsItems.addElement(object+" "+objectCount);
+        switch (object){
+
+            case "Clock": objectTable.put("Clock" + " " + objectCount, new Clock());break;
+
+            case "Player": objectTable.put((object+" "+objectCount),new Player());System.out.print("utworozno klase");  break;
+            case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());  break;
+
+            case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
+            case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
+
+            case "House": objectTable.put(object+" "+objectCount,new House());break;
+            case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
+            case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
+            case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
+            case "Microwave": objectTable.put(object+" "+objectCount,new Microwave());break;
+            case "Occupants": objectTable.put(object+" "+objectCount,new Occupants());break;
+            case "Plugs": objectTable.put(object+" "+objectCount,new Plugs());break;
+            case "Refrigerator": objectTable.put(object+" "+objectCount,new Refrigerator());break;
+            case "Waterheat": objectTable.put(object+" "+objectCount,new Waterheat());break;
+
+            case "Capacitor": objectTable.put(object+" "+objectCount,new Capacitor());break;
+            case "Fuse": objectTable.put(object+" "+objectCount,new Fuse());break;
+            case "LineConfiguration": objectTable.put(object+" "+objectCount,new LineConfiguration());break;
+            case "LineSpacing": objectTable.put(object+" "+objectCount,new LineSpacing());break;
+            case "Load": objectTable.put(object+" "+objectCount,new Load());break;
+            case "Meter": objectTable.put(object+" "+objectCount,new Meter());break;
+            case "Node": objectTable.put(object+" "+objectCount,new Node());break;
+            case "OverheadLine": objectTable.put(object+" "+objectCount,new OverheadLine() );break;
+            case "OverheadLineConductor": objectTable.put(object+" "+objectCount,new OverheadLineConductor());break;
+            case "Regulator": objectTable.put(object+" "+objectCount,new Regulator());break;
+            case "RegulatorConfiguration": objectTable.put(object+" "+objectCount,new RegulatorConfiguration());break;
+            case "Switch": objectTable.put(object+" "+objectCount,new Switch());break;
+            case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());break;
+            case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());break;
+            case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLine());break;
+            case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
+            case "TriplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
+            case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());break;
+            case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());break;
+            case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());break;
+            case "UnderGroundLineConductor": objectTable.put(object+" "+objectCount,new UnderGroundLineConductor());break;
+            default: System.out.println("not know type: "+object);
+        }
     }
 }
