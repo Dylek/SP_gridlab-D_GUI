@@ -525,9 +525,9 @@ public class MainWindow extends JFrame {
         glmMenu.add(exportItem);
         glmMenu.add(runItem);
         //do zakładki Help
-        JMenuItem authorsItem=new JMenuItem("About");
+        JMenuItem aboutItem=new JMenuItem("About");
         JMenuItem wikiItem=new JMenuItem("Gridlab-D wiki");
-        helpMenu.add(authorsItem);
+        helpMenu.add(aboutItem);
         helpMenu.add(wikiItem);
 
         //menu listeners
@@ -627,6 +627,28 @@ public class MainWindow extends JFrame {
                 }
 
 
+        });
+        aboutItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String about="Projekt GUI do programu GRIDLAB-D " +
+                        "\n Jest to projekt na zaliczenie zajęć: Studio Projektowe 2016 " +
+                        "\n Autorzy: " +
+                        "\n Aleksandra Pierzchała " +
+                        "\n Paweł Ogorzały " +
+                        "\n Marcin Jędrzejczyk "+
+                        "\n Prowadzący:"+
+                        "\n dr inż. Marek Zachera";
+                JOptionPane.showMessageDialog(mainFrame,about);
+            }
+        });
+        wikiItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String about="Więcej informacji o programie GRIDLAB-D na oficialnej stronie";
+                JOptionPane.showMessageDialog(mainFrame,about);
+                JOptionPane.
+            }
         });
     }
 
