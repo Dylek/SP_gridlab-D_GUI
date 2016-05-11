@@ -11,6 +11,7 @@ import gridlab.ModulesItems.Tape.Recorder;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -45,7 +46,7 @@ public class MainWindow extends JFrame {
     private JPanel buttons;
     private String fileName="Hello1.glm";
 
-
+    private JFileChooser fileChooser;
     private JList<String> modulesJList;
     private JList<String> objectsJList;
     private JList<String> addedObjectsJList;
@@ -82,6 +83,9 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
        objectTable=new HashMap<String,ToGLMParser>();
+        fileChooser=new JFileChooser();
+        FileNameExtensionFilter filterGLM=new FileNameExtensionFilter("GLM files","glm");
+        fileChooser.setFileFilter(filterGLM);
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -156,6 +160,8 @@ public class MainWindow extends JFrame {
 
 
     }
+
+
     private void loadLists(){
         objectsItems=new DefaultListModel<String>();
         addedObjectsItems=new DefaultListModel<String>();
@@ -529,27 +535,99 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String command;
                 command="gridlabd ";
-                fileName=fileNameJTextArea.getText();
+               // fileName=fileNameJTextArea.getText();
+                int returnVal=fileChooser.showOpenDialog(mainFrame);
 
-                if (fileName != null && fileName != "") {
+                if(returnVal==JFileChooser.APPROVE_OPTION) {
 
-                    ExecuteShellCommand execCom=new ExecuteShellCommand();
 
-                    JPanel conPan=new JPanel();
-                    conPan.setPreferredSize(new Dimension(400, 300));
-                    String str=execCom.executeCommand(command+fileName+".glm");
-                    consoleOutput.setText(str);
-                    consoleOutput.updateUI();
+                    try {
+                        fileName=fileChooser.getSelectedFile().getCanonicalPath();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
 
-                    System.out.println("Running in console");
-                    //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
+                    if (fileName != null && fileName != "") {
 
-                    System.out.println("End of console response");
+                        ExecuteShellCommand execCom=new ExecuteShellCommand();
+
+                        JPanel conPan=new JPanel();
+                        conPan.setPreferredSize(new Dimension(400, 300));
+                        String str=execCom.executeCommand(command+fileName);
+                        consoleOutput.setText(str);
+                        consoleOutput.updateUI();
+
+                        System.out.println("Running in console");
+                        //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
+
+                        System.out.println("End of console response");
+                }
+
+                fileChooser.setSelectedFile(new File(""));
                 }
 
             }
         });
+        exportItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int returnVal=fileChooser.showSaveDialog(mainFrame);
 
+                if(returnVal==JFileChooser.APPROVE_OPTION){
+                        File fileSelected= fileChooser.getSelectedFile();
+                        File file=new File(fileSelected+".glm");
+                        //Vector <String> toglmString=new Vector<String>();
+                        fileName=fileNameJTextArea.getText();
+
+                        // creates the file
+                        try {
+                            file.createNewFile();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        FileWriter writer = null;
+                        try {
+                            writer = new FileWriter(file);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        try {
+                            writer.write(checkModules());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        // creates a FileWriter Object
+                        for(int i=0;i<addedObjectsItems.size();i++){
+                            ToGLMParser glm= (ToGLMParser) objectTable.get(addedObjectsItems.get(i));
+                            // System.out.println(glm.ToGLM());
+
+
+                            // Writes the content to the file
+                            try {
+                                writer.write(glm.ToGLM());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            try {
+                                writer.flush();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        }
+                        try {
+                            writer.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                            fileChooser.setSelectedFile(new File(""));
+
+                    }
+                }
+
+
+        });
     }
 
     public void loadToolBox(){
