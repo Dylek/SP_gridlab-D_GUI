@@ -5,6 +5,7 @@ import gridlab.ModulesItems.Clock;
 import gridlab.ModulesItems.Generator.Inverter;
 import gridlab.ModulesItems.Generator.Solar;
 import gridlab.ModulesItems.Powerflow.*;
+import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.Residental.*;
 import gridlab.ModulesItems.Tape.Player;
 import gridlab.ModulesItems.Tape.Recorder;
@@ -19,13 +20,84 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.*;
 
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 /**
  * Created by Pavlo on 17.04.2016.
  */
+
+class ParentChild{
+    JLabel parentJLabel;
+    //String parentName;
+    JLabel childJLabel;
+   // String childName;
+
+    private ParentChild() {
+    }
+    public ParentChild(JLabel parent,JLabel child){
+        parentJLabel=parent;
+        childJLabel=child;
+
+    }
+    public boolean Conntain(JLabel jlabel){
+        if(parentJLabel.equals(jlabel)|| childJLabel.equals(jlabel)){
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public String toString(){
+        return "{"+parentJLabel.getLocation()+","+childJLabel.getLocation()+"}";
+    }
+
+    public int howToDrawLine(){
+        Point point1=parentJLabel.getLocation();
+        Point point2=childJLabel.getLocation();
+        if (point1.x > point2.x)
+        {
+            return 1;
+        }
+        else if (point1.x < point2.x)
+        {
+            return 2;
+        }
+        else if (point1.y > point2.y)
+        {
+            return 3;
+        }
+        else if (point1.y < point2.y)
+        {
+            return 4;
+        }
+        else
+            return 5;
+    }
+
+    public JLabel getChildJLabel() {
+        return childJLabel;
+    }
+
+    public JLabel getParentJLabel() {
+        return parentJLabel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ParentChild that = (ParentChild) o;
+
+        if (parentJLabel != null ? !parentJLabel.equals(that.parentJLabel) : that.parentJLabel != null) return false;
+        return childJLabel != null ? childJLabel.equals(that.childJLabel) : that.childJLabel == null;
+    }
+
+
+}
+
+
 public class MainWindow extends JFrame {
     private JFrame mainFrame;
     private JPanel modulesPanel;
@@ -36,6 +108,7 @@ public class MainWindow extends JFrame {
     private JButton addButton;
     private JButton removeButton;
     private JButton addClock;
+    private JButton connectButton;
     private JMenuBar menuBar;
     private JToolBar   toolBar;
     private JTextArea fileNameJTextArea = new JTextArea("HelloWorld");;
@@ -61,11 +134,16 @@ public class MainWindow extends JFrame {
 
     HashMap<String,ToGLMParser> objectTable;
     HashMap<String,JLabel> imagesTable;
+
+    ArrayList<ParentChild>listOfConn;
+    HashMap<String,String> hashChildParent;
+    Map<String,Point> map;
+
     static int objectCount=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
     private int currentObject=0;
-
+    private String stringCurrentObject="";
 
     private JTextArea consoleOutput=new JTextArea();
 
@@ -79,7 +157,15 @@ public class MainWindow extends JFrame {
 
 
 
+
+
+
     public MainWindow() {
+
+        hashChildParent=new HashMap<String,String>();
+        listOfConn=new ArrayList<ParentChild>();
+        map=new LinkedHashMap<String,Point>();
+
         objectTable=new HashMap<String,ToGLMParser>();
         imagesTable=new HashMap<String,JLabel>();
         fileChooser=new JFileChooser();
@@ -105,10 +191,11 @@ public class MainWindow extends JFrame {
         consolePanel.setPreferredSize(new Dimension(500,300));
         addButton = new JButton("+");
         removeButton = new JButton("-");
+        connectButton=new JButton("Connect");
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
-        drag_drop = new JPanel();
+        drag_drop = new MyJPanel();
         drag_drop.setPreferredSize(new Dimension(500,300));
         loadToolBox();
         Container container = mainFrame.getContentPane();
@@ -118,6 +205,7 @@ public class MainWindow extends JFrame {
         //container.add(objectPanel);
         //container.add(addButton);
         container.add(removeButton);
+        container.add(connectButton);
         //container.add(addClock);
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
@@ -200,6 +288,55 @@ public class MainWindow extends JFrame {
     }
     private void loadListers(){
 
+
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] nodes = showGUIForConnectionsMaking();
+                if (nodes == null || nodes[0]==null || nodes.length == 0 )
+                {}
+                else if (!nodes[0].equals(nodes[1]))
+                {
+                    String split[] = nodes[0].split(",");
+                    Point p1 = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+                    split = nodes[1].split(",");
+                    Point p2 = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+                    //
+                    JLabel labelParent = (JLabel)drag_drop.getComponentAt(p1);
+                    String parentName=labelParent.getName();
+                    JLabel labelChild = (JLabel)drag_drop.getComponentAt(p2);
+                    String childName=labelChild.getName();
+                    ParentChild pair = new ParentChild(labelParent,labelChild);
+                    //make parent child connection
+                    if(hashChildParent.containsKey(childName) ){
+                        consoleOutput.setText("A child object can have only one parent\n Overriding old parent");
+
+                    }
+
+                        hashChildParent.put(childName,parentName);
+
+                        Vector<Property> noweProperty=new Vector<Property>();
+                        for (Property p:objectTable.get(childName).GetProperties()) {
+                            if(p.GetName().equals("parent")){
+                                noweProperty.add(new Property("parent", parentName, ""));
+                            }else{
+                                noweProperty.add(p);
+                            }
+                        }
+                        objectTable.get(childName).SetProperty(noweProperty);
+                        listOfConn.add(pair);
+                        drag_drop.repaint();
+
+
+
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(MainWindow.this,"Nodes can't be same","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         modulesJList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
 
@@ -264,6 +401,7 @@ public class MainWindow extends JFrame {
                     currentObject=index;
                     String key = addedObjectsItems.get(index);
                     ToGLMParser value = objectTable.get(key);
+                    stringCurrentObject=key;
                     int propAmount = value.GetProperties().size();
                     JPanel params = new JPanel();
                     params.setLayout(new GridBagLayout());
@@ -357,11 +495,14 @@ public class MainWindow extends JFrame {
                 String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
+                map.remove(obj);
+
                 removeImageFromPanel(obj);
                 System.out.print("usunieto "+objectTable.size());
 
                 //czyści panel prosperites jak usuwamy obiekt
                 textFieldsGlobal=null;
+
                 propertiesPanel.setViewportView(null);
                 propertiesPanel.revalidate();
                 propertiesPanel.repaint();
@@ -375,6 +516,9 @@ public class MainWindow extends JFrame {
             }
         });
 }
+
+
+
     public String checkModules(){
         String modules = "";
         int checkGuard1 = 0;
@@ -447,6 +591,7 @@ public class MainWindow extends JFrame {
                 currentObject=0;
                 objectsItems.clear();
                 objectTable.clear();
+                imagesTable.clear();
                 addedObjectsItems.clear();
                 propertiesItems.clear();
                 textFieldsGlobal=null;
@@ -454,7 +599,8 @@ public class MainWindow extends JFrame {
                 propertiesPanel.revalidate();
                 propertiesPanel.repaint();
                 consoleOutput.setText("");
-
+                listOfConn.clear();
+                map.clear();
             }
         });
 
@@ -680,7 +826,6 @@ public class MainWindow extends JFrame {
         objectCount++;
         addedObjectsItems.addElement(object+" "+objectCount);
         switch (object){
-
             case "Clock": objectTable.put("Clock" + " " + objectCount, new Clock());
                 addImageToPanel(object);break;
             case "Player": objectTable.put((object+" "+objectCount),new Player());
@@ -753,19 +898,220 @@ public class MainWindow extends JFrame {
                 addImageToPanel(object);break;
             default: System.out.println("not know type: "+object);
         }
+
+        Vector<Property> noweProperty=new Vector<Property>();
+        System.out.println("created"+object+" "+objectCount);
+        for (Property p:objectTable.get(object+" "+objectCount).GetProperties()) {
+            //System.out.println(p.toString());
+            if(p.GetName().equals("name")){
+
+                Property k=new Property("name", object+" "+objectCount, "");
+               // System.out.println("ustawiam imie:"+k.GetValue());
+                noweProperty.add(k);
+            }else{
+                noweProperty.add(p);
+            }
+        }
+        objectTable.get(object+" "+objectCount).SetProperty(noweProperty);
     }
 
     public void addImageToPanel(String obj){
         String object = obj;
-        imagesTable.put(object+" "+objectCount,new JLabel(objectTable.get(object+" "+objectCount).getIcon()));
+        JLabel objectLabel=new JLabel(objectTable.get(object+" "+objectCount).getIcon());
+        objectLabel.setName(object+" "+objectCount);
+        MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
+        objectLabel.addMouseListener(myMouseAdapter);
+
+        objectLabel.addMouseMotionListener(myMouseAdapter);
+        objectLabel.setText(object+" "+objectCount);
+        imagesTable.put(object+" "+objectCount,objectLabel);
         drag_drop.add(imagesTable.get(object+" "+objectCount));
         drag_drop.revalidate();
         drag_drop.repaint();
+        map.put(object+" "+objectCount,objectLabel.getLocation());
+
+        objectLabel.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt) {
+                Component comp = (Component) evt.getSource();
+                JLabel jb=(JLabel)comp;
+
+                if (evt.getClickCount() == 1) {
+                    if(textFieldsGlobal!=null)
+                    {
+
+                       ToGLMParser value = objectTable.get(stringCurrentObject);
+                        int propAmount = value.GetProperties().size();
+                        for(int i =0; i<propAmount;i++){
+                            value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
+                        }
+                    }
+                    stringCurrentObject= jb.getName();
+                    ToGLMParser value = objectTable.get(stringCurrentObject);
+                    int propAmount = value.GetProperties().size();
+                    JPanel params = new JPanel();
+                    params.setLayout(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    params.setMinimumSize(new Dimension(300,50));
+                    params.setMaximumSize(new Dimension(300, 2500));
+                    JLabel labels[] = new JLabel[propAmount];
+                    JTextField textfields[] = new JTextField[propAmount];
+                    for(int i =0; i<propAmount;i++){
+                        labels[i] = new JLabel(value.GetProperties().get(i).GetName());
+                        textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
+                        gbc.ipadx=100;
+                        gbc.gridx = 0;
+                        gbc.gridy = i;
+                        params.add(labels[i],gbc);
+                        gbc.gridx = 1;
+                        gbc.gridy = i;
+                        params.add(textfields[i],gbc);
+                    }
+                    params.setPreferredSize(params.getPreferredSize());
+                    //labelsGlobal=labels;
+                    textFieldsGlobal=textfields;
+                    //  JScrollPane scrollPanel = new JScrollPane(params);
+                    propertiesPanel.setViewportView(params);
+                    // propertiesPanel.add(params);
+                    propertiesPanel.revalidate();
+                    propertiesPanel.repaint();
+                }
+
+            }
+        });
     }
     public void removeImageFromPanel(String obj){
         drag_drop.remove(imagesTable.get(obj));
+        System.out.println("*************"+obj+"  liczba conn "+listOfConn.size());
+
+        for(int i=0;i<listOfConn.size();i++){
+            if(listOfConn.get(i).getParentJLabel().getName().equals(obj) || listOfConn.get(i).getChildJLabel().getName().equals(obj)){
+                listOfConn.remove(listOfConn.get(i));
+            }
+        }
+        //System.out.println("liczba conn"+listOfConn.size()+"  " + listOfConn.get(0).getParentJLabel().getName());
+        //listOfConn.remove(listOfConn.get(0));
+       System.out.println("liczba conn "+listOfConn.size());
+       /* for (ParentChild temp:listOfConn){
+            if(temp.Conntain(imagesTable.get(obj))){
+                listOfConn.remove(temp);
+            }
+        }*/
         imagesTable.remove(obj);
+
         drag_drop.revalidate();
         drag_drop.repaint();
+    }
+
+
+
+
+    private String[] showGUIForConnectionsMaking(){
+        textFieldsGlobal=null;
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(map.size()+1,2));
+        JLabel coto=new JLabel("parent group -child group");
+        panel.add(coto);panel.add(new JLabel(""));
+        ButtonGroup group1 = new ButtonGroup();
+        ButtonGroup group2 = new ButtonGroup();
+        final String nodes[] = new String[2];
+        Set<String> keySet = map.keySet();
+        for (String name : keySet)
+        {
+            JRadioButton rButton = new JRadioButton(name);
+            rButton.setActionCommand(map.get(name).x+","+map.get(name).y);
+            rButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    nodes[0] = ((JRadioButton)evt.getSource()).getActionCommand();
+                }
+            });
+            group1.add(rButton);
+            panel.add(rButton);
+            JRadioButton rButton1 = new JRadioButton(name);
+            rButton1.setActionCommand(map.get(name).x+","+map.get(name).y);
+            rButton1.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    nodes[1] = ((JRadioButton)evt.getSource()).getActionCommand();
+                }
+            });
+            group2.add(rButton1);
+            panel.add(rButton1);
+        }
+
+        JOptionPane.showMessageDialog(MainWindow.this,panel,"Choose parents for childs",JOptionPane.INFORMATION_MESSAGE);
+
+        return nodes;
+
+    }
+    class MyMouseAdapter extends MouseAdapter {
+        private Point initialLoc;
+        private Point initialLocOnScreen;
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            Component comp = (Component) e.getSource();
+            initialLoc = comp.getLocation();
+            initialLocOnScreen = e.getLocationOnScreen();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            Component comp = (Component) e.getSource();
+            Point locOnScreen = e.getLocationOnScreen();
+
+            int x = locOnScreen.x - initialLocOnScreen.x + initialLoc.x;
+            int y = locOnScreen.y - initialLocOnScreen.y + initialLoc.y;
+            comp.setLocation(x, y);
+            map.put(((JLabel)comp).getText(),new Point(x,y));
+            drag_drop.repaint();
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            Component comp = (Component) e.getSource();
+            Point locOnScreen = e.getLocationOnScreen();
+
+            int x = locOnScreen.x - initialLocOnScreen.x + initialLoc.x;
+            int y = locOnScreen.y - initialLocOnScreen.y + initialLoc.y;
+            comp.setLocation(x, y);
+            map.put(((JLabel)comp).getText(),new Point(x,y));
+            drag_drop.repaint();
+        }
+    }
+    ///do rysowania liniii
+    private class MyJPanel extends JPanel//Creater your own JPanel and override paintComponentMethod.
+    {
+        @Override
+        public void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            for (ParentChild pair : listOfConn )
+            {
+                JLabel label1 = pair.getParentJLabel();
+                JLabel label2 = pair.getChildJLabel();
+                Point point1 = label1.getLocation();
+                Point point2 = label2.getLocation();
+                int i = pair.howToDrawLine();
+                if ( i == 1)
+                {
+                    g.drawLine(point1.x  , point1.y + label1.getHeight() / 2 , point2.x + label2.getWidth() , point2.y  +  label2.getHeight() / 2);
+                }
+                else if (i == 2)
+                {
+                    g.drawLine(point2.x , point2.y + label2.getHeight() / 2 , point1.x + label1.getWidth() , point1.y  +  label1.getHeight() / 2);
+                }
+                else if (i == 3)
+                {
+                    g.drawLine(point1.x + label1.getWidth() / 2 , point1.y , point2.x + label2.getWidth() / 2, point2.y + label2.getHeight());
+                }
+                else if (i == 4)
+                {
+                    g.drawLine(point2.x + label2.getWidth() / 2 , point2.y , point1.x + label1.getWidth() / 2, point1.y + label1.getHeight());
+                }
+            }
+        }
     }
 }

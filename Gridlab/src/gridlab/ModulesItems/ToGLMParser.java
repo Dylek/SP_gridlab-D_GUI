@@ -10,5 +10,6 @@ public interface ToGLMParser {
     public String ToGLM();
     public int getModule();
     public Vector<Property> GetProperties();
+    public void SetProperty(Vector<Property> wektor);
     public ImageIcon getIcon();
 }
