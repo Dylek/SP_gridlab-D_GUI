@@ -246,7 +246,7 @@ public class MainWindow extends JFrame {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    if(objectCount>1 && textFieldsGlobal!=null)
+                    if(textFieldsGlobal!=null)
                     {
                         int index = currentObject;
                         String key = addedObjectsItems.get(index);
@@ -357,8 +357,15 @@ public class MainWindow extends JFrame {
                 String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
+
           //      drag_drop.remove(objectTable.get(obj).getIcon()); nie mozna tak ;___:
                 System.out.print("usunieto "+objectTable.size());
+
+                //czyści panel prosperites jak usuwamy obiekt
+                textFieldsGlobal=null;
+                propertiesPanel.setViewportView(null);
+                propertiesPanel.revalidate();
+                propertiesPanel.repaint();
         }
         });
         addClock.addActionListener(new ActionListener() {
