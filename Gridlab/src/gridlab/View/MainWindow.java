@@ -60,6 +60,7 @@ public class MainWindow extends JFrame {
     DefaultListModel<String> propertiesItems;
 
     HashMap<String,ToGLMParser> objectTable;
+    HashMap<String,JLabel> imagesTable;
     static int objectCount=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
@@ -79,7 +80,8 @@ public class MainWindow extends JFrame {
 
 
     public MainWindow() {
-       objectTable=new HashMap<String,ToGLMParser>();
+        objectTable=new HashMap<String,ToGLMParser>();
+        imagesTable=new HashMap<String,JLabel>();
         fileChooser=new JFileChooser();
         FileNameExtensionFilter filterGLM=new FileNameExtensionFilter("GLM files","glm");
         fileChooser.setFileFilter(filterGLM);
@@ -355,8 +357,7 @@ public class MainWindow extends JFrame {
                 String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
-
-          //      drag_drop.remove(objectTable.get(obj).getIcon()); nie mozna tak ;___:
+                removeImageFromPanel(obj);
                 System.out.print("usunieto "+objectTable.size());
 
                 //czyści panel prosperites jak usuwamy obiekt
@@ -756,10 +757,15 @@ public class MainWindow extends JFrame {
 
     public void addImageToPanel(String obj){
         String object = obj;
-        drag_drop.add(new JLabel(objectTable.get(object+" "+objectCount).getIcon()));
+        imagesTable.put(object+" "+objectCount,new JLabel(objectTable.get(object+" "+objectCount).getIcon()));
+        drag_drop.add(imagesTable.get(object+" "+objectCount));
         drag_drop.revalidate();
         drag_drop.repaint();
     }
-    public void removeImageFromPanel(){
+    public void removeImageFromPanel(String obj){
+        drag_drop.remove(imagesTable.get(obj));
+        imagesTable.remove(obj);
+        drag_drop.revalidate();
+        drag_drop.repaint();
     }
 }
