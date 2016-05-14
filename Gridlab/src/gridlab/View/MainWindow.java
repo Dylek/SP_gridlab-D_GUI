@@ -68,7 +68,7 @@ public class MainWindow extends JFrame {
     static int objectCount=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
-    private int currentObject;
+    private int currentObject=0;
 
 
     private JTextArea consoleOutput=new JTextArea();
@@ -265,6 +265,18 @@ public class MainWindow extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
+
+                    if(objectCount>1)
+                    {
+                        int index = currentObject;
+                        String key = addedObjectsItems.get(index);
+                        ToGLMParser value = objectTable.get(key);
+                        int propAmount = value.GetProperties().size();
+                        for(int i =0; i<propAmount;i++){
+                            value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
+                        }
+                    }
+
 
                     int index = list.locationToIndex(evt.getPoint());
                     currentObject=index;
@@ -541,6 +553,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 objectCount=0;
+                currentObject=0;
                 objectsItems.clear();
                 objectTable.clear();
                 addedObjectsItems.clear();
