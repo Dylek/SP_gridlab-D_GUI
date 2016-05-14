@@ -312,8 +312,7 @@ public class MainWindow extends JFrame {
                     case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
                     case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
 
-                    case "House": objectTable.put(object+" "+objectCount,new House());
-                                  drag_drop.add(new JLabel(objectTable.get(object+" "+objectCount).getIcon())); break;
+                    case "House": objectTable.put(object+" "+objectCount,new House());break;
                     case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
                     case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
                     case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
@@ -347,7 +346,6 @@ public class MainWindow extends JFrame {
 
                 }
                 System.out.print("Dodano"+objectTable.size());
-                drag_drop.repaint();
             }
         });
         removeButton.addActionListener(new ActionListener()
@@ -682,46 +680,86 @@ public class MainWindow extends JFrame {
         addedObjectsItems.addElement(object+" "+objectCount);
         switch (object){
 
-            case "Clock": objectTable.put("Clock" + " " + objectCount, new Clock());break;
-
-            case "Player": objectTable.put((object+" "+objectCount),new Player());System.out.print("utworozno klase");  break;
-            case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());  break;
-
-            case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
-            case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
-
-            case "House": objectTable.put(object+" "+objectCount,new House());break;
-            case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
-            case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
-            case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
-            case "Microwave": objectTable.put(object+" "+objectCount,new Microwave());break;
-            case "Occupants": objectTable.put(object+" "+objectCount,new Occupants());break;
-            case "Plugs": objectTable.put(object+" "+objectCount,new Plugs());break;
-            case "Refrigerator": objectTable.put(object+" "+objectCount,new Refrigerator());break;
-            case "Waterheat": objectTable.put(object+" "+objectCount,new Waterheat());break;
-
-            case "Capacitor": objectTable.put(object+" "+objectCount,new Capacitor());break;
-            case "Fuse": objectTable.put(object+" "+objectCount,new Fuse());break;
-            case "LineConfiguration": objectTable.put(object+" "+objectCount,new LineConfiguration());break;
-            case "LineSpacing": objectTable.put(object+" "+objectCount,new LineSpacing());break;
-            case "Load": objectTable.put(object+" "+objectCount,new Load());break;
-            case "Meter": objectTable.put(object+" "+objectCount,new Meter());break;
-            case "Node": objectTable.put(object+" "+objectCount,new Node());break;
-            case "OverheadLine": objectTable.put(object+" "+objectCount,new OverheadLine() );break;
-            case "OverheadLineConductor": objectTable.put(object+" "+objectCount,new OverheadLineConductor());break;
-            case "Regulator": objectTable.put(object+" "+objectCount,new Regulator());break;
-            case "RegulatorConfiguration": objectTable.put(object+" "+objectCount,new RegulatorConfiguration());break;
-            case "Switch": objectTable.put(object+" "+objectCount,new Switch());break;
-            case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());break;
-            case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());break;
-            case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLine());break;
-            case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());break;
-            case "TriplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());break;
-            case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());break;
-            case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());break;
-            case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());break;
-            case "UnderGroundLineConductor": objectTable.put(object+" "+objectCount,new UnderGroundLineConductor());break;
+            case "Clock": objectTable.put("Clock" + " " + objectCount, new Clock());
+                addImageToPanel(object);break;
+            case "Player": objectTable.put((object+" "+objectCount),new Player());
+                addImageToPanel(object);break;
+            case "Recorder": objectTable.put(object+" "+objectCount,new Recorder());
+                addImageToPanel(object);break;
+            case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());
+                addImageToPanel(object);break;
+            case "Solar": objectTable.put(object+" "+objectCount,new Solar());
+                addImageToPanel(object);break;
+            case "House": objectTable.put(object+" "+objectCount,new House());
+                addImageToPanel(object);break;
+            case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());
+                addImageToPanel(object);break;
+            case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());
+                addImageToPanel(object);break;
+            case "Lights": objectTable.put(object+" "+objectCount,new Lights());
+                addImageToPanel(object);break;
+            case "Microwave": objectTable.put(object+" "+objectCount,new Microwave());
+                addImageToPanel(object);break;
+            case "Occupants": objectTable.put(object+" "+objectCount,new Occupants());
+                addImageToPanel(object);break;
+            case "Plugs": objectTable.put(object+" "+objectCount,new Plugs());
+                addImageToPanel(object);break;
+            case "Refrigerator": objectTable.put(object+" "+objectCount,new Refrigerator());
+                addImageToPanel(object);break;
+            case "Waterheat": objectTable.put(object+" "+objectCount,new Waterheat());
+                addImageToPanel(object);break;
+            case "Capacitor": objectTable.put(object+" "+objectCount,new Capacitor());
+                addImageToPanel(object);break;
+            case "Fuse": objectTable.put(object+" "+objectCount,new Fuse());
+                addImageToPanel(object);break;
+            case "LineConfiguration": objectTable.put(object+" "+objectCount,new LineConfiguration());
+                addImageToPanel(object);break;
+            case "LineSpacing": objectTable.put(object+" "+objectCount,new LineSpacing());
+                addImageToPanel(object);break;
+            case "Load": objectTable.put(object+" "+objectCount,new Load());
+                addImageToPanel(object);break;
+            case "Meter": objectTable.put(object+" "+objectCount,new Meter());
+                addImageToPanel(object);break;
+            case "Node": objectTable.put(object+" "+objectCount,new Node());
+                addImageToPanel(object);break;
+            case "OverheadLine": objectTable.put(object+" "+objectCount,new OverheadLine());
+                addImageToPanel(object);break;
+            case "OverheadLineConductor": objectTable.put(object+" "+objectCount,new OverheadLineConductor());
+                addImageToPanel(object);break;
+            case "Regulator": objectTable.put(object+" "+objectCount,new Regulator());
+                addImageToPanel(object);break;
+            case "RegulatorConfiguration": objectTable.put(object+" "+objectCount,new RegulatorConfiguration());
+                addImageToPanel(object);break;
+            case "Switch": objectTable.put(object+" "+objectCount,new Switch());
+                addImageToPanel(object);break;
+            case "Transformer": objectTable.put(object+" "+objectCount,new Transformer());
+                addImageToPanel(object);break;
+            case "TransformerConfiguration": objectTable.put(object+" "+objectCount,new TransformerConfiguration());
+                addImageToPanel(object);break;
+            case "TriplexLine": objectTable.put(object+" "+objectCount,new TriplexLine());
+                addImageToPanel(object);break;
+            case "TriplexLineConductor": objectTable.put(object+" "+objectCount,new TriplexLineConductor());
+                addImageToPanel(object);break;
+            case "TriplexLineConfiguration": objectTable.put(object+" "+objectCount,new TriplexLineConfiguration());
+                addImageToPanel(object);break;
+            case "TriplexMeter": objectTable.put(object+" "+objectCount,new TriplexMeter());
+                addImageToPanel(object);break;
+            case "TriplexNode": objectTable.put(object+" "+objectCount,new TriplexNode());
+                addImageToPanel(object);break;
+            case "UndergroundLine": objectTable.put(object+" "+objectCount,new UndergroundLine());
+                addImageToPanel(object);break;
+            case "UnderGroundLineConductor": objectTable.put(object+" "+objectCount,new UnderGroundLineConductor());
+                addImageToPanel(object);break;
             default: System.out.println("not know type: "+object);
         }
+    }
+
+    public void addImageToPanel(String obj){
+        String object = obj;
+        drag_drop.add(new JLabel(objectTable.get(object+" "+objectCount).getIcon()));
+        drag_drop.revalidate();
+        drag_drop.repaint();
+    }
+    public void removeImageFromPanel(){
     }
 }
