@@ -11,6 +11,8 @@ import gridlab.ModulesItems.Tape.Recorder;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
@@ -646,8 +648,11 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String about="Więcej informacji o programie GRIDLAB-D na oficialnej stronie";
-                JOptionPane.showMessageDialog(mainFrame,about);
-                JOptionPane.
+
+
+
+                JOptionPane.showMessageDialog(mainFrame,(about));
+
             }
         });
     }
