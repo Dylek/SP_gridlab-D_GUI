@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Residental;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -11,6 +12,10 @@ import java.util.Vector;
 public class Microwave implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
+    private ImageIcon icon = new ImageIcon();
+    public ImageIcon getIcon() {
+        return icon;
+    }
 
     public Microwave(){
         properties = new Vector<Property>();

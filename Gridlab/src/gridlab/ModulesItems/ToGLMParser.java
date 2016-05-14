@@ -1,5 +1,6 @@
 package gridlab.ModulesItems;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -9,5 +10,5 @@ public interface ToGLMParser {
     public String ToGLM();
     public int getModule();
     public Vector<Property> GetProperties();
-
+    public ImageIcon getIcon();
 }

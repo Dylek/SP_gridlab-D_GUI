@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Powerflow;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Vector;
 public class OverheadLineConductor implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
+    private ImageIcon icon = new ImageIcon();
 
     public OverheadLineConductor(){
         properties=new Vector<Property>();
@@ -30,6 +32,11 @@ public class OverheadLineConductor implements ToGLMParser {
     public Vector<Property> GetProperties(){
         return properties;
     }
+
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
     public String ToGLM(){
         String s="";
         s="object overhead_line_conductor { \n";

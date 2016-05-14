@@ -3,6 +3,8 @@ package gridlab.ModulesItems.Residental;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Vector;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Vector;
 public class House implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\residental.png");
 
     public House(){
         properties = new Vector<Property>();
@@ -162,5 +165,9 @@ public class House implements ToGLMParser {
 
     public int getModule(){
         return module;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 }

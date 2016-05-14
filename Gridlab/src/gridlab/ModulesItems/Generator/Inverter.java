@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Generator;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -12,6 +13,8 @@ public class Inverter implements ToGLMParser {
 
     private Vector<Property> properties;
     private int module =0;
+    private ImageIcon icon = new ImageIcon();
+
     public Inverter() {
         properties = new Vector<Property>();
         properties.add(new Property("name", "", ""));
@@ -70,5 +73,9 @@ public class Inverter implements ToGLMParser {
         else
             System.out.println("nie");
 
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 }

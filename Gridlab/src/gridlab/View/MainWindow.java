@@ -40,7 +40,7 @@ public class MainWindow extends JFrame {
     private JToolBar   toolBar;
     private JTextArea fileNameJTextArea = new JTextArea("HelloWorld");;
 
-    private JPanel buttons;
+    private JPanel drag_drop;
     private String fileName="Hello1.glm";
 
     private JFileChooser fileChooser;
@@ -106,9 +106,8 @@ public class MainWindow extends JFrame {
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
-        buttons = new JPanel();
-        buttons.setLayout(new GridLayout(2,2,0,30));
-
+        drag_drop = new JPanel();
+        drag_drop.setPreferredSize(new Dimension(500,300));
         loadToolBox();
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -120,7 +119,7 @@ public class MainWindow extends JFrame {
         //container.add(addClock);
         container.add(addedObjectsPanel);
         container.add(propertiesPanel);
-        container.add(buttons);
+        container.add(drag_drop);
         container.add(consolePanel);
 
 
@@ -313,7 +312,8 @@ public class MainWindow extends JFrame {
                     case "Inverter": objectTable.put(object+" "+objectCount,new Inverter());break;
                     case "Solar": objectTable.put(object+" "+objectCount,new Solar());break;
 
-                    case "House": objectTable.put(object+" "+objectCount,new House());break;
+                    case "House": objectTable.put(object+" "+objectCount,new House());
+                                  drag_drop.add(new JLabel(objectTable.get(object+" "+objectCount).getIcon())); break;
                     case "Dishwasher": objectTable.put(object+" "+objectCount,new Dishwasher());break;
                     case "Clotheswasher": objectTable.put(object+" "+objectCount,new Clotheswasher());break;
                     case "Lights": objectTable.put(object+" "+objectCount,new Lights());break;
@@ -347,6 +347,7 @@ public class MainWindow extends JFrame {
 
                 }
                 System.out.print("Dodano"+objectTable.size());
+                drag_drop.repaint();
             }
         });
         removeButton.addActionListener(new ActionListener()
@@ -356,6 +357,7 @@ public class MainWindow extends JFrame {
                 String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
+          //      drag_drop.remove(objectTable.get(obj).getIcon()); nie mozna tak ;___:
                 System.out.print("usunieto "+objectTable.size());
         }
         });

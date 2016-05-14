@@ -1,5 +1,6 @@
 package gridlab.ModulesItems;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -8,6 +9,10 @@ import java.util.Vector;
 public class Clock implements ToGLMParser {
 
     private Vector<Property> properties;
+    private ImageIcon icon = new ImageIcon();
+    public ImageIcon getIcon() {
+        return icon;
+    }
 
     public Clock(){
         properties = new Vector<Property>();

@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Tape;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -11,6 +12,10 @@ import java.util.Vector;
 public class Player implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 3;
+    private ImageIcon icon = new ImageIcon();
+    public ImageIcon getIcon() {
+        return icon;
+    }
 
     public Player(){
         properties = new Vector<Property>();

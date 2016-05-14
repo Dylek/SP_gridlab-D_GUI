@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Powerflow;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Vector;
 public class Capacitor implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
+    private ImageIcon icon = new ImageIcon();
 
     public Capacitor(){
         properties=new Vector<Property>();
@@ -63,5 +65,9 @@ public class Capacitor implements ToGLMParser {
 
     public int getModule(){
         return module;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 }

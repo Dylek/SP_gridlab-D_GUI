@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Powerflow;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
@@ -10,6 +11,10 @@ import java.util.Vector;
 public class Switch implements ToGLMParser {
     private Vector<Property>properties;
     private int module = 1;
+    private ImageIcon icon = new ImageIcon();
+    public ImageIcon getIcon() {
+        return icon;
+    }
 
     public Switch(){
         properties=new Vector<Property>();

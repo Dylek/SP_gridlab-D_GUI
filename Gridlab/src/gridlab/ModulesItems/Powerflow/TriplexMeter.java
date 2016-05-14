@@ -3,6 +3,7 @@ package gridlab.ModulesItems.Powerflow;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
@@ -12,6 +13,10 @@ public class TriplexMeter  implements ToGLMParser {
 
     private Vector<Property> properties;
     private int module = 1;
+    private ImageIcon icon = new ImageIcon();
+    public ImageIcon getIcon() {
+        return icon;
+    }
 
     public TriplexMeter(){
         properties=new Vector<Property>();
