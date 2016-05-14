@@ -35,15 +35,10 @@ public class MainWindow extends JFrame {
     private JScrollPane consolePanel;
     private JButton addButton;
     private JButton removeButton;
-    private JButton exportToGlm;
-    private JButton runSimulation;
     private JButton addClock;
-    private JTextArea fileNameJTextArea;
-
     private JMenuBar menuBar;
     private JToolBar   toolBar;
-
-    private JButton saveChangers;
+    private JTextArea fileNameJTextArea = new JTextArea("HelloWorld");;
 
     private JPanel buttons;
     private String fileName="Hello1.glm";
@@ -108,25 +103,11 @@ public class MainWindow extends JFrame {
         consolePanel.setPreferredSize(new Dimension(500,300));
         addButton = new JButton("+");
         removeButton = new JButton("-");
-        exportToGlm = new JButton("Export to GLM");
-        runSimulation = new JButton("Run Simulation");
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         buttons = new JPanel();
         buttons.setLayout(new GridLayout(2,2,0,30));
-        Dimension d = new Dimension(100,50);
-        exportToGlm.setPreferredSize(d);
-        buttons.add(exportToGlm);
-        /*
-         *JTextArea aktualizuje zmienną fineName, po tym jak klikniemy ExportToGLM
-         */
-        fileNameJTextArea=new JTextArea("HelloWorld");
-        buttons.add(fileNameJTextArea);
-        buttons.add(runSimulation);
-        saveChangers= new JButton("Save changes");
-        buttons.add(saveChangers);
-
 
         loadToolBox();
         Container container = mainFrame.getContentPane();
@@ -385,104 +366,6 @@ public class MainWindow extends JFrame {
                 objectTable.put("Clock" + " " + objectCount, new Clock());
             }
         });
-
-
-        saveChangers.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent evt) {
-                if (evt.getClickCount() == 1) {
-                    int index = currentObject;
-                    String key = addedObjectsItems.get(index);
-                    ToGLMParser value = objectTable.get(key);
-                    int propAmount = value.GetProperties().size();
-                    for(int i =0; i<propAmount;i++){
-                       value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
-                    }
-
-                }
-            }
-        });
-
-        runSimulation.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String command;
-                command="gridlabd ";
-                fileName=fileNameJTextArea.getText();
-
-                if (fileName != null && fileName != "") {
-
-                    ExecuteShellCommand execCom=new ExecuteShellCommand();
-
-                    JPanel conPan=new JPanel();
-                    conPan.setPreferredSize(new Dimension(400, 300));
-                    String str=execCom.executeCommand(command+fileName+".glm");
-                    consoleOutput.setText(str);
-                    consoleOutput.updateUI();
-
-                    System.out.println("Running in console");
-                    //System.out.println(execCom.executeCommand(command+"waterheater_example.glm"));
-
-                    System.out.println("End of console response");
-                }
-
-            }
-        });
-
-
-        exportToGlm.addActionListener(new ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Vector <String> toglmString=new Vector<String>();
-                fileName=fileNameJTextArea.getText();
-                File file = new File(fileName+".glm");
-                // creates the file
-                try {
-                    file.createNewFile();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                FileWriter writer = null;
-                try {
-                    writer = new FileWriter(file);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                try {
-                    writer.write(checkModules());
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-
-                // creates a FileWriter Object
-                for(int i=0;i<addedObjectsItems.size();i++){
-                   ToGLMParser glm= (ToGLMParser) objectTable.get(addedObjectsItems.get(i));
-                   // System.out.println(glm.ToGLM());
-
-
-                    // Writes the content to the file
-                    try {
-                        writer.write(glm.ToGLM());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    try {
-                        writer.flush();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-
-                }
-                try {
-                    writer.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-
-            }
-
-        });
-
 }
     public String checkModules(){
         String modules = "";
