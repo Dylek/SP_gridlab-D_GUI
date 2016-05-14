@@ -246,7 +246,7 @@ public class MainWindow extends JFrame {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 1) {
 
-                    if(objectCount>1)
+                    if(objectCount>1 && textFieldsGlobal!=null)
                     {
                         int index = currentObject;
                         String key = addedObjectsItems.get(index);
@@ -443,7 +443,7 @@ public class MainWindow extends JFrame {
                 objectTable.clear();
                 addedObjectsItems.clear();
                 propertiesItems.clear();
-
+                textFieldsGlobal=null;
                 propertiesPanel.setViewportView(new JPanel());
                 propertiesPanel.revalidate();
                 propertiesPanel.repaint();
