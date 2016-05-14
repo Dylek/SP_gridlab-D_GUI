@@ -513,13 +513,11 @@ public class MainWindow extends JFrame {
 
 
         //do zakłądi file
-        JMenuItem saveItem=new JMenuItem("Save");
-        JMenuItem newItem=new JMenuItem("New");
-        JMenuItem openItem=new JMenuItem("Open");
+        JMenuItem clearItem=new JMenuItem("Clear");
+
         JMenuItem exitItem=new JMenuItem("Exit");
-        fileMenu.add(saveItem);
-        fileMenu.add(newItem);
-        fileMenu.add(openItem);
+
+        fileMenu.add(clearItem);
         fileMenu.add(exitItem);
         //do zakładki GLM
         JMenuItem exportItem=new JMenuItem("Export to GLM");
@@ -533,6 +531,29 @@ public class MainWindow extends JFrame {
         helpMenu.add(wikiItem);
 
         //menu listeners
+        exitItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        clearItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                objectCount=0;
+                objectsItems.clear();
+                objectTable.clear();
+                addedObjectsItems.clear();
+                propertiesItems.clear();
+
+                propertiesPanel.setViewportView(new JPanel());
+                propertiesPanel.revalidate();
+                propertiesPanel.repaint();
+                consoleOutput.setText("");
+
+            }
+        });
+
         runItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command;
