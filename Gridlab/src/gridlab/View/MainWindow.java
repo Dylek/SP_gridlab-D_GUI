@@ -592,6 +592,9 @@ public class MainWindow extends JFrame {
                 objectsItems.clear();
                 objectTable.clear();
                 imagesTable.clear();
+                drag_drop.removeAll();
+                drag_drop.revalidate();
+                drag_drop.repaint();
                 addedObjectsItems.clear();
                 propertiesItems.clear();
                 textFieldsGlobal=null;
@@ -921,13 +924,13 @@ public class MainWindow extends JFrame {
         objectLabel.setName(object+" "+objectCount);
         MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
         objectLabel.addMouseListener(myMouseAdapter);
-
         objectLabel.addMouseMotionListener(myMouseAdapter);
         objectLabel.setText(object+" "+objectCount);
         imagesTable.put(object+" "+objectCount,objectLabel);
         drag_drop.add(imagesTable.get(object+" "+objectCount));
+        
         drag_drop.revalidate();
-        drag_drop.repaint();
+         drag_drop.repaint();
         map.put(object+" "+objectCount,objectLabel.getLocation());
 
         objectLabel.addMouseListener(new MouseAdapter(){
