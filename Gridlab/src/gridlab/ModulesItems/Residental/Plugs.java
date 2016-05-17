@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Plugs implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Residental\\plug.png");
     public ImageIcon getIcon() {
         return icon;
     }

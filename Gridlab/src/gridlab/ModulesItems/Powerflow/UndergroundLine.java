@@ -12,7 +12,7 @@ import java.util.Vector;
 public class UndergroundLine implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\undergroundline.png");
     public ImageIcon getIcon() {
         return icon;
     }

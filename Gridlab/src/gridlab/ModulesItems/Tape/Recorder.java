@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Recorder implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 3;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Tape\\symbol.png");
     public ImageIcon getIcon() {
         return icon;
     }

@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Capacitor implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\capacitor.png");
 
     public Capacitor(){
         properties=new Vector<Property>();

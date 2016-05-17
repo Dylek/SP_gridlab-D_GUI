@@ -13,7 +13,7 @@ import java.util.Vector;
 public class Solar implements ToGLMParser {
     private Vector<Property> properties;
     private int module =0;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Generator\\solar.png");
 
     public Solar(){
         properties=new Vector<Property>();

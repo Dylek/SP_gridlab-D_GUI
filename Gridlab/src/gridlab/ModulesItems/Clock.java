@@ -9,7 +9,7 @@ import java.util.Vector;
 public class Clock implements ToGLMParser {
 
     private Vector<Property> properties;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\clock-128.png");
     public ImageIcon getIcon() {
         return icon;
     }
