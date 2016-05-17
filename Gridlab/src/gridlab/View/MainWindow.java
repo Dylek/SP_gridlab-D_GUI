@@ -122,11 +122,11 @@ public class MainWindow extends JFrame {
     private JList<String> addedObjectsJList;
     private JList<String> propertiesJList;
 
-    DefaultListModel<String> modulesItems;//nie usuwać pod rzadnym pozorem
-    DefaultListModel<String> powerflowItems;//nie usuwać pod rzadnym pozorem
-    DefaultListModel<String> residentalItems;//nie usuwać pod rzadnym pozorem
-    DefaultListModel<String> tapeItems;//nie usuwać pod rzadnym pozorem
-    DefaultListModel<String> generatorItems;//nie usuwać pod rzadnym pozorem MJ
+    DefaultListModel<String> modulesItems;//nie usuwać pod żadnym pozorem
+    DefaultListModel<String> powerflowItems;//nie usuwać pod żadnym pozorem
+    DefaultListModel<String> residentalItems;//nie usuwać pod żadnym pozorem
+    DefaultListModel<String> tapeItems;//nie usuwać pod żadnym pozorem
+    DefaultListModel<String> generatorItems;//nie usuwać pod żadnym pozorem MJ
 
     DefaultListModel<String> objectsItems;
     DefaultListModel<String> addedObjectsItems;
