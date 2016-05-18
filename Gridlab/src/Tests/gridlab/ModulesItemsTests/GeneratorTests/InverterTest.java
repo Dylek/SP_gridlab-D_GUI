@@ -1,14 +1,28 @@
 package Tests.gridlab.ModulesItemsTests.GeneratorTests;
 
 import gridlab.ModulesItems.Generator.Inverter;
+import gridlab.ModulesItems.Property;
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import java.util.Vector;
 
 /**
  * Created by Dell on 2016-05-18.
  */
 public class InverterTest extends TestCase {
+
     Inverter i = new Inverter();
+    private Vector<Property> ps;
+    private Property p1;
+    private Property p2;
+    private Property p3;
+
+    public void createPs(){
+        ps.add(p1);
+        ps.add(p2);
+        ps.add(p3);
+    }
 
     @Test
     public void testConstructor() {
@@ -67,7 +81,19 @@ public class InverterTest extends TestCase {
         assertEquals("inverter_manufacturer", i.GetProperties().elementAt(13).GetName());
         assertEquals("", i.GetProperties().elementAt(13).GetValue());
         assertEquals("", i.GetProperties().elementAt(13).GetUnit());
+    }
 
+    @Test
+    public void testSetProperty(){
+        createPs();
+        i.SetProperty(ps);
+
+        assertEquals(ps, i.GetProperties());
+    }
+
+    @Test
+    public void testGetModule(){
+        assertEquals(0, i.getModule());
     }
 
 }

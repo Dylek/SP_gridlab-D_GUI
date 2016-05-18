@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Inverter implements ToGLMParser {
 
     private Vector<Property> properties;
-    private int module =0;
+    private int module = 0;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Generator\\inverter.png");
 
     public Inverter() {
@@ -37,11 +37,11 @@ public class Inverter implements ToGLMParser {
 
     }
     public Inverter(Inverter inverter){
-        properties=inverter.GetProperties();
+        properties = inverter.GetProperties();
     }
 
     public void SetProperty(Vector<Property> wektor){
-        properties=wektor;
+        properties = wektor;
     }
     public Vector<Property> GetProperties(){
         return properties;
