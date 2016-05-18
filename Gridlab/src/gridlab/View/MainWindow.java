@@ -310,7 +310,13 @@ public class MainWindow extends JFrame {
                     //make parent child connection
                     if(hashChildParent.containsKey(childName) ){
                         consoleOutput.setText("A child object can have only one parent\n Overriding old parent");
-
+                        //hashChildParent.remove(childName);
+                        for(int i=0;i<listOfConn.size();i++){
+                            if(listOfConn.get(i).getParentJLabel().getName().equals(hashChildParent.get(childName))){
+                                listOfConn.remove(listOfConn.get(i));
+                            }
+                        }
+                        hashChildParent.replace(childName,parentName);
                     }
 
                         hashChildParent.put(childName,parentName);

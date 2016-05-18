@@ -13,7 +13,7 @@ public class Inverter implements ToGLMParser {
 
     private Vector<Property> properties;
     private int module =0;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Generator\\inverter.png");
 
     public Inverter() {
         properties = new Vector<Property>();

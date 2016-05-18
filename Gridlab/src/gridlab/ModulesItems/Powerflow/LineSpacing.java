@@ -12,7 +12,8 @@ import java.util.Vector;
 public class LineSpacing implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\linespacing.png");
+
     public ImageIcon getIcon() {
         return icon;
     }

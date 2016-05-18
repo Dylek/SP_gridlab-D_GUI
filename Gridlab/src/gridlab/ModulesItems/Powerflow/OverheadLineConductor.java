@@ -12,7 +12,7 @@ import java.util.Vector;
 public class OverheadLineConductor implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\overheadlineconductor.png");
 
     public OverheadLineConductor(){
         properties=new Vector<Property>();

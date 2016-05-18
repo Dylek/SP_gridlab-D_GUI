@@ -12,7 +12,8 @@ import java.util.Vector;
 public class Fuse implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 1;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\fuse.png");
+
 
     public Fuse(){
         properties=new Vector<Property>();

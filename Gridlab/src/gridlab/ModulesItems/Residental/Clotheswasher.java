@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Clotheswasher implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Residental\\washing-machine.png");
     public ImageIcon getIcon() {
         return icon;
     }

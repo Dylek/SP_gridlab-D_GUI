@@ -13,7 +13,7 @@ import java.util.Vector;
 public class Refrigerator implements ToGLMParser {
     private Vector<Property> properties;
     private int module = 2;
-    private ImageIcon icon = new ImageIcon();
+    private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Residental\\fridge.png");
     public ImageIcon getIcon() {
         return icon;
     }
