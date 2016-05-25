@@ -11,8 +11,8 @@ import java.util.Vector;
  * Created by Dell on 2016-05-18.
  */
 public class ClockTest extends TestCase {
-    private Clock c;
-    private Vector<Property> ps;
+    private Clock c=new Clock();
+    private Vector<Property> ps = new Vector<>();
     private Property p1;
     private Property p2;
     private Property p3;
@@ -54,8 +54,8 @@ public class ClockTest extends TestCase {
 
     @Test
     public void testToGLM(){
-        assertEquals("clock{ \ntimezone    ;\n" +
-                "timestamp    ;\n" +
+        assertEquals("clock{ \ntimezone    PST+8PDT;\n" +
+               // "timestamp    ;\n" +
                 "starttime    '2016-04-01 00:00:00';\n" +
                 "stoptime    '2016-04-02 00:00:00';\n" +
                 "} \n", c.ToGLM());
