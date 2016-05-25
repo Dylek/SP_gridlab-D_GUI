@@ -39,7 +39,6 @@ public class Capacitor implements ToGLMParser {
         properties.add(new Property("remote_sense", "", ""));
         properties.add(new Property("remote_sense_B", "", ""));
         properties.add(new Property("control_level", "INDIVIDUAL", "")); //BANK,INDIVIDUAL
-
     }
 
     public void SetProperty(Vector<Property> wektor){
