@@ -1,6 +1,6 @@
-TO DO gridlabd:
+﻿TO DO gridlabd:
 
-ocena 1 prezentacji : 80/100  
+ocena 1 prezentacji : 80/100   za 15%
 
 panel boczny 
 elementy do wyboru
@@ -12,3 +12,18 @@ sprawdzenie kazdego objectu czy wywala errory w konsoli
 poprawienie jpanela z properties
 ogarniecie polaczen
 panel konsoli ma wyłapywać warningi itp
+
+
+
+2: razem 28/100
+ocena  2 prezentacji 80%   za 20%
+Do zrobienia na następny raz
+zapis do modelu , nasz format // może serializacja,deserializacja
+i wczyt
+//export do .glm w tle do temp
+ikonka do uruchamiania tego temp
+RUN SImulation: export do temp, run temp
+lepsze łączenie obiektów, nie przez przycisk CONNECT, tylko przez jakieś przesuwanie,
+testy dokończyć
+działające modele przygotować
+refaktor kodu
