@@ -30,7 +30,7 @@ public class InverterTest extends TestCase {
         assertEquals("", i.GetProperties().firstElement().GetValue());
         assertEquals("", i.GetProperties().firstElement().GetUnit());
 
-        assertEquals("phase", i.GetProperties().elementAt(1).GetName());
+        assertEquals("phases", i.GetProperties().elementAt(1).GetName());
         assertEquals("", i.GetProperties().elementAt(1).GetValue());
         assertEquals("", i.GetProperties().elementAt(1).GetValue());
 
