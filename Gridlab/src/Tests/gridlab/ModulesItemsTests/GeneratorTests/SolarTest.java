@@ -71,4 +71,17 @@ public class SolarTest extends TestCase {
         assertEquals("orientation", "DEFAULT", s.GetProperties().elementAt(40).GetName());
         assertEquals("phases", "", s.GetProperties().elementAt(41).GetName());
     }
+
+    @Test
+    public void testSetProperty(){
+        createPs();
+        s.SetProperty(ps);
+
+        assertEquals(ps, s.GetProperties());
+    }
+
+    @Test
+    public void testGetModule(){
+        assertEquals(0, s.getModule());
+    }
 }
