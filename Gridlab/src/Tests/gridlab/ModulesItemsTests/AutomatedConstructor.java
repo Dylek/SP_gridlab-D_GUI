@@ -1,7 +1,7 @@
 package Tests.gridlab.ModulesItemsTests;
 
 import gridlab.ModulesItems.Property;
-import gridlab.ModulesItems.Residental.House;
+import gridlab.ModulesItems.Residental.*;
 
 /**
  * Created by Dylek on 2016-05-25.
@@ -13,11 +13,22 @@ public class AutomatedConstructor {
         dzięki temu wygeneruje wam kod do TestCOnstructor()
         haha ale przechytrzyłem system :v
          */
-        House h=new House();//to modyfikujesz
-        String className="house";//i to też modyfikujesz
+        Occupants h=new Occupants();//to modyfikujesz
+        String className="occupantload";//i to też modyfikujesz
 
 
-
+        System.out.println("   private  objectTest=new ();\n" +
+                "\n" +
+                "    private Vector<Property> ps= new Vector<>();\n" +
+                "    private Property p1;\n" +
+                "    private Property p2;\n" +
+                "    private Property p3;\n" +
+                "\n" +
+                "    public void createPs(){\n" +
+                "        ps.add(p1);\n" +
+                "        ps.add(p2);\n" +
+                "        ps.add(p3);\n" +
+                "    }");
         System.out.println("\n@Test\n public void testConstructor(){\n");
         for(int i=0;i<h.GetProperties().size();i++){
             System.out.println(" assertEquals(\""+h.GetProperties().elementAt(i).GetName()+"\", objectTest.GetProperties().elementAt("+i+").GetName());\n" +
@@ -40,14 +51,22 @@ public class AutomatedConstructor {
         for (Property p: h.GetProperties()){
             if(!p.GetValue().isEmpty())
             {
-                s+=p.GetName()+"    "+p.GetValue();
+                s+="\""+p.GetName()+"    "+p.GetValue()+";\n\"+";
                 // if(false)s+=" "+p.GetUnit();
                 s+=";\n";
             }
         }
-        s+="\n \"\\n}\",";
+        s+="\n \"} \\n\",";
         s+="\nobjectTest.ToGLM());";
         System.out.println(s);
         System.out.println("\n\n}");
+
+
+        System.out.println(" @Test\n" +
+                "    public void testSetProperty(){\n" +
+                "        createPs();\n" +
+                "        objectTest.SetProperty(ps);\n" +
+                "        assertEquals(ps,objectTest.GetProperties());\n" +
+                "    }");
     }
 }
