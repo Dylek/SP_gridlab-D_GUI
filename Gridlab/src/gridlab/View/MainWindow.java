@@ -109,6 +109,7 @@ public class MainWindow extends JFrame {
     private JButton removeButton;
     private JButton addClock;
     private JButton connectButton;
+    private JButton startSimulationButton;
     private JMenuBar menuBar;
     private JToolBar   toolBar;
     private JTextArea fileNameJTextArea = new JTextArea("HelloWorld");;
@@ -192,6 +193,9 @@ public class MainWindow extends JFrame {
         addButton = new JButton("+");
         removeButton = new JButton("-");
         connectButton=new JButton("Connect");
+        startSimulationButton=new JButton("Start symulacji",new ImageIcon("C:\\Users\\Dylek\\Documents\\GitHub\\SP_gridlab-D_GUI\\Gridlab\\Icons\\start16x16.png"));
+
+
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
@@ -563,7 +567,7 @@ public class MainWindow extends JFrame {
         menuBar.add(fileMenu);
         menuBar.add(glmMenu);
         menuBar.add(helpMenu);
-
+        menuBar.add(startSimulationButton);
 
         //do zakłądi file
         JMenuItem clearItem=new JMenuItem("Clear");
