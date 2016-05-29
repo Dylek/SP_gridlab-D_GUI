@@ -574,10 +574,15 @@ public class MainWindow extends JFrame {
 
         //do zakłądi file
         JMenuItem clearItem=new JMenuItem("Clear");
-
         JMenuItem exitItem=new JMenuItem("Exit");
+        JMenuItem saveItem= new JMenuItem("Save");
+        JMenuItem loadITem=new JMenuItem("Load");
 
+        fileMenu.add(saveItem);
+        fileMenu.add(loadITem);
+        fileMenu.addSeparator();
         fileMenu.add(clearItem);
+        fileMenu.addSeparator();
         fileMenu.add(exitItem);
         //do zakładki GLM
         JMenuItem exportItem=new JMenuItem("Export to GLM");
@@ -619,6 +624,20 @@ public class MainWindow extends JFrame {
                 map.clear();
             }
         });
+        //TODO
+        saveItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        loadITem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
 
         runItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
