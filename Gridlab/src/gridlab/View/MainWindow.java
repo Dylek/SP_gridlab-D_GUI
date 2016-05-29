@@ -115,10 +115,13 @@ public class MainWindow extends JFrame {
     private JTextArea fileNameJTextArea = new JTextArea("HelloWorld");;
 
     private JPanel drag_drop;
+
+
     private String fileName="Hello1.glm";
 
     private JFileChooser fileChooser;
     private JList<String> modulesJList;
+
     private JList<String> objectsJList;
     private JList<String> addedObjectsJList;
     private JList<String> propertiesJList;
@@ -737,6 +740,62 @@ public class MainWindow extends JFrame {
 
                 JOptionPane.showMessageDialog(mainFrame,(about));
 
+            }
+        });
+        startSimulationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file=new File("temp.glm");
+                // creates the file
+                try {
+                    file.createNewFile();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                FileWriter writer = null;
+                try {
+                    writer = new FileWriter(file);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    writer.write(checkModules());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+                // creates a FileWriter Object
+                for(int i=0;i<addedObjectsItems.size();i++){
+                    ToGLMParser glm= (ToGLMParser) objectTable.get(addedObjectsItems.get(i));
+                    try {
+                        writer.write(glm.ToGLM());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        writer.flush();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                try {
+                    writer.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
+                try {
+                    fileName=file.getCanonicalPath();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                ExecuteShellCommand execCom=new ExecuteShellCommand();
+
+                JPanel conPan=new JPanel();
+                conPan.setPreferredSize(new Dimension(400, 300));
+                String str=execCom.executeCommand("gridlabd "+fileName);
+                consoleOutput.setText(str);
+                consoleOutput.updateUI();
             }
         });
     }
