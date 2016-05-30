@@ -10,92 +10,19 @@ import gridlab.ModulesItems.Residental.*;
 import gridlab.ModulesItems.Tape.Player;
 import gridlab.ModulesItems.Tape.Recorder;
 import gridlab.ModulesItems.ToGLMParser;
+import gridlab.ParentChild;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
-
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 /**
  * Created by Pavlo on 17.04.2016.
  */
 
-class ParentChild{
-    JLabel parentJLabel;
-    //String parentName;
-    JLabel childJLabel;
-   // String childName;
-
-    private ParentChild() {
-    }
-    public ParentChild(JLabel parent,JLabel child){
-        parentJLabel=parent;
-        childJLabel=child;
-
-    }
-    public boolean Conntain(JLabel jlabel){
-        if(parentJLabel.equals(jlabel)|| childJLabel.equals(jlabel)){
-            return true;
-        }
-        return false;
-    }
-    @Override
-    public String toString(){
-        return "{"+parentJLabel.getLocation()+","+childJLabel.getLocation()+"}";
-    }
-
-    public int howToDrawLine(){
-        Point point1=parentJLabel.getLocation();
-        Point point2=childJLabel.getLocation();
-        if (point1.x > point2.x)
-        {
-            return 1;
-        }
-        else if (point1.x < point2.x)
-        {
-            return 2;
-        }
-        else if (point1.y > point2.y)
-        {
-            return 3;
-        }
-        else if (point1.y < point2.y)
-        {
-            return 4;
-        }
-        else
-            return 5;
-    }
-
-    public JLabel getChildJLabel() {
-        return childJLabel;
-    }
-
-    public JLabel getParentJLabel() {
-        return parentJLabel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ParentChild that = (ParentChild) o;
-
-        if (parentJLabel != null ? !parentJLabel.equals(that.parentJLabel) : that.parentJLabel != null) return false;
-        return childJLabel != null ? childJLabel.equals(that.childJLabel) : that.childJLabel == null;
-    }
-
-
-}
 
 
 public class MainWindow extends JFrame {
@@ -120,6 +47,7 @@ public class MainWindow extends JFrame {
     private String fileName="Hello1.glm";
 
     private JFileChooser fileChooser;
+
     private JList<String> modulesJList;
 
     private JList<String> objectsJList;
@@ -628,14 +556,106 @@ public class MainWindow extends JFrame {
         saveItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               // int returnVal=fileChooser.showSaveDialog(mainFrame);
+                //fileChooser.setFileFilter(new FileNameExtensionFilter("SaveFile",".ser"));
 
-            }
+              //  if(returnVal==JFileChooser.APPROVE_OPTION){
+                    File fileSelected= fileChooser.getSelectedFile();
+                    System.out.println(fileSelected);
+                    SaveFileClass save=new SaveFileClass();
+                    save.addedObjectsItems=addedObjectsItems;
+                    save.modulesItems=modulesItems;
+
+                    save.powerflowItems=powerflowItems;
+                    save.residentalItems=residentalItems;
+                    save.tapeItems=tapeItems;
+                    save.generatorItems=generatorItems;
+                    save.objectsItems=objectsItems;
+                    save.stringCurrentObject=stringCurrentObject;
+                    SaveFileClass.objectCount=objectCount;
+                    save.currentObject=currentObject;
+                    save.hashChildParent=hashChildParent;
+                    save.imagesTable=imagesTable;
+                    save.listOfConn=listOfConn;
+                    save.map=map;
+
+                    String fileName= null;
+                    System.out.println("1.");
+                  /*  try {
+                        fileName = fileSelected.getCanonicalPath()+".ser";
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }*/
+                    System.out.println("2.");
+                    try
+                    {
+                        FileOutputStream fileOut =
+                                new FileOutputStream("temp.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(e);
+                        out.close();
+                        fileOut.close();
+                        System.out.printf("Serialized data is saved in /tmp/employee.ser");
+                    }catch(IOException i)
+                    {
+                        i.printStackTrace();
+                    }
+                    System.out.println("3.");
+                    fileChooser.setSelectedFile(new File(""));
+
+                }
+
+           // }
         });
         loadITem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               // int returnVal=fileChooser.showOpenDialog(mainFrame);
+                //fileChooser.setFileFilter(new FileNameExtensionFilter("SaveFile",".ser"));
 
-            }
+               // if(returnVal==JFileChooser.APPROVE_OPTION){
+                //    File fileSelected= fileChooser.getSelectedFile();
+
+
+                SaveFileClass save = null;
+                Object obj;
+                try
+                {
+                    FileInputStream fileIn = new FileInputStream("temp.ser");
+                    ObjectInputStream in = new ObjectInputStream(fileIn);
+                    save =(SaveFileClass) (in.readObject());
+                    in.close();
+                    fileIn.close();
+                }catch(IOException i)
+                {
+                    i.printStackTrace();
+                    return;
+                }catch(ClassNotFoundException c)
+                {
+                    System.out.println("Employee class not found");
+                    c.printStackTrace();
+                    return;
+                }
+                    addedObjectsItems= save.addedObjectsItems;
+
+                    modulesItems=save.modulesItems;
+
+                    powerflowItems=save.powerflowItems;
+                    residentalItems=save.residentalItems;
+                    tapeItems= save.tapeItems;
+                    generatorItems=  save.generatorItems;
+                    objectsItems=save.objectsItems;
+                    stringCurrentObject= save.stringCurrentObject;
+                    objectCount=SaveFileClass.objectCount;
+                    currentObject= save.currentObject;
+                    hashChildParent=save.hashChildParent;
+                    imagesTable= save.imagesTable;
+                    listOfConn= save.listOfConn;
+                    map= save.map;
+
+
+                }
+          //  }
         });
 
 
