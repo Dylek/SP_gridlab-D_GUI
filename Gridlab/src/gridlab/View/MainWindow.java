@@ -534,7 +534,8 @@ public class MainWindow extends JFrame {
         clearItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                objectCount=0;
+                clearMemory();
+               /* objectCount=0;
                 currentObject=0;
                 objectsItems.clear();
                 objectTable.clear();
@@ -550,7 +551,7 @@ public class MainWindow extends JFrame {
                 propertiesPanel.repaint();
                 consoleOutput.setText("");
                 listOfConn.clear();
-                map.clear();
+                map.clear();*/
             }
         });
         //TODO
@@ -639,7 +640,11 @@ public class MainWindow extends JFrame {
                     c.printStackTrace();
                     return;
                 }
-                    addedObjectsItems= save.addedObjectsItems;
+                clearMemory();
+                    //addedObjectsItems= save.addedObjectsItems;
+                    for(int i=0;i<save.addedObjectsItems.getSize();i++){
+                        addedObjectsItems.addElement(save.addedObjectsItems.get(i));
+                    }
 
                     modulesItems=save.modulesItems;
 
@@ -658,6 +663,19 @@ public class MainWindow extends JFrame {
                     propertiesItems = save.propertiesItems;
                     objectTable = save.objectTable;
 
+
+
+
+                    Set<String> keys=imagesTable.keySet();
+                    for (String k:keys) {
+                        drag_drop.add(imagesTable.get(k));
+                        map.put(k,imagesTable.get(k).getLocation());
+                        MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
+                        imagesTable.get(k).addMouseListener(myMouseAdapter);
+                        imagesTable.get(k).addMouseMotionListener(myMouseAdapter);
+                    }
+
+                    addedObjectsJList=new JList<String>(addedObjectsItems);
                     //odswiezenie widoku, nie wiem czemu dziala tylko polaczenie miedzy obiektami
                     addedObjectsPanel.revalidate();
                     addedObjectsPanel.repaint();
@@ -1056,54 +1074,12 @@ public class MainWindow extends JFrame {
          drag_drop.repaint();
         map.put(object+" "+objectCount,objectLabel.getLocation());
 
-        objectLabel.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent evt) {
-                Component comp = (Component) evt.getSource();
-                JLabel jb=(JLabel)comp;
+        /*objectLabel.addMouseListener(new MouseAdapter(){
 
-                if (evt.getClickCount() == 1) {
-                    if(textFieldsGlobal!=null)
-                    {
 
-                       ToGLMParser value = objectTable.get(stringCurrentObject);
-                        int propAmount = value.GetProperties().size();
-                        for(int i =0; i<propAmount;i++){
-                            value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
-                        }
-                    }
-                    stringCurrentObject= jb.getName();
-                    ToGLMParser value = objectTable.get(stringCurrentObject);
-                    int propAmount = value.GetProperties().size();
-                    JPanel params = new JPanel();
-                    params.setLayout(new GridBagLayout());
-                    GridBagConstraints gbc = new GridBagConstraints();
-                    params.setMinimumSize(new Dimension(300,50));
-                    params.setMaximumSize(new Dimension(300, 2500));
-                    JLabel labels[] = new JLabel[propAmount];
-                    JTextField textfields[] = new JTextField[propAmount];
-                    for(int i =0; i<propAmount;i++){
-                        labels[i] = new JLabel(value.GetProperties().get(i).GetName());
-                        textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
-                        gbc.ipadx=100;
-                        gbc.gridx = 0;
-                        gbc.gridy = i;
-                        params.add(labels[i],gbc);
-                        gbc.gridx = 1;
-                        gbc.gridy = i;
-                        params.add(textfields[i],gbc);
-                    }
-                    params.setPreferredSize(params.getPreferredSize());
-                    //labelsGlobal=labels;
-                    textFieldsGlobal=textfields;
-                    //  JScrollPane scrollPanel = new JScrollPane(params);
-                    propertiesPanel.setViewportView(params);
-                    // propertiesPanel.add(params);
-                    propertiesPanel.revalidate();
-                    propertiesPanel.repaint();
-                }
+            });*/
+        objectLabel.addMouseListener(new MouseAdapterClick());
 
-            }
-        });
     }
     public void removeImageFromPanel(String obj){
         drag_drop.remove(imagesTable.get(obj));
@@ -1126,6 +1102,26 @@ public class MainWindow extends JFrame {
 
         drag_drop.revalidate();
         drag_drop.repaint();
+    }
+
+    private void clearMemory(){
+        objectCount=0;
+        currentObject=0;
+        objectsItems.clear();
+        objectTable.clear();
+        imagesTable.clear();
+        drag_drop.removeAll();
+        drag_drop.revalidate();
+        drag_drop.repaint();
+        addedObjectsItems.clear();
+        propertiesItems.clear();
+        textFieldsGlobal=null;
+        propertiesPanel.setViewportView(new JPanel());
+        propertiesPanel.revalidate();
+        propertiesPanel.repaint();
+        consoleOutput.setText("");
+        listOfConn.clear();
+        map.clear();
     }
 
 
@@ -1207,6 +1203,53 @@ public class MainWindow extends JFrame {
             drag_drop.repaint();
         }
     }
+
+    class MouseAdapterClick extends MouseAdapter{
+        public void mouseClicked(MouseEvent evt) {
+            Component comp = (Component) evt.getSource();
+            JLabel jb = (JLabel) comp;
+
+            if (evt.getClickCount() == 1) {
+                if (textFieldsGlobal != null) {
+
+                    ToGLMParser value = objectTable.get(stringCurrentObject);
+                    int propAmount = value.GetProperties().size();
+                    for (int i = 0; i < propAmount; i++) {
+                        value.GetProperties().get(i).SetValue(textFieldsGlobal[i].getText());
+                    }
+                }
+                stringCurrentObject = jb.getName();
+                ToGLMParser value = objectTable.get(stringCurrentObject);
+                int propAmount = value.GetProperties().size();
+                JPanel params = new JPanel();
+                params.setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                params.setMinimumSize(new Dimension(300, 50));
+                params.setMaximumSize(new Dimension(300, 2500));
+                JLabel labels[] = new JLabel[propAmount];
+                JTextField textfields[] = new JTextField[propAmount];
+                for (int i = 0; i < propAmount; i++) {
+                    labels[i] = new JLabel(value.GetProperties().get(i).GetName());
+                    textfields[i] = new JTextField(value.GetProperties().get(i).GetValue());
+                    gbc.ipadx = 100;
+                    gbc.gridx = 0;
+                    gbc.gridy = i;
+                    params.add(labels[i], gbc);
+                    gbc.gridx = 1;
+                    gbc.gridy = i;
+                    params.add(textfields[i], gbc);
+                }
+                params.setPreferredSize(params.getPreferredSize());
+                //labelsGlobal=labels;
+                textFieldsGlobal = textfields;
+                //  JScrollPane scrollPanel = new JScrollPane(params);
+                propertiesPanel.setViewportView(params);
+                // propertiesPanel.add(params);
+                propertiesPanel.revalidate();
+                propertiesPanel.repaint();
+            }
+        }
+        }
     ///do rysowania liniii
     private class MyJPanel extends JPanel//Creater your own JPanel and override paintComponentMethod.
     {
