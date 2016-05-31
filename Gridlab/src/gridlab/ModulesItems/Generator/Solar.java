@@ -5,12 +5,13 @@ import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Solar implements ToGLMParser {
+public class Solar implements ToGLMParser, Serializable {
     private Vector<Property> properties;
     private int module =0;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Generator\\solar.png");

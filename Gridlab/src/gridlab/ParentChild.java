@@ -2,11 +2,12 @@ package gridlab;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Dylek on 2016-05-29.
  */
-public class ParentChild{
+public class ParentChild implements Serializable {
     JLabel parentJLabel;
     //String parentName;
     JLabel childJLabel;

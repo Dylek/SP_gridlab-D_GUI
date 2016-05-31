@@ -1,12 +1,13 @@
 package gridlab.ModulesItems;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Clock implements ToGLMParser {
+public class Clock implements ToGLMParser, Serializable {
 
     private Vector<Property> properties;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\clock-128.png");

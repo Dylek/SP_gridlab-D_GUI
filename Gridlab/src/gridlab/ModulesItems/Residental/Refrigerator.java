@@ -4,13 +4,14 @@ import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Refrigerator implements ToGLMParser {
+public class Refrigerator implements ToGLMParser, Serializable {
     private Vector<Property> properties;
     private int module = 2;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Residental\\fridge.png");
