@@ -286,65 +286,48 @@ public class MainWindow extends JFrame {
         connectFTButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] nodes = showGUIForConnectionsMaking("From To","make FRom-To connection");
+                String[] nodes = showGUIForConnectionsFromToMaking("From--Connector--To","make FRom-To connection");
                 if (nodes == null || nodes[0]==null || nodes.length == 0 )
                 {}
-                else if (!nodes[0].equals(nodes[1]))
+                else if (!nodes[0].equals(nodes[2]))
                 {
                     String split[] = nodes[0].split(",");
-                    Point p1 = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+                    Point pFrom = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
                     split = nodes[1].split(",");
-                    Point p2 = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+                    Point pConnector = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+                    split = nodes[2].split(",");
+                    Point pTo = new Point(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
                     //
-                    JLabel labelFrom = (JLabel)drag_drop.getComponentAt(p1);
+                    JLabel labelFrom = (JLabel)drag_drop.getComponentAt(pFrom);
                     String fromName=labelFrom.getName();
-                    JLabel labelTo = (JLabel)drag_drop.getComponentAt(p2);
+                    JLabel labelTo = (JLabel)drag_drop.getComponentAt(pTo);
                     String toName=labelTo.getName();
-                    ParentChild pair = new ParentChild(labelFrom,labelTo);
-                    //make parent child connection
-                    if(hashChildParent.containsKey(fromName) ){
-                        consoleOutput.setText("A child object can have only one parent\n Overriding old parent");
-                        //hashChildParent.remove(childName);
-                        for(int i=0;i<listOfConn.size();i++){
-                            if(listOfConn.get(i).getParentJLabel().getName().equals(hashChildParent.get(fromName))){
-                                listOfConn.remove(listOfConn.get(i));
-                            }
-                        }
-                        hashChildParent.replace(fromName,toName);
-                    }
+                    JLabel labelConn= (JLabel)drag_drop.getComponentAt(pConnector);
+                    String connName= labelConn.getName();
 
-                    hashChildParent.put(fromName,toName);
+                    ParentChild pairTo = new ParentChild(labelConn,labelTo);
+                    ParentChild pairFrom =new ParentChild(labelConn,labelFrom);
 
                     Vector<Property> noweProperty=new Vector<Property>();
-                    for (Property p:objectTable.get(toName).GetProperties()) {
+                    for (Property p:objectTable.get(connName).GetProperties()) {
                         if(p.GetName().equals("from")){
                             noweProperty.add(new Property("from", fromName, ""));
-                        }else{
-                            noweProperty.add(p);
-                        }
-                    }
-                    objectTable.get(toName).SetProperty(noweProperty);
-
-                    noweProperty=new Vector<Property>();
-                    for (Property p:objectTable.get(fromName).GetProperties()) {
-                        if(p.GetName().equals("to")){
+                        }else if(p.GetName().equals("to")){
                             noweProperty.add(new Property("to", toName, ""));
-                        }else{
+                        }else {
                             noweProperty.add(p);
                         }
                     }
-                    objectTable.get(fromName).SetProperty(noweProperty);
-
-
-                    listOfConn.add(pair);
+                    objectTable.get(connName).SetProperty(noweProperty);
+                    listOfConn.add(pairTo);
+                    listOfConn.add(pairFrom);
                     drag_drop.repaint();
-
 
 
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(MainWindow.this,"Nodes can't be same","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MainWindow.this,"Nie można łączyć tych samych obiektów","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -1245,6 +1228,7 @@ public class MainWindow extends JFrame {
         panel.setLayout(new GridLayout(map.size()+1,2));
         JLabel coto=new JLabel(info1);
         panel.add(coto);panel.add(new JLabel(""));
+
         ButtonGroup group1 = new ButtonGroup();
         ButtonGroup group2 = new ButtonGroup();
         final String nodes[] = new String[2];
@@ -1274,7 +1258,62 @@ public class MainWindow extends JFrame {
             group2.add(rButton1);
             panel.add(rButton1);
         }
+        JOptionPane.showMessageDialog(MainWindow.this,panel,info2,JOptionPane.INFORMATION_MESSAGE);
 
+        return nodes;
+
+    }
+    private String[] showGUIForConnectionsFromToMaking(String info1,String info2){
+        textFieldsGlobal=null;
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(map.size()+1,2));
+        JLabel coto=new JLabel(info1);
+        panel.add(coto);panel.add(new JLabel(""));panel.add(new JLabel(""));
+
+        ButtonGroup group1 = new ButtonGroup();
+        ButtonGroup group2 = new ButtonGroup();
+        ButtonGroup group3 = new ButtonGroup();
+
+        final String nodes[] = new String[3];
+        Set<String> keySet = map.keySet();
+        for (String name : keySet)
+        {
+            JRadioButton rButton = new JRadioButton(name);
+            rButton.setActionCommand(map.get(name).x+","+map.get(name).y);
+            rButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    nodes[0] = ((JRadioButton)evt.getSource()).getActionCommand();
+                }
+            });
+            group1.add(rButton);
+            panel.add(rButton);
+
+            JRadioButton rButton1 = new JRadioButton(name);
+            rButton1.setActionCommand(map.get(name).x+","+map.get(name).y);
+            rButton1.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    nodes[1] = ((JRadioButton)evt.getSource()).getActionCommand();
+                }
+            });
+            group2.add(rButton1);
+            panel.add(rButton1);
+
+            JRadioButton rButton2 = new JRadioButton(name);
+            rButton2.setActionCommand(map.get(name).x+","+map.get(name).y);
+            rButton2.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent evt)
+                {
+                    nodes[2] = ((JRadioButton)evt.getSource()).getActionCommand();
+                }
+            });
+            group3.add(rButton2);
+            panel.add(rButton2);
+        }
         JOptionPane.showMessageDialog(MainWindow.this,panel,info2,JOptionPane.INFORMATION_MESSAGE);
 
         return nodes;
