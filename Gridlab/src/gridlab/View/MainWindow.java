@@ -1290,7 +1290,7 @@ public class MainWindow extends JFrame {
 
 
     private File loadFile() {
-        int returnVal = fileChooser.showSaveDialog(mainFrame);
+        int returnVal = fileChooser.showOpenDialog(mainFrame);
         File fileSelected = null;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             fileSelected = fileChooser.getSelectedFile();
