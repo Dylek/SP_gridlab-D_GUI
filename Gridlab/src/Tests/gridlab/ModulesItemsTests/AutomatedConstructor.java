@@ -14,8 +14,8 @@ public class AutomatedConstructor {
         dzięki temu wygeneruje wam kod do TestCOnstructor()
         haha ale przechytrzyłem system :v
          */
-        Regulator h = new Regulator();//to modyfikujesz
-        String className = "regulator";//i to też modyfikujesz
+        Capacitor h = new Capacitor();//to modyfikujesz
+        String className = "capacitor";//i to też modyfikujesz
 
 
         System.out.println("   private  objectTest = new ();\n" +

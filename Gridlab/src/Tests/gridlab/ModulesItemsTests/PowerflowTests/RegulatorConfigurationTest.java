@@ -1,7 +1,7 @@
 package Tests.gridlab.ModulesItemsTests.PowerflowTests;
 
-import gridlab.ModulesItems.Powerflow.Fuse;
-import gridlab.ModulesItems.Powerflow.LineConfiguration;
+import com.sun.org.apache.regexp.internal.RE;
+import gridlab.ModulesItems.Powerflow.RegulatorConfiguration;
 import gridlab.ModulesItems.Property;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -9,11 +9,11 @@ import org.junit.Test;
 import java.util.Vector;
 
 /**
- * Created by Dell on 2016-05-21.
+ * Created by Dell on 2016-05-31.
  */
-public class LineConfigurationTest extends TestCase{
+public class RegulatorConfigurationTest extends TestCase {
 
-    private LineConfiguration objectTest = new LineConfiguration();
+    private RegulatorConfiguration objectTest = new RegulatorConfiguration();
 
     private Vector<Property> ps = new Vector<>();
     private Property p1;
@@ -33,61 +33,49 @@ public class LineConfigurationTest extends TestCase{
         assertEquals("", objectTest.GetProperties().elementAt(0).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(0).GetUnit());
 
-        assertEquals("conductor_A", objectTest.GetProperties().elementAt(1).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(1).GetValue());
+        assertEquals("phases", objectTest.GetProperties().elementAt(1).GetName());
+        assertEquals("ABC", objectTest.GetProperties().elementAt(1).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(1).GetUnit());
 
-        assertEquals("conductor_B", objectTest.GetProperties().elementAt(2).GetName());
+        assertEquals("from", objectTest.GetProperties().elementAt(2).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(2).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(2).GetUnit());
 
-        assertEquals("conductor_C", objectTest.GetProperties().elementAt(3).GetName());
+        assertEquals("to", objectTest.GetProperties().elementAt(3).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(3).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(3).GetUnit());
+        assertEquals("V", objectTest.GetProperties().elementAt(3).GetUnit());
 
-        assertEquals("conductor_N", objectTest.GetProperties().elementAt(4).GetName());
+        assertEquals("configuration", objectTest.GetProperties().elementAt(4).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(4).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(4).GetUnit());
 
-        assertEquals("spacing", objectTest.GetProperties().elementAt(5).GetName());
+        assertEquals("tap_A", objectTest.GetProperties().elementAt(5).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(5).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(5).GetUnit());
 
-        assertEquals("z11", objectTest.GetProperties().elementAt(6).GetName());
+        assertEquals("tap_B", objectTest.GetProperties().elementAt(6).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(6).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(6).GetUnit());
 
-        assertEquals("z12", objectTest.GetProperties().elementAt(7).GetName());
+        assertEquals("tap_C", objectTest.GetProperties().elementAt(7).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(7).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(7).GetUnit());
 
-        assertEquals("z13", objectTest.GetProperties().elementAt(8).GetName());
+        assertEquals("sense_node", objectTest.GetProperties().elementAt(8).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(8).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(8).GetUnit());
 
-        assertEquals("z21", objectTest.GetProperties().elementAt(9).GetName());
+        assertEquals("tap_A_change_count", objectTest.GetProperties().elementAt(9).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(9).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(9).GetUnit());
 
-        assertEquals("z22", objectTest.GetProperties().elementAt(10).GetName());
+        assertEquals("tap_B_change_count", objectTest.GetProperties().elementAt(10).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(10).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(10).GetUnit());
 
-        assertEquals("z23", objectTest.GetProperties().elementAt(11).GetName());
+        assertEquals("tap_C_change_count", objectTest.GetProperties().elementAt(11).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(11).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(11).GetUnit());
-
-        assertEquals("z31", objectTest.GetProperties().elementAt(12).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(12).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(12).GetUnit());
-
-        assertEquals("z32", objectTest.GetProperties().elementAt(13).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(13).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(13).GetUnit());
-
-        assertEquals("z33", objectTest.GetProperties().elementAt(14).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(14).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(14).GetUnit());
 
 
 
@@ -98,8 +86,10 @@ public class LineConfigurationTest extends TestCase{
 //    @Test
 //    public void testToGLM(){
 //
-//        assertEquals("object lineconfiguration{ \n"+
-//                        "} \n",
+//        assertEquals("object regulator{ \n"+"phases    ABC;
+//                "+;
+//
+//                "} \n",
 //                objectTest.ToGLM());
 //
 //

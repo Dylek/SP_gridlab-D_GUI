@@ -1,7 +1,6 @@
 package Tests.gridlab.ModulesItemsTests.PowerflowTests;
 
-import gridlab.ModulesItems.Powerflow.Fuse;
-import gridlab.ModulesItems.Powerflow.LineConfiguration;
+import gridlab.ModulesItems.Powerflow.TriplexLineConfiguration;
 import gridlab.ModulesItems.Property;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -9,11 +8,11 @@ import org.junit.Test;
 import java.util.Vector;
 
 /**
- * Created by Dell on 2016-05-21.
+ * Created by Dell on 2016-05-31.
  */
-public class LineConfigurationTest extends TestCase{
+public class TriplexLineConfigurationTest extends TestCase {
 
-    private LineConfiguration objectTest = new LineConfiguration();
+    private TriplexLineConfiguration objectTest = new TriplexLineConfiguration();
 
     private Vector<Property> ps = new Vector<>();
     private Property p1;
@@ -41,13 +40,13 @@ public class LineConfigurationTest extends TestCase{
         assertEquals("", objectTest.GetProperties().elementAt(2).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(2).GetUnit());
 
-        assertEquals("conductor_C", objectTest.GetProperties().elementAt(3).GetName());
+        assertEquals("conductor_N", objectTest.GetProperties().elementAt(3).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(3).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(3).GetUnit());
 
-        assertEquals("conductor_N", objectTest.GetProperties().elementAt(4).GetName());
+        assertEquals("insulation_thickness", objectTest.GetProperties().elementAt(4).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(4).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(4).GetUnit());
+        assertEquals("in", objectTest.GetProperties().elementAt(4).GetUnit());
 
         assertEquals("spacing", objectTest.GetProperties().elementAt(5).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(5).GetValue());
@@ -98,7 +97,7 @@ public class LineConfigurationTest extends TestCase{
 //    @Test
 //    public void testToGLM(){
 //
-//        assertEquals("object lineconfiguration{ \n"+
+//        assertEquals("object triplexlineconfiguration{ \n"+
 //                        "} \n",
 //                objectTest.ToGLM());
 //
