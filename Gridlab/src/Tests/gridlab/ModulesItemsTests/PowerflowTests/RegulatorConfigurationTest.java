@@ -33,51 +33,98 @@ public class RegulatorConfigurationTest extends TestCase {
         assertEquals("", objectTest.GetProperties().elementAt(0).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(0).GetUnit());
 
-        assertEquals("phases", objectTest.GetProperties().elementAt(1).GetName());
-        assertEquals("ABC", objectTest.GetProperties().elementAt(1).GetValue());
+        assertEquals("connect_type", objectTest.GetProperties().elementAt(1).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(1).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(1).GetUnit());
 
-        assertEquals("from", objectTest.GetProperties().elementAt(2).GetName());
+        assertEquals("band_center", objectTest.GetProperties().elementAt(2).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(2).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(2).GetUnit());
 
-        assertEquals("to", objectTest.GetProperties().elementAt(3).GetName());
+        assertEquals("band_width", objectTest.GetProperties().elementAt(3).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(3).GetValue());
         assertEquals("V", objectTest.GetProperties().elementAt(3).GetUnit());
 
-        assertEquals("configuration", objectTest.GetProperties().elementAt(4).GetName());
+        assertEquals("time_delay", objectTest.GetProperties().elementAt(4).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(4).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(4).GetUnit());
+        assertEquals("V", objectTest.GetProperties().elementAt(4).GetUnit());
 
-        assertEquals("tap_A", objectTest.GetProperties().elementAt(5).GetName());
+        assertEquals("dwell_time", objectTest.GetProperties().elementAt(5).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(5).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(5).GetUnit());
+        assertEquals("kVA", objectTest.GetProperties().elementAt(5).GetUnit());
 
-        assertEquals("tap_B", objectTest.GetProperties().elementAt(6).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(6).GetValue());
+        assertEquals("raise_taps", objectTest.GetProperties().elementAt(6).GetName());
+        assertEquals("16", objectTest.GetProperties().elementAt(6).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(6).GetUnit());
 
-        assertEquals("tap_C", objectTest.GetProperties().elementAt(7).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(7).GetValue());
+        assertEquals("lower_taps", objectTest.GetProperties().elementAt(7).GetName());
+        assertEquals("16", objectTest.GetProperties().elementAt(7).GetValue());
         assertEquals("", objectTest.GetProperties().elementAt(7).GetUnit());
 
-        assertEquals("sense_node", objectTest.GetProperties().elementAt(8).GetName());
+        assertEquals("current_transducer_ratio", objectTest.GetProperties().elementAt(8).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(8).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(8).GetUnit());
+        assertEquals("kVA", objectTest.GetProperties().elementAt(8).GetUnit());
 
-        assertEquals("tap_A_change_count", objectTest.GetProperties().elementAt(9).GetName());
+        assertEquals("power_transducer_ratio", objectTest.GetProperties().elementAt(9).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(9).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(9).GetUnit());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(9).GetUnit());
 
-        assertEquals("tap_B_change_count", objectTest.GetProperties().elementAt(10).GetName());
+        assertEquals("compensator_r_setting_A", objectTest.GetProperties().elementAt(10).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(10).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(10).GetUnit());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(10).GetUnit());
 
-        assertEquals("tap_C_change_count", objectTest.GetProperties().elementAt(11).GetName());
+        assertEquals("compensator_r_setting_B", objectTest.GetProperties().elementAt(11).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(11).GetValue());
-        assertEquals("", objectTest.GetProperties().elementAt(11).GetUnit());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(11).GetUnit());
+
+        assertEquals("compensator_r_setting_C", objectTest.GetProperties().elementAt(12).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(12).GetValue());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(12).GetUnit());
+
+        assertEquals("compensator_x_setting_A", objectTest.GetProperties().elementAt(13).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(13).GetValue());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(13).GetUnit());
+
+        assertEquals("compensator_x_setting_B", objectTest.GetProperties().elementAt(14).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(14).GetValue());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(14).GetUnit());
 
 
+        assertEquals("compensator_x_setting_C", objectTest.GetProperties().elementAt(15).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(15).GetValue());
+        assertEquals("OHM PU", objectTest.GetProperties().elementAt(15).GetUnit());
+
+        assertEquals("CT_phase", objectTest.GetProperties().elementAt(16).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(16).GetValue());
+        assertEquals("lb", objectTest.GetProperties().elementAt(16).GetUnit());
+
+        assertEquals("PT_phase", objectTest.GetProperties().elementAt(17).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(17).GetValue());
+        assertEquals("lb", objectTest.GetProperties().elementAt(17).GetUnit());
+
+        assertEquals("regulation", objectTest.GetProperties().elementAt(18).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(18).GetValue());
+        assertEquals("gal", objectTest.GetProperties().elementAt(18).GetUnit());
+
+        assertEquals("Control", objectTest.GetProperties().elementAt(19).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(19).GetValue());
+        assertEquals("C", objectTest.GetProperties().elementAt(19).GetUnit());
+
+        assertEquals("Type", objectTest.GetProperties().elementAt(20).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(20).GetValue());
+        assertEquals("C", objectTest.GetProperties().elementAt(20).GetUnit());
+
+        assertEquals("tap_pos_A", objectTest.GetProperties().elementAt(21).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(21).GetValue());
+        assertEquals("H", objectTest.GetProperties().elementAt(21).GetUnit());
+
+        assertEquals("tap_pos_B", objectTest.GetProperties().elementAt(22).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(22).GetValue());
+        assertEquals("H", objectTest.GetProperties().elementAt(22).GetUnit());
+
+        assertEquals("tap_pos_C", objectTest.GetProperties().elementAt(23).GetName());
+        assertEquals("", objectTest.GetProperties().elementAt(23).GetValue());
+        assertEquals("", objectTest.GetProperties().elementAt(23).GetUnit());
 
     }
 

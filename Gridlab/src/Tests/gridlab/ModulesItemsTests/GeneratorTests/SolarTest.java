@@ -14,10 +14,10 @@ public class SolarTest extends TestCase {
     
     Solar s = new Solar();
 
-    private Vector<Property> ps;
-    private Property p1;
-    private Property p2;
-    private Property p3;
+    private Vector<Property> ps = new Vector<Property>();
+    private Property p1 = new Property();
+    private Property p2 = new Property();
+    private Property p3 = new Property();
 
     public void createPs(){
         ps.add(p1);
@@ -49,8 +49,8 @@ public class SolarTest extends TestCase {
         assertEquals("Insolation", s.GetProperties().elementAt(18).GetName());
         assertEquals("Rinternal", s.GetProperties().elementAt(19).GetName());
         assertEquals("Rated_Insolation", s.GetProperties().elementAt(20).GetName());
-        assertEquals("Pmax_temp_coeff", "", s.GetProperties().elementAt(21).GetName());
-        assertEquals("Voc_temp_coeff", "", s.GetProperties().elementAt(22).GetName());
+        assertEquals("Pmax_temp_coeff", s.GetProperties().elementAt(21).GetName());
+        assertEquals("Voc_temp_coeff", s.GetProperties().elementAt(22).GetName());
         assertEquals("V_Max", s.GetProperties().elementAt(23).GetName());
         assertEquals("Voc_Max", s.GetProperties().elementAt(24).GetName());
         assertEquals("Voc", s.GetProperties().elementAt(25).GetName());
@@ -63,13 +63,13 @@ public class SolarTest extends TestCase {
         assertEquals("V_Out", s.GetProperties().elementAt(32).GetName());
         assertEquals("I_Out", s.GetProperties().elementAt(33).GetName());
         assertEquals("VA_Out", s.GetProperties().elementAt(34).GetName());
-        assertEquals("weather", "", s.GetProperties().elementAt(35).GetName());
+        assertEquals("weather", s.GetProperties().elementAt(35).GetName());
         assertEquals("shading_factor", s.GetProperties().elementAt(36).GetName());
         assertEquals("tilt_angle", s.GetProperties().elementAt(37).GetName());
         assertEquals("orientation_azimuth", s.GetProperties().elementAt(38).GetName());
-        assertEquals("latitude_angle_fix", "false", s.GetProperties().elementAt(39).GetName());
-        assertEquals("orientation", "DEFAULT", s.GetProperties().elementAt(40).GetName());
-        assertEquals("phases", "", s.GetProperties().elementAt(41).GetName());
+        assertEquals("latitude_angle_fix", s.GetProperties().elementAt(39).GetName());
+        assertEquals("orientation", s.GetProperties().elementAt(40).GetName());
+        assertEquals("phases", s.GetProperties().elementAt(41).GetName());
     }
 
     @Test

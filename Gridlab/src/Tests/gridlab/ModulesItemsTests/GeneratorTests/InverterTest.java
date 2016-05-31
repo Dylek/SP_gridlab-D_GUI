@@ -13,10 +13,10 @@ import java.util.Vector;
 public class InverterTest extends TestCase {
 
     Inverter i = new Inverter();
-    private Vector<Property> ps;
-    private Property p1;
-    private Property p2;
-    private Property p3;
+    private Vector<Property> ps = new Vector<Property>();
+    private Property p1 = new Property();
+    private Property p2 = new Property();
+    private Property p3 = new Property();
 
     public void createPs(){
         ps.add(p1);

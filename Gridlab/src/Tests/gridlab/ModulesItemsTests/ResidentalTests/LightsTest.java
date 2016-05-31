@@ -62,7 +62,7 @@ public class LightsTest extends TestCase {
 
     @Test
     public void testToGLM(){
-        assertEquals("object lights{ \ntype    HID; \n"+
+        assertEquals("object lights{ \ntype    HID;\n"+
         "placement    OUTDOOR;\n} \n",
         lights.ToGLM());
 

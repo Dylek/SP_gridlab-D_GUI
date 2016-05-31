@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
         addButton = new JButton("+");
         removeButton = new JButton("-");
         connectButton=new JButton("Connect");
-        startSimulationButton=new JButton("Start symulacji",new ImageIcon("C:\\Users\\Dylek\\Documents\\GitHub\\SP_gridlab-D_GUI\\Gridlab\\Icons\\start16x16.png"));
+        startSimulationButton=new JButton("Start symulacji",new ImageIcon("Gridlab\\Icons\\start16x16.png"));
 
 
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
