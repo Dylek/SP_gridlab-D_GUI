@@ -103,7 +103,9 @@ public class MainWindow extends JFrame {
         imagesTable=new HashMap<String,JLabel>();
         fileChooser=new JFileChooser();
         FileNameExtensionFilter filterGLM=new FileNameExtensionFilter("GLM files","glm");
-        fileChooser.setFileFilter(filterGLM);
+        fileChooser.addChoosableFileFilter(filterGLM);
+        FileNameExtensionFilter filterSer=new FileNameExtensionFilter("Save files","ser");
+        fileChooser.addChoosableFileFilter(filterSer);
 
         loadLists();
         modulesJList=new JList <String>(modulesItems);
@@ -591,15 +593,16 @@ public class MainWindow extends JFrame {
                         e1.printStackTrace();
                     }*/
                     System.out.println("2.");
+                    File file=saveFile(".ser");
                     try
                     {
                         FileOutputStream fileOut =
-                                new FileOutputStream("temp.ser");
+                                new FileOutputStream(file);
                         ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(fileOut));
                         out.writeObject(save);
                         out.close();
                         fileOut.close();
-                        System.out.printf("Serialized data is saved in /tmp/employee.ser");
+                        //System.out.printf("Serialized data is saved in /tmp/employee.ser");
                     }catch(IOException i)
                     {
                         i.printStackTrace();
@@ -623,9 +626,11 @@ public class MainWindow extends JFrame {
 
                 SaveFileClass save = null;
                 Object obj;
+                File file=loadFile();
+
                 try
                 {
-                    FileInputStream fileIn = new FileInputStream("temp.ser");
+                    FileInputStream fileIn = new FileInputStream(file);
                     ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(fileIn));
                     save =(SaveFileClass) (in.readObject());
                     in.close();
@@ -672,6 +677,7 @@ public class MainWindow extends JFrame {
                         map.put(k,imagesTable.get(k).getLocation());
                         MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
                         imagesTable.get(k).addMouseListener(myMouseAdapter);
+                        imagesTable.get(k).addMouseListener(new MouseAdapterClick());
                         imagesTable.get(k).addMouseMotionListener(myMouseAdapter);
                     }
 
@@ -737,8 +743,6 @@ public class MainWindow extends JFrame {
                 if(returnVal==JFileChooser.APPROVE_OPTION){
                         File fileSelected= fileChooser.getSelectedFile();
                         File file=new File(fileSelected+".glm");
-                        //Vector <String> toglmString=new Vector<String>();
-                        fileName=fileNameJTextArea.getText();
 
                         // creates the file
                         try {
@@ -1282,5 +1286,23 @@ public class MainWindow extends JFrame {
                 }
             }
         }
+    }
+
+
+    private File loadFile() {
+        int returnVal = fileChooser.showSaveDialog(mainFrame);
+        File fileSelected = null;
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            fileSelected = fileChooser.getSelectedFile();
+        }
+        return fileSelected;
+    }
+    private File saveFile(String extension){
+        int returnVal=fileChooser.showSaveDialog(mainFrame);
+        File fileSelected=null;
+        if(returnVal==JFileChooser.APPROVE_OPTION){
+            fileSelected= fileChooser.getSelectedFile();
+        }
+        return new File(fileSelected+extension);
     }
 }
