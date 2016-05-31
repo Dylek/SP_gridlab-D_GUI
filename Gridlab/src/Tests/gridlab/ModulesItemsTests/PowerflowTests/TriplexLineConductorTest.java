@@ -1,6 +1,6 @@
 package Tests.gridlab.ModulesItemsTests.PowerflowTests;
 
-import gridlab.ModulesItems.Powerflow.OverheadLineConductor;
+import gridlab.ModulesItems.Powerflow.TriplexLineConductor;
 import gridlab.ModulesItems.Property;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -10,9 +10,9 @@ import java.util.Vector;
 /**
  * Created by Dell on 2016-05-31.
  */
-public class OverheadLineConductorTest extends TestCase {
+public class TriplexLineConductorTest extends TestCase {
 
-    private OverheadLineConductor objectTest = new OverheadLineConductor();
+    private TriplexLineConductor objectTest = new TriplexLineConductor();
 
     private Vector<Property> ps = new Vector<>();
     private Property p1;
@@ -37,7 +37,7 @@ public class OverheadLineConductorTest extends TestCase {
         assertEquals("ft", objectTest.GetProperties().elementAt(1).GetUnit());
 
         assertEquals("resistance", objectTest.GetProperties().elementAt(2).GetName());
-        assertEquals("", objectTest.GetProperties().elementAt(2).GetValue());
+        assertEquals("0.97", objectTest.GetProperties().elementAt(2).GetValue());
         assertEquals("Ohm/mile", objectTest.GetProperties().elementAt(2).GetUnit());
 
         assertEquals("diameter", objectTest.GetProperties().elementAt(3).GetName());
@@ -46,7 +46,7 @@ public class OverheadLineConductorTest extends TestCase {
 
         assertEquals("rating.summer.continuous", objectTest.GetProperties().elementAt(4).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(4).GetValue());
-        assertEquals("A", objectTest.GetProperties().elementAt(4).GetUnit());
+        assertEquals(" A", objectTest.GetProperties().elementAt(4).GetUnit());
 
         assertEquals("rating.summer.emergency", objectTest.GetProperties().elementAt(5).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(5).GetValue());
@@ -54,7 +54,7 @@ public class OverheadLineConductorTest extends TestCase {
 
         assertEquals("rating.winter.continuous", objectTest.GetProperties().elementAt(6).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(6).GetValue());
-        assertEquals("A", objectTest.GetProperties().elementAt(6).GetUnit());
+        assertEquals(" A", objectTest.GetProperties().elementAt(6).GetUnit());
 
         assertEquals("rating.winter.emergency", objectTest.GetProperties().elementAt(7).GetName());
         assertEquals("", objectTest.GetProperties().elementAt(7).GetValue());
@@ -69,8 +69,10 @@ public class OverheadLineConductorTest extends TestCase {
 //    @Test
 //    public void testToGLM(){
 //
-//        assertEquals("object overheadlineconductor{ \n"+
-//                        "} \n",
+//        assertEquals("object triplexlineconductor{ \n"+"resistance    0.97;
+//                "+;
+//
+//                "} \n",
 //                objectTest.ToGLM());
 //
 //
