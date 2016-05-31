@@ -1,5 +1,6 @@
 package Tests.gridlab.ModulesItemsTests;
 
+import gridlab.ModulesItems.Powerflow.*;
 import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.Residental.*;
 
@@ -13,13 +14,13 @@ public class AutomatedConstructor {
         dzięki temu wygeneruje wam kod do TestCOnstructor()
         haha ale przechytrzyłem system :v
          */
-        Occupants h=new Occupants();//to modyfikujesz
-        String className="occupantload";//i to też modyfikujesz
+        Regulator h = new Regulator();//to modyfikujesz
+        String className = "regulator";//i to też modyfikujesz
 
 
-        System.out.println("   private  objectTest=new ();\n" +
+        System.out.println("   private  objectTest = new ();\n" +
                 "\n" +
-                "    private Vector<Property> ps= new Vector<>();\n" +
+                "    private Vector<Property> ps = new Vector<>();\n" +
                 "    private Property p1;\n" +
                 "    private Property p2;\n" +
                 "    private Property p3;\n" +
