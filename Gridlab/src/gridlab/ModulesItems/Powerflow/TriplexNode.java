@@ -4,12 +4,13 @@ import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class TriplexNode implements ToGLMParser {
+public class TriplexNode implements ToGLMParser, Serializable {
 
     private Vector<Property> properties;
     private int module = 1;

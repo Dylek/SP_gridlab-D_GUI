@@ -71,7 +71,8 @@ public class MainWindow extends JFrame {
     HashMap<String,String> hashChildParent;
     Map<String,Point> map;
 
-    static int objectCount=0;
+    //static
+    int objectCount=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
     private int currentObject=0;
@@ -572,12 +573,14 @@ public class MainWindow extends JFrame {
                     save.generatorItems=generatorItems;
                     save.objectsItems=objectsItems;
                     save.stringCurrentObject=stringCurrentObject;
-                    SaveFileClass.objectCount=objectCount;
+                    save.objectCount=objectCount;
                     save.currentObject=currentObject;
                     save.hashChildParent=hashChildParent;
                     save.imagesTable=imagesTable;
                     save.listOfConn=listOfConn;
                     save.map=map;
+                    save.objectTable=objectTable;
+                    save.propertiesItems=propertiesItems;
 
                     String fileName= null;
                     System.out.println("1.");
@@ -591,8 +594,8 @@ public class MainWindow extends JFrame {
                     {
                         FileOutputStream fileOut =
                                 new FileOutputStream("temp.ser");
-                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                        out.writeObject(e);
+                        ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(fileOut));
+                        out.writeObject(save);
                         out.close();
                         fileOut.close();
                         System.out.printf("Serialized data is saved in /tmp/employee.ser");
@@ -622,7 +625,7 @@ public class MainWindow extends JFrame {
                 try
                 {
                     FileInputStream fileIn = new FileInputStream("temp.ser");
-                    ObjectInputStream in = new ObjectInputStream(fileIn);
+                    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(fileIn));
                     save =(SaveFileClass) (in.readObject());
                     in.close();
                     fileIn.close();
@@ -646,14 +649,26 @@ public class MainWindow extends JFrame {
                     generatorItems=  save.generatorItems;
                     objectsItems=save.objectsItems;
                     stringCurrentObject= save.stringCurrentObject;
-                    objectCount=SaveFileClass.objectCount;
+                    objectCount=save.objectCount;
                     currentObject= save.currentObject;
                     hashChildParent=save.hashChildParent;
                     imagesTable= save.imagesTable;
                     listOfConn= save.listOfConn;
                     map= save.map;
+                    propertiesItems = save.propertiesItems;
+                    objectTable = save.objectTable;
 
-
+                    //odswiezenie widoku, nie wiem czemu dziala tylko polaczenie miedzy obiektami
+                    addedObjectsPanel.revalidate();
+                    addedObjectsPanel.repaint();
+                    drag_drop.revalidate();
+                    drag_drop.repaint();
+                    propertiesPanel.revalidate();
+                    propertiesPanel.repaint();
+                    //test - deserializacja przebiega pomyslnie, bo wyswietla wartosci
+                    System.out.print(addedObjectsItems);
+                    System.out.print(objectCount);
+                    System.out.print(objectTable);
                 }
           //  }
         });

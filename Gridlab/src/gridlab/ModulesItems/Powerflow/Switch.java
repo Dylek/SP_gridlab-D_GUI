@@ -4,11 +4,12 @@ import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.Vector;
 /**
  * Created by Dylek on 2016-04-16.
  */
-public class Switch implements ToGLMParser {
+public class Switch implements ToGLMParser, Serializable {
     private Vector<Property>properties;
     private int module = 1;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\switch.png");

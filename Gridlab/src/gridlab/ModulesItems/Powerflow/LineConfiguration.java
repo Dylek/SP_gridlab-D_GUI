@@ -5,12 +5,13 @@ import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class LineConfiguration implements ToGLMParser {
+public class LineConfiguration implements ToGLMParser, Serializable {
     private Vector<Property> properties;
     private int module = 1;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\lineconfiguration.png");

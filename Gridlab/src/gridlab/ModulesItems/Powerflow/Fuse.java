@@ -4,6 +4,7 @@ import gridlab.ModulesItems.Property;
 import gridlab.ModulesItems.ToGLMParser;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 import org.junit.Test;
@@ -11,7 +12,7 @@ import org.junit.Test;
 /**
  * Created by Pavlo on 16.04.2016.
  */
-public class Fuse implements ToGLMParser {
+public class Fuse implements ToGLMParser, Serializable {
     private Vector<Property> properties;
     private int module = 1;
     private ImageIcon icon = new ImageIcon("Gridlab\\Icons\\Gridlab icons\\Powerflow\\fuse.png");

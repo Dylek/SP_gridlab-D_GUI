@@ -1,6 +1,7 @@
 package gridlab.View;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import javax.swing.*;
 /**
  * Created by Pavlo on 17.04.2016.
  */
-public class ModulesPanel extends JPanel {
+public class ModulesPanel extends JPanel{
 
     private JList mojaList;
     //private DefaultListModel<String> modulesItems;
