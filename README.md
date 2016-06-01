@@ -1,7 +1,8 @@
 # SP_gridlab-D_GUI
 Projekt GUI dla programu Gridlab-D.
 
-1. Uruchamianie \n
+1. Uruchamianie
+
 Z użyciem kodu źródłowego: kompilujemy klasę GridalbGUI.java
 Deskopowo: uruchamiamy aplikację gridlabdGUI.jar
 
