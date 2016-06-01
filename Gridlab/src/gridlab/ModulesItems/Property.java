@@ -5,7 +5,10 @@ import java.io.Serializable;
 /**
  * Created by Dylek on 2016-04-16.
  */
+
+/*Klasa stanowiąca parametr obiektów*/
 public class Property implements Serializable{
+
 
     private String name;
     private String value;

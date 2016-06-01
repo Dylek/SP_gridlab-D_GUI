@@ -72,7 +72,6 @@ public class MainWindow extends JFrame {
     HashMap<String,String> hashChildParent;
     Map<String,Point> map;
 
-    //static
     int objectCount=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
@@ -129,7 +128,7 @@ public class MainWindow extends JFrame {
         removeButton = new JButton("-");
         connectButton=new JButton("Parent Connect");
         connectFTButton=new JButton("From To Connect");
-        startSimulationButton=new JButton("Start symulacji",new ImageIcon("C:\\Users\\Dylek\\Documents\\GitHub\\SP_gridlab-D_GUI\\Gridlab\\Icons\\start16x16.png"));
+        startSimulationButton=new JButton("Start symulacji",new ImageIcon("Gridlab\\Icons\\start16x16.png"));
 
 
         Icon clock = new ImageIcon("Gridlab\\resources\\clock.png");
@@ -553,7 +552,7 @@ public class MainWindow extends JFrame {
         menuBar.add(helpMenu);
         menuBar.add(startSimulationButton);
 
-        //do zakłądi file
+        //do zakładki file
         JMenuItem clearItem=new JMenuItem("Clear");
         JMenuItem exitItem=new JMenuItem("Exit");
         JMenuItem saveItem= new JMenuItem("Save");
