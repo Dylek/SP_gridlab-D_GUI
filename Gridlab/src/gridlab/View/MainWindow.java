@@ -120,13 +120,14 @@ public class MainWindow extends JFrame {
         modulesPanel = new ModulesPanel(modulesJList);
         objectPanel = new ModulesPanel(objectsJList);
         addedObjectsPanel = new ModulesPanel(addedObjectsJList);
+        addedObjectsPanel.setPreferredSize(new Dimension(200,450));
         propertiesPanel = new JScrollPane();
         consolePanel = new JScrollPane(consoleOutput);
         //propertiesPanel.setLayout(null);
-        propertiesPanel.setPreferredSize(new Dimension(450, 300));
-        consolePanel.setPreferredSize(new Dimension(500,300));
+        propertiesPanel.setPreferredSize(new Dimension(350, 450));
+        consolePanel.setPreferredSize(new Dimension(900,100));
         addButton = new JButton("+");
-        removeButton = new JButton("-");
+        removeButton = new JButton("- Remove object");
         connectButton=new JButton("Parent Connect");
         connectFTButton=new JButton("From To Connect");
         startSimulationButton=new JButton("Start symulacji",new ImageIcon("C:\\Users\\Dylek\\Documents\\GitHub\\SP_gridlab-D_GUI\\Gridlab\\Icons\\start16x16.png"));
@@ -136,7 +137,8 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         drag_drop = new MyJPanel();
-        drag_drop.setPreferredSize(new Dimension(500,300));
+        drag_drop.setPreferredSize(new Dimension(700,500));
+
         loadToolBox();
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -144,13 +146,21 @@ public class MainWindow extends JFrame {
         //container.add(modulesPanel);
         //container.add(objectPanel);
         //container.add(addButton);
-        container.add(removeButton);
-        container.add(connectButton);
-        container.add(connectFTButton);
+        JPanel buttons= new JPanel();
+       /* buttons.setPreferredSize(new Dimension(150,150));
+        buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buttons.add(removeButton);
+        buttons.add(connectButton);
+        buttons.add(connectFTButton);
+        container.add(buttons);*/
+       // container.add(removeButton);
+       // container.add(connectButton);
+        //container.add(connectFTButton);
+
         //container.add(addClock);
         container.add(addedObjectsPanel);
-        container.add(propertiesPanel);
         container.add(drag_drop);
+        container.add(propertiesPanel);
         container.add(consolePanel);
 
 
@@ -162,7 +172,7 @@ public class MainWindow extends JFrame {
         loadMenu();
 
 
-        mainFrame.setSize(new Dimension(1300,600));
+        mainFrame.setSize(new Dimension(1350,700));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Gridlab-D GUI");
@@ -552,6 +562,9 @@ public class MainWindow extends JFrame {
         menuBar.add(glmMenu);
         menuBar.add(helpMenu);
         menuBar.add(startSimulationButton);
+        menuBar.add(removeButton);
+        menuBar.add(connectButton);
+        menuBar.add(connectFTButton);
 
         //do zakłądi file
         JMenuItem clearItem=new JMenuItem("Clear");
@@ -769,7 +782,7 @@ public class MainWindow extends JFrame {
                         ExecuteShellCommand execCom=new ExecuteShellCommand();
 
                         JPanel conPan=new JPanel();
-                        conPan.setPreferredSize(new Dimension(400, 300));
+                        conPan.setPreferredSize(new Dimension(100, 100));
                         String str=execCom.executeCommand(command+fileName);
                         consoleOutput.setText(str);
                         consoleOutput.updateUI();
@@ -918,7 +931,7 @@ public class MainWindow extends JFrame {
                 ExecuteShellCommand execCom=new ExecuteShellCommand();
 
                 JPanel conPan=new JPanel();
-                conPan.setPreferredSize(new Dimension(400, 300));
+                conPan.setPreferredSize(new Dimension(100, 100));
                 String str=execCom.executeCommand("gridlabd "+fileName);
                 consoleOutput.setText(str);
                 consoleOutput.updateUI();
