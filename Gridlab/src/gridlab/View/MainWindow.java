@@ -136,6 +136,8 @@ public class MainWindow extends JFrame {
         addClock = new JButton("Add clock");
         addClock.setIcon(clock);
         drag_drop = new MyJPanel();
+        drag_drop.setBackground(Color.WHITE);
+        drag_drop.setBorder(BorderFactory.createLoweredBevelBorder());
         drag_drop.setPreferredSize(new Dimension(700,500));
 
         loadToolBox();
