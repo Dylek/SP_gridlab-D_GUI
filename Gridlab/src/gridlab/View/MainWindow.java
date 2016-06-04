@@ -36,6 +36,7 @@ public class MainWindow extends JFrame {
     private JButton removeButton;
     private JButton addClock;
     private JButton connectButton;
+    private JButton refreshButton;
     private JButton connectFTButton;
     private JButton startSimulationButton;
     private JMenuBar menuBar;
@@ -73,8 +74,7 @@ public class MainWindow extends JFrame {
     Map<String,Point> map;
 
     int objectCount=0;
-    private int xLabel=0;
-    private int yLabel=0;
+
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
     private int currentObject=0;
@@ -131,6 +131,7 @@ public class MainWindow extends JFrame {
         removeButton = new JButton("- Remove object");
         connectButton=new JButton("Parent Connect");
         connectFTButton=new JButton("From To Connect");
+        refreshButton=new JButton("Refresh after load");
         startSimulationButton=new JButton("Start symulacji",new ImageIcon("Gridlab\\Icons\\start16x16.png"));
 
 
@@ -149,7 +150,7 @@ public class MainWindow extends JFrame {
         //container.add(modulesPanel);
         //container.add(objectPanel);
         //container.add(addButton);
-        JPanel buttons= new JPanel();
+       // JPanel buttons= new JPanel();
        /* buttons.setPreferredSize(new Dimension(150,150));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
         buttons.add(removeButton);
@@ -571,6 +572,7 @@ public class MainWindow extends JFrame {
         menuBar.add(removeButton);
         menuBar.add(connectButton);
         menuBar.add(connectFTButton);
+        menuBar.add(refreshButton);
 
         //do zakładki file
         JMenuItem clearItem=new JMenuItem("Clear");
@@ -596,6 +598,15 @@ public class MainWindow extends JFrame {
         helpMenu.add(wikiItem);
 
         //menu listeners
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addObject("House");
+                addedObjectsJList.setSelectedIndex(addedObjectsItems.getSize()-1);
+                removeButton.doClick();
+                objectCount--;
+            }
+        });
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -794,7 +805,7 @@ public class MainWindow extends JFrame {
 
             //  }
         });
-
+      
 
         runItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
