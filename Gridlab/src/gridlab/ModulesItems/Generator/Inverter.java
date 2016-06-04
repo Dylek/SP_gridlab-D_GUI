@@ -33,9 +33,6 @@ public class Inverter implements ToGLMParser, Serializable {
         properties.add(new Property("four_quadrant_control_mode", "", ""));//(NONE, CONSTANT_PQ, CONSTANT_PF, CONSTANT_V, VOLT_VAR)
         properties.add(new Property("inverter_manufacturer", "", ""));//(NONE, FRONIUS, SMA, XANTREX)
 
-        //properties.add(new Property("Rated_kV", "", ""));
-       // properties.add(new Property("efficiency", "", ""));
-
     }
     public Inverter(Inverter inverter){
         properties = inverter.GetProperties();
