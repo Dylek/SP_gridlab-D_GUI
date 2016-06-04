@@ -73,6 +73,8 @@ public class MainWindow extends JFrame {
     Map<String,Point> map;
 
     int objectCount=0;
+    private int xLabel=0;
+    private int yLabel=0;
     //private JLabel[] labelsGlobal;
     private JTextField[] textFieldsGlobal;
     private int currentObject=0;
@@ -139,7 +141,7 @@ public class MainWindow extends JFrame {
         drag_drop.setBackground(Color.WHITE);
         drag_drop.setBorder(BorderFactory.createLoweredBevelBorder());
         drag_drop.setPreferredSize(new Dimension(700,500));
-
+        drag_drop.setLayout(new FlowLayout(FlowLayout.LEFT));
         loadToolBox();
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -388,8 +390,8 @@ public class MainWindow extends JFrame {
         addedObjectsJList.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
-                if (evt.getClickCount() == 1) {
-
+                if (evt.getClickCount() == 1 && !addedObjectsItems.isEmpty()) {
+                    System.out.println(addedObjectsJList.getSelectedIndex());
                     if(textFieldsGlobal!=null)
                     {
                         int index = currentObject;
@@ -497,6 +499,9 @@ public class MainWindow extends JFrame {
         {
             public void actionPerformed(ActionEvent e)
             {
+                System.out.println(addedObjectsJList.getSelectedIndex()+"");
+                System.out.println(addedObjectsItems.getSize()+"");
+
                 String obj=addedObjectsItems.get(addedObjectsJList.getSelectedIndex());
                 addedObjectsItems.remove(addedObjectsJList.getSelectedIndex());
                 objectTable.remove(obj);
@@ -711,10 +716,11 @@ public class MainWindow extends JFrame {
                 }
                 clearMemory();
                     //addedObjectsItems= save.addedObjectsItems;
+                System.out.println(addedObjectsJList.getSize());
                     for(int i=0;i<save.addedObjectsItems.getSize();i++){
                         addedObjectsItems.addElement(save.addedObjectsItems.get(i));
                     }
-
+                System.out.println(addedObjectsJList.getSize());
                     modulesItems=save.modulesItems;
 
                     powerflowItems=save.powerflowItems;
@@ -738,27 +744,55 @@ public class MainWindow extends JFrame {
                     Set<String> keys=imagesTable.keySet();
                     for (String k:keys) {
                         drag_drop.add(imagesTable.get(k));
+                        drag_drop.repaint();
                         map.put(k,imagesTable.get(k).getLocation());
                         MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
                         imagesTable.get(k).addMouseListener(myMouseAdapter);
                         imagesTable.get(k).addMouseListener(new MouseAdapterClick());
                         imagesTable.get(k).addMouseMotionListener(myMouseAdapter);
                     }
+               // drag_drop.validate();
 
-                    addedObjectsJList=new JList<String>(addedObjectsItems);
+                // objectLabel.setLocation(xLabel,yLabel);
+                //drag_drop.repaint();
+                    //addedObjectsJList=new JList<String>(addedObjectsItems);
                     //odswiezenie widoku, nie wiem czemu dziala tylko polaczenie miedzy obiektami
                     addedObjectsPanel.revalidate();
                     addedObjectsPanel.repaint();
-                    drag_drop.revalidate();
+
+                    //drag_drop.validate();
+                   // drag_drop.repaint();
+
+               /* for(int i=0;i<drag_drop.getComponentCount();i++){
+                    Component comp= drag_drop.getComponent(i);
+                    drag_drop.validate();
                     drag_drop.repaint();
+                    comp.setLocation(map.get( drag_drop.getComponent(i).getName()));
+
+                }*/
                     propertiesPanel.revalidate();
                     propertiesPanel.repaint();
                     //test - deserializacja przebiega pomyslnie, bo wyswietla wartosci
                     System.out.print(addedObjectsItems);
                     System.out.print(objectCount);
                     System.out.print(objectTable);
+
+
+                //addObject("House");
+                //addedObjectsJList.setSelectedIndex(addedObjectsItems.getSize()-1);
+                //removeButton.doClick();
+               // objectCount--;
+                //String obj2="House"+" "+objectCount;
+                /*String obj2=addedObjectsItems.get(addedObjectsItems.getSize()-1);
+                addedObjectsItems.remove( addedObjectsItems.getSize()-1);
+                objectTable.remove(obj2);
+                map.remove(obj2);
+                drag_drop.remove(imagesTable.get(obj2));
+                imagesTable.remove(obj2);*/
                 }
-          //  }
+
+
+            //  }
         });
 
 
@@ -1111,6 +1145,12 @@ public class MainWindow extends JFrame {
             default: System.out.println("not know type: "+object);
         }
 
+
+        for(int i=0;i<drag_drop.getComponentCount();i++){
+            drag_drop.getComponent(i).setLocation(map.get( drag_drop.getComponent(i).getName()));
+            drag_drop.repaint();
+        }
+
         Vector<Property> noweProperty=new Vector<Property>();
         System.out.println("created"+object+" "+objectCount);
         for (Property p:objectTable.get(object+" "+objectCount).GetProperties()) {
@@ -1129,29 +1169,37 @@ public class MainWindow extends JFrame {
 
     public void addImageToPanel(String obj){
         String object = obj;
+
         JLabel objectLabel=new JLabel(objectTable.get(object+" "+objectCount).getIcon());
         objectLabel.setName(object+" "+objectCount);
         MyMouseAdapter myMouseAdapter=new MyMouseAdapter();
         objectLabel.addMouseListener(myMouseAdapter);
         objectLabel.addMouseMotionListener(myMouseAdapter);
         objectLabel.setText(object+" "+objectCount);
+        objectLabel.setHorizontalTextPosition(JLabel.CENTER);
+        objectLabel.setVerticalTextPosition(JLabel.BOTTOM);
+
         imagesTable.put(object+" "+objectCount,objectLabel);
         drag_drop.add(imagesTable.get(object+" "+objectCount));
-        
-        drag_drop.revalidate();
-         drag_drop.repaint();
+        Component comp=objectLabel;
+        drag_drop.validate();
+        drag_drop.repaint();
+        comp.setLocation(0,0);
+        consoleOutput.append(objectLabel.getLocation().toString());
+
+      // objectLabel.setLocation(xLabel,yLabel);
+        drag_drop.repaint();
+
+
         map.put(object+" "+objectCount,objectLabel.getLocation());
 
-        /*objectLabel.addMouseListener(new MouseAdapter(){
 
-
-            });*/
         objectLabel.addMouseListener(new MouseAdapterClick());
 
     }
     public void removeImageFromPanel(String obj){
         drag_drop.remove(imagesTable.get(obj));
-        System.out.println("*************"+obj+"  liczba conn "+listOfConn.size());
+        //System.out.println("*************"+obj+"  liczba conn "+listOfConn.size());
 
         for(int i=0;i<listOfConn.size();i++){
             if(listOfConn.get(i).getParentJLabel().getName().equals(obj) || listOfConn.get(i).getChildJLabel().getName().equals(obj)){
@@ -1168,8 +1216,12 @@ public class MainWindow extends JFrame {
         }*/
         imagesTable.remove(obj);
 
-        drag_drop.revalidate();
+        drag_drop.validate();
         drag_drop.repaint();
+        for(int i=0;i<drag_drop.getComponentCount();i++){
+            drag_drop.getComponent(i).setLocation(map.get( drag_drop.getComponent(i).getName()));
+            drag_drop.repaint();
+        }
     }
 
     private void clearMemory(){
@@ -1179,13 +1231,14 @@ public class MainWindow extends JFrame {
         objectTable.clear();
         imagesTable.clear();
         drag_drop.removeAll();
-        drag_drop.revalidate();
+        drag_drop.validate();
         drag_drop.repaint();
-        addedObjectsItems.clear();
+        addedObjectsItems.removeAllElements();
+       // addedObjectsItems.clear();
         propertiesItems.clear();
         textFieldsGlobal=null;
         propertiesPanel.setViewportView(new JPanel());
-        propertiesPanel.revalidate();
+        propertiesPanel.validate();
         propertiesPanel.repaint();
         consoleOutput.setText("");
         listOfConn.clear();
@@ -1358,6 +1411,15 @@ public class MainWindow extends JFrame {
             comp.setLocation(x, y);
             map.put(((JLabel)comp).getText(),new Point(x,y));
             drag_drop.repaint();
+
+            System.out.println("*******\ncomp.getL"+"\t "+comp.getLocation().toString());
+            System.out.println("foreach");
+            for(int i=0;i<drag_drop.getComponentCount();i++){
+                System.out.println("drag_drop.getComponent(i).getLocation() "+"\t "+drag_drop.getComponent(i).getLocation().toString());
+                System.out.println("+map.get "+map.get(((JLabel)drag_drop.getComponent(i)).getText()).getLocation().toString());
+            }
+            System.out.println("map compet"+map.get(((JLabel)comp).getText()).getLocation().toString());
+
         }
 
         @Override
@@ -1421,7 +1483,7 @@ public class MainWindow extends JFrame {
                 //  JScrollPane scrollPanel = new JScrollPane(params);
                 propertiesPanel.setViewportView(params);
                 // propertiesPanel.add(params);
-                propertiesPanel.revalidate();
+                propertiesPanel.validate();
                 propertiesPanel.repaint();
             }
         }
@@ -1477,4 +1539,5 @@ public class MainWindow extends JFrame {
         }
         return new File(fileSelected+extension);
     }
+
 }
