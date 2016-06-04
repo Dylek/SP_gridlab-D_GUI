@@ -1350,6 +1350,10 @@ public class MainWindow extends JFrame {
 
             int x = locOnScreen.x - initialLocOnScreen.x + initialLoc.x;
             int y = locOnScreen.y - initialLocOnScreen.y + initialLoc.y;
+            x=Math.max(x,0);
+            x=Math.min(x, comp.getParent().getWidth()-comp.getWidth());
+            y=Math.max(y,0);
+            y=Math.min(y, comp.getParent().getHeight()-comp.getHeight());
             comp.setLocation(x, y);
             map.put(((JLabel)comp).getText(),new Point(x,y));
             drag_drop.repaint();
@@ -1362,6 +1366,13 @@ public class MainWindow extends JFrame {
 
             int x = locOnScreen.x - initialLocOnScreen.x + initialLoc.x;
             int y = locOnScreen.y - initialLocOnScreen.y + initialLoc.y;
+            int newX;
+            int newY;
+            x=Math.max(x,0);
+            x=Math.min(x, comp.getParent().getWidth()-comp.getWidth());
+            y=Math.max(y,0);
+            y=Math.min(y, comp.getParent().getHeight()-comp.getHeight());
+
             comp.setLocation(x, y);
             map.put(((JLabel)comp).getText(),new Point(x,y));
             drag_drop.repaint();
