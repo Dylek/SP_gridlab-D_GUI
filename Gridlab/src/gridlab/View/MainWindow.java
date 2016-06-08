@@ -35,7 +35,7 @@ public class MainWindow extends JFrame {
     private JButton addButton;
     private JButton removeButton;
     private JButton addClock;
-    private JButton connectButton;
+    private JButton connectButton                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ;
     private JButton refreshButton;
     private JButton connectFTButton;
     private JButton startSimulationButton;
@@ -86,14 +86,6 @@ public class MainWindow extends JFrame {
     private JPopupMenu popupResidental;
     private JPopupMenu popupPowerflow;
     private JPopupMenu popupGenerator;
-   //private JPopupMenu popup;
-
-
-
-
-
-
-
 
     public MainWindow() {
 
@@ -124,7 +116,6 @@ public class MainWindow extends JFrame {
         addedObjectsPanel.setPreferredSize(new Dimension(200,450));
         propertiesPanel = new JScrollPane();
         consolePanel = new JScrollPane(consoleOutput);
-        //propertiesPanel.setLayout(null);
         propertiesPanel.setPreferredSize(new Dimension(350, 450));
         consolePanel.setPreferredSize(new Dimension(900,100));
         addButton = new JButton("+");
@@ -147,34 +138,16 @@ public class MainWindow extends JFrame {
         Container container = mainFrame.getContentPane();
         container.setLayout(new FlowLayout(FlowLayout.LEFT));
         container.add(toolBar);
-        //container.add(modulesPanel);
-        //container.add(objectPanel);
-        //container.add(addButton);
-       // JPanel buttons= new JPanel();
-       /* buttons.setPreferredSize(new Dimension(150,150));
-        buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
-        buttons.add(removeButton);
-        buttons.add(connectButton);
-        buttons.add(connectFTButton);
-        container.add(buttons);*/
-       // container.add(removeButton);
-       // container.add(connectButton);
-        //container.add(connectFTButton);
-
-        //container.add(addClock);
         container.add(addedObjectsPanel);
         container.add(drag_drop);
         container.add(propertiesPanel);
         container.add(consolePanel);
 
-
         loadListers();
-
 
         menuBar=new JMenuBar();
         mainFrame.setJMenuBar(menuBar);
         loadMenu();
-
 
         mainFrame.setSize(new Dimension(1350,700));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -182,10 +155,6 @@ public class MainWindow extends JFrame {
         mainFrame.setTitle("Gridlab-D GUI");
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
-
-
-
-
     }
 
 
@@ -241,9 +210,8 @@ public class MainWindow extends JFrame {
         generatorItems.addElement("Inverter");
         generatorItems.addElement("Solar");
     }
+
     private void loadListers(){
-
-
         connectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -287,9 +255,6 @@ public class MainWindow extends JFrame {
                         objectTable.get(childName).SetProperty(noweProperty);
                         listOfConn.add(pair);
                         drag_drop.repaint();
-
-
-
                 }
                 else
                 {
@@ -617,33 +582,12 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearMemory();
-               /* objectCount=0;
-                currentObject=0;
-                objectsItems.clear();
-                objectTable.clear();
-                imagesTable.clear();
-                drag_drop.removeAll();
-                drag_drop.revalidate();
-                drag_drop.repaint();
-                addedObjectsItems.clear();
-                propertiesItems.clear();
-                textFieldsGlobal=null;
-                propertiesPanel.setViewportView(new JPanel());
-                propertiesPanel.revalidate();
-                propertiesPanel.repaint();
-                consoleOutput.setText("");
-                listOfConn.clear();
-                map.clear();*/
             }
         });
         //TODO
         saveItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // int returnVal=fileChooser.showSaveDialog(mainFrame);
-                //fileChooser.setFileFilter(new FileNameExtensionFilter("SaveFile",".ser"));
-
-              //  if(returnVal==JFileChooser.APPROVE_OPTION){
                     File fileSelected= fileChooser.getSelectedFile();
                     System.out.println(fileSelected);
                     SaveFileClass save=new SaveFileClass();
@@ -667,11 +611,6 @@ public class MainWindow extends JFrame {
 
                     String fileName= null;
                     System.out.println("1.");
-                  /*  try {
-                        fileName = fileSelected.getCanonicalPath()+".ser";
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }*/
                     System.out.println("2.");
                     File file=saveFile(".ser");
                     try
@@ -682,7 +621,6 @@ public class MainWindow extends JFrame {
                         out.writeObject(save);
                         out.close();
                         fileOut.close();
-                        //System.out.printf("Serialized data is saved in /tmp/employee.ser");
                     }catch(IOException i)
                     {
                         i.printStackTrace();
@@ -697,13 +635,6 @@ public class MainWindow extends JFrame {
         loadITem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // int returnVal=fileChooser.showOpenDialog(mainFrame);
-                //fileChooser.setFileFilter(new FileNameExtensionFilter("SaveFile",".ser"));
-
-               // if(returnVal==JFileChooser.APPROVE_OPTION){
-                //    File fileSelected= fileChooser.getSelectedFile();
-
-
                 SaveFileClass save = null;
                 Object obj;
                 File file=loadFile();
@@ -726,7 +657,6 @@ public class MainWindow extends JFrame {
                     return;
                 }
                 clearMemory();
-                    //addedObjectsItems= save.addedObjectsItems;
                 System.out.println(addedObjectsJList.getSize());
                     for(int i=0;i<save.addedObjectsItems.getSize();i++){
                         addedObjectsItems.addElement(save.addedObjectsItems.get(i));
@@ -762,48 +692,15 @@ public class MainWindow extends JFrame {
                         imagesTable.get(k).addMouseListener(new MouseAdapterClick());
                         imagesTable.get(k).addMouseMotionListener(myMouseAdapter);
                     }
-               // drag_drop.validate();
-
-                // objectLabel.setLocation(xLabel,yLabel);
-                //drag_drop.repaint();
-                    //addedObjectsJList=new JList<String>(addedObjectsItems);
-                    //odswiezenie widoku, nie wiem czemu dziala tylko polaczenie miedzy obiektami
                     addedObjectsPanel.revalidate();
                     addedObjectsPanel.repaint();
 
-                    //drag_drop.validate();
-                   // drag_drop.repaint();
-
-               /* for(int i=0;i<drag_drop.getComponentCount();i++){
-                    Component comp= drag_drop.getComponent(i);
-                    drag_drop.validate();
-                    drag_drop.repaint();
-                    comp.setLocation(map.get( drag_drop.getComponent(i).getName()));
-
-                }*/
                     propertiesPanel.revalidate();
                     propertiesPanel.repaint();
-                    //test - deserializacja przebiega pomyslnie, bo wyswietla wartosci
                     System.out.print(addedObjectsItems);
                     System.out.print(objectCount);
                     System.out.print(objectTable);
-
-
-                //addObject("House");
-                //addedObjectsJList.setSelectedIndex(addedObjectsItems.getSize()-1);
-                //removeButton.doClick();
-               // objectCount--;
-                //String obj2="House"+" "+objectCount;
-                /*String obj2=addedObjectsItems.get(addedObjectsItems.getSize()-1);
-                addedObjectsItems.remove( addedObjectsItems.getSize()-1);
-                objectTable.remove(obj2);
-                map.remove(obj2);
-                drag_drop.remove(imagesTable.get(obj2));
-                imagesTable.remove(obj2);*/
                 }
-
-
-            //  }
         });
       
 
@@ -1198,7 +1095,6 @@ public class MainWindow extends JFrame {
         comp.setLocation(0,0);
         consoleOutput.append(objectLabel.getLocation().toString());
 
-      // objectLabel.setLocation(xLabel,yLabel);
         drag_drop.repaint();
 
 
@@ -1210,21 +1106,14 @@ public class MainWindow extends JFrame {
     }
     public void removeImageFromPanel(String obj){
         drag_drop.remove(imagesTable.get(obj));
-        //System.out.println("*************"+obj+"  liczba conn "+listOfConn.size());
 
         for(int i=0;i<listOfConn.size();i++){
             if(listOfConn.get(i).getParentJLabel().getName().equals(obj) || listOfConn.get(i).getChildJLabel().getName().equals(obj)){
                 listOfConn.remove(listOfConn.get(i));
             }
         }
-        //System.out.println("liczba conn"+listOfConn.size()+"  " + listOfConn.get(0).getParentJLabel().getName());
-        //listOfConn.remove(listOfConn.get(0));
+
        System.out.println("liczba conn "+listOfConn.size());
-       /* for (ParentChild temp:listOfConn){
-            if(temp.Conntain(imagesTable.get(obj))){
-                listOfConn.remove(temp);
-            }
-        }*/
         imagesTable.remove(obj);
 
         drag_drop.validate();
@@ -1245,7 +1134,6 @@ public class MainWindow extends JFrame {
         drag_drop.validate();
         drag_drop.repaint();
         addedObjectsItems.removeAllElements();
-       // addedObjectsItems.clear();
         propertiesItems.clear();
         textFieldsGlobal=null;
         propertiesPanel.setViewportView(new JPanel());
@@ -1255,51 +1143,6 @@ public class MainWindow extends JFrame {
         listOfConn.clear();
         map.clear();
     }
-
-
-
-
-   /* private String[] showGUIForConnectionsMaking(){
-        textFieldsGlobal=null;
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(map.size()+1,2));
-        JLabel coto=new JLabel("parent group -child group");
-        panel.add(coto);panel.add(new JLabel(""));
-        ButtonGroup group1 = new ButtonGroup();
-        ButtonGroup group2 = new ButtonGroup();
-        final String nodes[] = new String[2];
-        Set<String> keySet = map.keySet();
-        for (String name : keySet)
-        {
-            JRadioButton rButton = new JRadioButton(name);
-            rButton.setActionCommand(map.get(name).x+","+map.get(name).y);
-            rButton.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    nodes[0] = ((JRadioButton)evt.getSource()).getActionCommand();
-                }
-            });
-            group1.add(rButton);
-            panel.add(rButton);
-            JRadioButton rButton1 = new JRadioButton(name);
-            rButton1.setActionCommand(map.get(name).x+","+map.get(name).y);
-            rButton1.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent evt)
-                {
-                    nodes[1] = ((JRadioButton)evt.getSource()).getActionCommand();
-                }
-            });
-            group2.add(rButton1);
-            panel.add(rButton1);
-        }
-
-        JOptionPane.showMessageDialog(MainWindow.this,panel,"Choose parents for childs",JOptionPane.INFORMATION_MESSAGE);
-
-        return nodes;
-
-    }*/
     private String[] showGUIForConnectionsMaking(String info1,String info2){
         textFieldsGlobal=null;
         JPanel panel = new JPanel();
